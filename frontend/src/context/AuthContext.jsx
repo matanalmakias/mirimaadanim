@@ -54,6 +54,11 @@ const AuthContextProvider = ({ children }) => {
     setEmail(email);
     setUsername(username);
     setToken(token);
+    return (
+      <>
+        <p>התחברת בהצלחה</p>
+      </>
+    );
   };
 
   const logout = () => {
@@ -62,7 +67,13 @@ const AuthContextProvider = ({ children }) => {
     setToken(undefined);
     setEmail(undefined);
     setUsername(undefined);
+    return (
+      <>
+        <p>התנתקת בהצלחה</p>
+      </>
+    );
   };
+
   //what we want to expose/share with the app:
   const contextValues = {
     isAdmin,

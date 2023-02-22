@@ -49,8 +49,7 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
     //before saving the user:
     //for each user -> save the role id of user
     user.roles = [(await Role.findOne({ name: "user" }))._id];
-
-    await user.save();
+    user.cart = await user.save();
     return res.json({ message: "user saved", id: user._id });
   } catch (e) {
     return res.status(500).json({ message: "Server DB Error", error: e });

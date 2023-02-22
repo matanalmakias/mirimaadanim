@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { ColorRing } from "react-loader-spinner";
 import authService from "../../services/auth.service";
+import "./register.css";
 
 const Register = () => {
   const nav = useNavigate();
@@ -71,65 +72,68 @@ const Register = () => {
         onSubmit={handleRegister}
         validationSchema={validationSchema}
       >
-        <Form className="w-50 mx-auto">
-          <div>
-            <label htmlFor="username" className="form-label">
-              User Name
-            </label>
-            <Field
-              name="username"
-              type="text"
-              className="form-control"
-              id="username"
-            />
-            <ErrorMessage
-              name="username"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <Field
-              name="email"
-              type="email"
-              className="form-control"
-              id="email"
-            />
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div>
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <Field
-              name="password"
-              type="password"
-              className="form-control"
-              id="password"
-            />
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="alert alert-danger"
-            />
-          </div>
-          <div className="col-12">
-            <button
-              disabled={isLoading}
-              className="btn btn-primary"
-              type="submit"
-            >
-              Register
-            </button>
-          </div>
-        </Form>
+        <div className="my_container">
+          <Form className="my_form ">
+            <h1 className="h1">הרשמה</h1>
+            <div className="my_div">
+              <Field
+                name="username"
+                type="text"
+                className="my_field"
+                id="username"
+              />
+              <label htmlFor="username" className="  my_label ">
+                שם משתמש
+              </label>
+              <ErrorMessage
+                name="username"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="my_div">
+              <Field
+                name="email"
+                type="email"
+                className="my_field"
+                id="email"
+              />
+              <label htmlFor="email" className="my_label ">
+                אימייל
+              </label>
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="my_div">
+              <Field
+                name="password"
+                type="password"
+                className="my_field "
+                id="password"
+              />
+              <label htmlFor="password" className="my_label">
+                סיסמא
+              </label>
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="alert alert-danger"
+              />
+            </div>
+            <div className="my_div">
+              <button
+                disabled={isLoading}
+                className="my_btn btn btn-primary"
+                type="submit"
+              >
+                הרשמה
+              </button>
+            </div>
+          </Form>
+        </div>
       </Formik>
     </div>
   );

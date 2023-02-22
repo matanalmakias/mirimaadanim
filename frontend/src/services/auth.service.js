@@ -2,11 +2,11 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/auth";
 
-const register = (username, email, password) => {
+const register = async (username, email, password) => {
   return axios.post(baseUrl + "/signup", { username, email, password });
 };
 
-const login = (email, password) => {
+const login = async (email, password) => {
   return axios.post(baseUrl + "/signin", { email, password }).then((res) => {
     const token = res.data.accessToken;
     const email = res.data.email;
@@ -23,7 +23,7 @@ const login = (email, password) => {
   });
 };
 
-const logout = () => {
+const logout = async () => {
   localStorage.removeItem("token");
 };
 

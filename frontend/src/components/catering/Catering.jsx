@@ -1,12 +1,12 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
-const WorkPlaces = () => {
+const Catering = () => {
   return (
     <div>
       <Container className="text-center">
         <Row>
-          <h2 className="h2 fs-2">אוכל למפעלים ולמקומות עבודה</h2>
+          <h2 className="h2 fs-2">קייטרינג לאירועים</h2>
           <Col></Col>
         </Row>
       </Container>
@@ -14,4 +14,4 @@ const WorkPlaces = () => {
   );
 };
 
-export default WorkPlaces;
+export default Catering;
