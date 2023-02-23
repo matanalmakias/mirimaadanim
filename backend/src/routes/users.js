@@ -41,7 +41,7 @@ router.get("/", (req, res) => {
 //api/auth/signup
 router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
   try {
-    const body = _.pick(req.body, "username", "email", "password", "score");
+    const body = _.pick(req.body, "username", "email", "password");
 
     body.password = await bcrypt.hash(body.password, 12);
     const user = new User(body);

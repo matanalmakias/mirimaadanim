@@ -1,7 +1,7 @@
 ### הוספת פריט לקייטרינגים
 POST http://localhost:3001/api/manager/product/createProduct
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzEyMTc2MiwiZXhwIjoxNjc5NzEzNzYyfQ.TEX-5mmaflGVEU4WaPe3bB_YlAMIdr11yBRocQmElV8
 
 {
     "title":"סלט ירקות",

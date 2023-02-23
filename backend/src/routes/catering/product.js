@@ -33,7 +33,7 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
     const productId = req.params.productId;
     const userId = req.userId;
 
-    const product = await Product.findOne({ id: productId });
+    const product = await Product.findOne({ _id: productId });
     const user = await User.findOne({ _id: userId });
 
     if (!userId) {
@@ -53,7 +53,7 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
     }
 
     const isProductAlreadyInCart = user.cart.some(
-      (item) => item.id === productId
+      (item) => item._id === productId
     );
     if (isProductAlreadyInCart) {
       res.json({ message: `This product is already in cart` });
@@ -97,10 +97,9 @@ router.delete("/deleteFromCart/:productId", validateToken, async (req, res) => {
 });
 
 // --------- Checkout ---------
-router.post("/checkout/:productId", validateToken, async (req, res) => {
+router.post("/checkout", validateToken, async (req, res) => {
   try {
     const userId = req.userId;
-    const productId = req.params.productId;
     const user = await User.findOne({ _id: userId }).populate("cart.product");
 
     if (!user) {
@@ -113,12 +112,10 @@ router.post("/checkout/:productId", validateToken, async (req, res) => {
       return;
     }
 
-    const product = await Product.findById(productId);
-
     const order = new Order({
       user: user._id,
       items: user.cart.map((cartItem) => ({
-        product: cartItem.product.id,
+        product: cartItem.product._id,
         name: cartItem.product.title,
         quantity: cartItem.quantity,
         price: cartItem.product.price,

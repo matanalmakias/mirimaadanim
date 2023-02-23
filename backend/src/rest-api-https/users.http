@@ -4,9 +4,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVk
 
 
 ### Add To Cart--->
-POST http://localhost:3001/api/product/addToCart/63f6cf0e6a521a2373deba7e
+POST http://localhost:3001/api/product/addToCart/63f6d90a8a8a52b838abb530
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzEyMTg5NCwiZXhwIjoxNjc5NzEzODk0fQ.u9hl4a6qbJumFOvC1lMNrqIfmIgqFzUODQhvu6Bye7Y
 
 ### Remove From Cart--->
 DELETE http://localhost:3001/api/product/deleteFromCart/uyDR1RDyR
@@ -21,7 +21,7 @@ Content-Type: application/json
 {
     "username":"matan", 
     "email":"inviteserv@gmail.com",
-    "password":"123123ssSS@@"
+    "password":"123123123"
 }
 
 
@@ -31,7 +31,7 @@ Content-Type: application/json
 
 {
     "email":"inviteserv@gmail.com",
-    "password":"123123ssSS@@"
+    "password":"123123123"
 }
 
 ###GET All Users :
