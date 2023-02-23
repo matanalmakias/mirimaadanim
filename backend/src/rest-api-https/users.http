@@ -1,19 +1,26 @@
-### increase Quantity in cart
-POST http://localhost:3001/api/cart/incQuantity/63f6es4900c311ab9c2cc4cd2
+### Create an order package from cart
+POST http://localhost:3001/api/cart/createOrderPackage
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
+### decrement Quantity in cart
+POST http://localhost:3001/api/cart/decQuantity/63f7a6a4e06a0b2e7d9601a0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+
+### increment Quantity in cart
+POST http://localhost:3001/api/cart/incQuantity/63f7a6a4e06a0b2e7d9601a0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### uploadCart 
 POST http://localhost:3001/api/cart/uploadCart
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Add To Cart--->
-POST http://localhost:3001/api/cart/addToCart/63f6e4900c311ab9c2cc4cd2
+POST http://localhost:3001/api/cart/addToCart/63f7a6a4e06a0b2e7d9601a0
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Remove From Cart--->
-DELETE http://localhost:3001/api/cart/deleteFromCart/63f6e4900c311ab9c2cc4cd2
+DELETE http://localhost:3001/api/cart/deleteFromCart/63f7a6a4e06a0b2e7d9601a0
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
@@ -26,7 +33,6 @@ Content-Type: application/json
     "email":"inviteserv@gmail.com",
     "password":"123123123"
 }
-
 
 ###POST to sign in user:
 POST http://localhost:3001/api/auth/signin

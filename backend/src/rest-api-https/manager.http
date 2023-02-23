@@ -10,22 +10,18 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2Qx
     "price":5
 }
 
-### מחיקת פריט מהקייטרינגים 
-
 ### עדכון/עריכת פריט
-POST http://localhost:3001/api/manager/product/editProduct/63f656a9b217ffd3117225f2
+POST http://localhost:3001/api/manager/product/editProduct/63f7a6a4e06a0b2e7d9601a0
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 {
     "title":"דשגשדגשדגשדגשדגשדשדשדגשדגש"
 }
 
-
 ### מחיקת פריט
-DELETE http://localhost:3001/api/manager/product/deleteProduct/63f656a9b217ffd3117225f2
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
-
+DELETE http://localhost:3001/api/manager/product/deleteProduct/63f7a6f9e06a0b2e7d9601ab
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### מחיקת כל הפריטים
 DELETE http://localhost:3001/api/manager/product/deleteAll/
@@ -41,7 +37,6 @@ Content-Type: application/json
     "email":"inviteserv@gmail.com",
     "password":"123123ssSS@@",
 }
-
 
 ###POST to sign in user:
 POST http://localhost:3001/api/auth/signin

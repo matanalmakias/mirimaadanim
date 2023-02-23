@@ -1,11 +1,14 @@
 import { Router } from "express";
 import _ from "underscore";
 import { Product } from "../../db/models/product.js";
+import { Category } from "../../db/models/category.js";
 const router = Router();
 import { validateToken } from "../../middleware/user/validateToken.js";
 import { isManager } from "../../middleware/roles/isManager.js";
 import shortid from "shortid";
 import { mongoose } from "mongoose";
+
+// -------- Give Discount ---------
 
 // -------- DELETE All Products --------
 router.delete(
@@ -38,19 +41,31 @@ router.post(
         "category"
       );
 
+      // Check if the category already exists
+      let category = await Category.findOne({ name: body.category });
+
+      if (!category) {
+        // If the category does not exist, create a new category
+        category = new Category({
+          name: body.category,
+        });
+
+        await category.save();
+      }
+
+      // Create a new product with the specified category
       const newProduct = new Product({
-        _id: new mongoose.Types.ObjectId(), // generate a new ObjectId
         title: body.title,
         description: body.description,
         price: body.price,
-        category: body.category,
+        category: category._id,
       });
 
       const savedProduct = await newProduct.save();
 
-      const product = await Product.findById(savedProduct._id).select(
-        "id title description price category"
-      );
+      const product = await Product.findById(savedProduct._id)
+        .populate("category", "name")
+        .select("id title description price category");
 
       res.status(201).json({
         message: "Product item created successfully",
