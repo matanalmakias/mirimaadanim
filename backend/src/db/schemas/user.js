@@ -1,15 +1,11 @@
 import { Schema } from "mongoose";
-
-const cartSchema = new Schema({});
+import { cartItemSchema } from "./cart.js";
 
 const userSchema = new Schema({
   username: String,
   email: String,
   password: String,
-  cart: [],
-  /*
-        user has roles:
-    */
+  cart: [cartItemSchema] || [],
   roles: [
     {
       type: Schema.Types.ObjectId,

@@ -1,13 +1,15 @@
+
+
 ### Create an order package from cart
 POST http://localhost:3001/api/cart/createOrderPackage
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### decrement Quantity in cart
-POST http://localhost:3001/api/cart/decQuantity/63f7a6a4e06a0b2e7d9601a0
+POST http://localhost:3001/api/cart/decQuantity/63f7c094af9209d27ec7ad28
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### increment Quantity in cart
-POST http://localhost:3001/api/cart/incQuantity/63f7a6a4e06a0b2e7d9601a0
+POST http://localhost:3001/api/cart/incQuantity/63f7c094af9209d27ec7ad28
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### uploadCart 
@@ -15,12 +17,12 @@ POST http://localhost:3001/api/cart/uploadCart
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Add To Cart--->
-POST http://localhost:3001/api/cart/addToCart/63f7a6a4e06a0b2e7d9601a0
+POST http://localhost:3001/api/cart/addToCart/63f7c094af9209d27ec7ad28
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Remove From Cart--->
-DELETE http://localhost:3001/api/cart/deleteFromCart/63f7a6a4e06a0b2e7d9601a0
+DELETE http://localhost:3001/api/cart/deleteFromCart/63f7c094af9209d27ec7ad28
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 

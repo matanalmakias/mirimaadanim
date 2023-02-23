@@ -1,5 +1,5 @@
 import { model } from "mongoose";
 import { productSchema } from "../schemas/product.js";
-const Product = model("Catering", productSchema);
+const Product = model("Product", productSchema);
 
 export { Product };

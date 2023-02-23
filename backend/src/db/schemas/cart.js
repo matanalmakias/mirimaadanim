@@ -11,6 +11,7 @@ const cartItemSchema = new Schema({
     required: true,
     default: 1,
   },
+  _id: false,
 });
 
 export { cartItemSchema };
