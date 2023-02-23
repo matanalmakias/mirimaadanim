@@ -1,21 +1,27 @@
-### increase Quantity in cart
-POST http://localhost:3001/api/cart/incQuantity/63f6es4900c311ab9c2cc4cd2
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+### GET all Product
+GET http://localhost:3001/api/product
 
+### Decrease Quantity in cart
+POST http://localhost:3001/api/cart/decQuantity/63f78840684c09355c9d55c0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzE2NjYxOSwiZXhwIjoxNjc5NzU4NjE5fQ.tXVv8teTKxV9yrnMAAotNwV_FIwGfWZvpW_wHnExy-4
+
+### increase Quantity in cart
+POST http://localhost:3001/api/cart/incQuantity/63f78840684c09355c9d55c0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzE2NjYxOSwiZXhwIjoxNjc5NzU4NjE5fQ.tXVv8teTKxV9yrnMAAotNwV_FIwGfWZvpW_wHnExy-4
 
 ### uploadCart 
 POST http://localhost:3001/api/cart/uploadCart
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Add To Cart--->
-POST http://localhost:3001/api/cart/addToCart/63f6e4900c311ab9c2cc4cd2
+POST http://localhost:3001/api/cart/addToCart/63f78840684c09355c9d55c0
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzE2NjYxOSwiZXhwIjoxNjc5NzU4NjE5fQ.tXVv8teTKxV9yrnMAAotNwV_FIwGfWZvpW_wHnExy-4
 
 ### Remove From Cart--->
-DELETE http://localhost:3001/api/cart/deleteFromCart/63f6e4900c311ab9c2cc4cd2
+DELETE http://localhost:3001/api/cart/deleteFromCart/63f78840684c09355c9d55c0
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzE2NjYxOSwiZXhwIjoxNjc5NzU4NjE5fQ.tXVv8teTKxV9yrnMAAotNwV_FIwGfWZvpW_wHnExy-4
 
 ###POST to add user:
 POST http://localhost:3001/api/auth/signup
@@ -26,7 +32,6 @@ Content-Type: application/json
     "email":"inviteserv@gmail.com",
     "password":"123123123"
 }
-
 
 ###POST to sign in user:
 POST http://localhost:3001/api/auth/signin

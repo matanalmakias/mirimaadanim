@@ -39,11 +39,10 @@ router.post(
       );
 
       const newProduct = new Product({
-        _id: new mongoose.Types.ObjectId(), // generate a new ObjectId
-        title: body.title,
-        description: body.description,
-        price: body.price,
-        category: body.category,
+        name: "Product name",
+        description: "Product description",
+        price: 9.99,
+        category: "category_id",
       });
 
       const savedProduct = await newProduct.save();

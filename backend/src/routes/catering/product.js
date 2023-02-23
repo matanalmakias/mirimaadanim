@@ -19,7 +19,7 @@ router.get("/:id", (req, res) => {
 // GET All ProductS
 router.get("/", async (req, res) => {
   try {
-    const Products = await Product.find({});
+    const products = await Product.find({}).populate("category");
     res.send(products);
   } catch (error) {
     console.error(error);
