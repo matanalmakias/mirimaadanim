@@ -1,6 +1,7 @@
 ### increase Quantity in cart
-POST http://localhost:3001/api/cart/incQuantity/63f6e4900c311ab9c2cc4cd2
+POST http://localhost:3001/api/cart/incQuantity/63f6es4900c311ab9c2cc4cd2
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+
 
 ### uploadCart 
 POST http://localhost:3001/api/cart/uploadCart

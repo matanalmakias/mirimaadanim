@@ -6,6 +6,33 @@ import { Product } from "../db/models/product.js";
 import { Order } from "../db/models/order.js";
 import { mongoose } from "mongoose";
 const router = Router();
+// ---------- Increment Product Quantity ----------
+router.post(
+  "/incQuantity/:productId",
+  validateToken,
+  async (req, res, next) => {
+    const productId = req.params.productId;
+    const user = await User.findById(req.userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const isProductExistOnCart = user.cart.some(
+      (item) => item._id === productId
+    );
+
+    if (isProductExistOnCart) {
+      const result = await User.updateOne(
+        { _id: req.userId, "cart._id": productId },
+        { $inc: { "cart.$.quantity": 1 } }
+      );
+      res.json({ message: `Cart increment successfully` });
+    } else {
+      res.status(500).json({ message: `The product is not exist on cart` });
+      next();
+    }
+  }
+);
 
 // --------- Checkout ---------
 router.post("/uploadCart", validateToken, async (req, res) => {
@@ -81,27 +108,6 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// ---------- Increment Product Quantity ----------
-router.post("/incQuantity/:productId", validateToken, async (req, res) => {
-  try {
-    const productId = req.params.productId;
-    const user = await User.findOne({ _id: req.userId });
-    const cart = user.cart || [];
-    const index = cart.findIndex((item) => item._id.toString() === productId);
-    let foundProductInCart = await user.cart.find(
-      (item) => item._id === productId
-    );
-    foundProductInCart.quantity += 1;
-    await user.save();
-
-    console.log(user.cart);
-    res.json({ message: "Quantity updated successfully" });
-  } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Internal server error" });
   }
 });
