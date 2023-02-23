@@ -7,6 +7,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Header from "./components/header/Header";
 import Manager from "./pages/manager/Manager";
+import Cart from "./components/store/Cart";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -14,6 +15,7 @@ function App() {
     <>
       <Header />
       <Routes>
+        <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Home />} />
         {isManager && <Route exact path="/manager" element={<Manager />} />}
         {!isLoggedIn && <Route path="/login" element={<Login />} />}

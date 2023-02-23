@@ -10,16 +10,16 @@ const createCaterings = async (object) => {
 };
 const getAllCaterings = async (setState) => {
   try {
-    const url = `http://localhost:3001/api/catering`;
-    const data = await axios.get(url);
-    setState(data.data);
+    axios
+      .get(`http://localhost:3001/api/catering`)
+      .then((res) => setState(res.data));
   } catch (error) {
     console.log(error);
   }
 };
 const deleteAllGathers = async () => {
   try {
-    const url = `http://localhost:3001/api/admin/catering/deleteAll`;
+    const url = `http://localhost:3001/api/manager/catering/deleteAll`;
     const deleted = await axios.delete(url);
   } catch (error) {
     console.log(error);

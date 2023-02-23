@@ -1,7 +1,6 @@
-import { RequestHandler } from "express";
 import { Role } from "../../db/models/role.js";
 import { User } from "../../db/models/user.js";
-const isModerator: RequestHandler = async (req, res, next) => {
+const isModerator = async (req, res, next) => {
   const userId = req.userId;
 
   try {
@@ -9,7 +8,7 @@ const isModerator: RequestHandler = async (req, res, next) => {
     const roles = await Role.find({ _id: { $in: user.roles } });
 
     for (let role of roles) {
-      if (role.name === "moderator" || 'manager') {
+      if (role.name === "moderator" || "manager") {
         return next();
       }
     }

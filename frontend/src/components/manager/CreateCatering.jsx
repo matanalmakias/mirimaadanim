@@ -11,8 +11,22 @@ function CreateCatering() {
   const [fields, setFields] = useState([]);
   const nav = useNavigate();
   const createField = () => {
-    setFields([...fields, { name: "", info: "" }]);
+    setFields([...fields, { name: "", price: 0 }]);
   };
+  const categories = [
+    "סלטים",
+    "בשרים",
+    "שתייה",
+    "לחם",
+    "דגים",
+    "עופות",
+    "על האש",
+    "צמחוני",
+    "טבעוני",
+    "פשטידות",
+    "מטוגנים",
+    "תוספות",
+  ];
 
   const handleFieldChange = (index, event) => {
     const newFields = [...fields];
@@ -39,11 +53,27 @@ function CreateCatering() {
           formSubmit(e);
         }}
       >
-        <h3 className="h3 mb-4">הוספת חבילת קייטרינג</h3>
+        <h3 className="h3 mb-4">הוספת פריט לקייטרינג</h3>
         {fields.map((field, index) => (
-          <div className="container d-flex" key={index}>
+          <div className="container p-2 m-2 d-flex" key={index}>
+            <input
+              className="form-control"
+              type="number"
+              name="price"
+              placeholder="הכנס מחיר פריט"
+              value={field.value}
+              onChange={(event) => handleFieldChange(index, event)}
+            />
+            <select>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+
             <textarea
-              className="form-control me-2"
+              className="form-control"
               name="description"
               placeholder="הכנס תיאור המוצר"
               value={field.description}
@@ -64,14 +94,12 @@ function CreateCatering() {
           הוסף פריט
         </Button>
         <Button className="btn btn-success mx-2" type="submit">
-          {" "}
-          הוסף פריט לשרת
-        </Button>{" "}
-        {isManager && (
-          <Button className="btn btn-danger m-3" onClick={deleteAll}>
-            מחק את הכל
-          </Button>
-        )}
+          הוסף את החבילה לשרת
+        </Button>
+
+        <Button className="btn btn-danger" onClick={deleteAll}>
+          מחק את הכל
+        </Button>
       </Form>
     </Container>
   );

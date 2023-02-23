@@ -1,0 +1,59 @@
+### הוספת פריט לקייטרינגים
+POST http://localhost:3001/api/manager/product/createProduct
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+
+{
+    "title":"סלט ירקות",
+    "description":"סלט עם עגבנייה, מלפפון ובצל",
+    "category":"salads",
+    "price":5
+}
+
+### מחיקת פריט מהקייטרינגים 
+
+### עדכון/עריכת פריט
+POST http://localhost:3001/api/manager/product/editProduct/63f656a9b217ffd3117225f2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+
+{
+    "title":"דשגשדגשדגשדגשדגשדשדשדגשדגש"
+}
+
+
+### מחיקת פריט
+DELETE http://localhost:3001/api/manager/product/deleteProduct/63f656a9b217ffd3117225f2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+
+
+### מחיקת כל הפריטים
+DELETE http://localhost:3001/api/manager/product/deleteAll/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+
+
+###POST to add user:
+POST http://localhost:3001/api/auth/signup
+Content-Type: application/json
+
+{
+    "username":"matan", 
+    "email":"inviteserv@gmail.com",
+    "password":"123123ssSS@@",
+}
+
+
+###POST to sign in user:
+POST http://localhost:3001/api/auth/signin
+Content-Type: application/json
+
+{
+    "email":"inviteserv@gmail.com",
+    "password":"123123"
+}
+
+###GET All Users :
+GET http://localhost:3001/api/auth/
+
+
+

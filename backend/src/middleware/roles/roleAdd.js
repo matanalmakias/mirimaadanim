@@ -1,9 +1,8 @@
-import { RequestHandler } from "express";
 import _ from "underscore";
 
 import { roleAddSchema } from "../../validators/roles.js";
 
-const roleAddValidate: RequestHandler = (req, res, next) => {
+const roleAddValidate = (req, res, next) => {
   const body = _.pick(req.body, "username", "role");
 
   const { error } = roleAddSchema.validate(body);

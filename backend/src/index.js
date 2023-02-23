@@ -6,8 +6,8 @@ import { notFound } from "./middleware/not-found.js";
 import { authRouter } from "./routes/users.js";
 import { Server } from "socket.io";
 import nodeEvents from "./nodeEvents/nodeEvents.js";
-import { adminRouter } from "./routes/catering/admin.js";
-import { cateringRouter } from "./routes/catering/catering.js";
+import { managerRouter } from "./routes/catering/manager.js";
+import { productRouter } from "./routes/catering/product.js";
 
 const app = express();
 
@@ -28,8 +28,8 @@ app.use(morgan("dev"));
 
 //routes:
 app.use("/api/auth", authRouter);
-app.use("/api/admin", adminRouter);
-app.use("/api/catering", cateringRouter);
+app.use("/api/manager", managerRouter);
+app.use("/api/product", productRouter);
 
 //404:
 app.use(notFound);

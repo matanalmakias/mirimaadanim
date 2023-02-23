@@ -4,7 +4,7 @@ import { passwordRegex } from "./utils.js";
 const userSignUpSchema = Joi.object({
   username: Joi.string().min(2).max(30).required(),
   email: Joi.string().email().required(),
-  password: Joi.string().regex(passwordRegex).required(),
+  password: Joi.string().required(),
 });
 
 const userSignInSchema = Joi.object({
