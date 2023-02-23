@@ -1,18 +1,20 @@
-### Checkout Cart
-POST http://localhost:3001/api/product/checkout/uyDR1RDyR
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
+### increase Quantity in cart
+POST http://localhost:3001/api/cart/incQuantity/63f6e4900c311ab9c2cc4cd2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
+### uploadCart 
+POST http://localhost:3001/api/cart/uploadCart
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Add To Cart--->
-POST http://localhost:3001/api/product/addToCart/63f6d90a8a8a52b838abb530
+POST http://localhost:3001/api/cart/addToCart/63f6e4900c311ab9c2cc4cd2
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkOGM3OGE4YTUyYjgzOGFiYjUyNiIsImlhdCI6MTY3NzEyMTg5NCwiZXhwIjoxNjc5NzEzODk0fQ.u9hl4a6qbJumFOvC1lMNrqIfmIgqFzUODQhvu6Bye7Y
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ### Remove From Cart--->
-DELETE http://localhost:3001/api/product/deleteFromCart/uyDR1RDyR
+DELETE http://localhost:3001/api/cart/deleteFromCart/63f6e4900c311ab9c2cc4cd2
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjY1MzNjODE4NGVkYWMwNTdiMjNkYiIsImlhdCI6MTY3NzA4NzU5NCwiZXhwIjoxNjc5Njc5NTk0fQ.NaVZR9wOxOhC_dsGQNNkRaTvhEHfaAYzP2YaVqLqynE
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
 
 ###POST to add user:
 POST http://localhost:3001/api/auth/signup

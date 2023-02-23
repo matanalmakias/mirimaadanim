@@ -38,17 +38,8 @@ router.post(
         "category"
       );
 
-      // Check if product with same ID already exists
-      const existingProduct = await Product.findOne({ id: body.id });
-      if (existingProduct) {
-        return res
-          .status(409)
-          .json({ error: "Product with ID already exists" });
-      }
-
       const newProduct = new Product({
         _id: new mongoose.Types.ObjectId(), // generate a new ObjectId
-        id: shortid.generate(),
         title: body.title,
         description: body.description,
         price: body.price,

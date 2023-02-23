@@ -8,6 +8,7 @@ import { Server } from "socket.io";
 import nodeEvents from "./nodeEvents/nodeEvents.js";
 import { managerRouter } from "./routes/catering/manager.js";
 import { productRouter } from "./routes/catering/product.js";
+import { cartRouter } from "./routes/cart.js";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(morgan("dev"));
 app.use("/api/auth", authRouter);
 app.use("/api/manager", managerRouter);
 app.use("/api/product", productRouter);
+app.use("/api/cart", cartRouter);
 
 //404:
 app.use(notFound);

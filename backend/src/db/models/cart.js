@@ -1,5 +1,5 @@
 import { model } from "mongoose";
-import { cartSchema } from "../schemas/cart.js";
-const Cart = model("Cart", cartSchema);
+import { cartItemSchema } from "../schemas/cart.js";
+const Cart = model("Cart", cartItemSchema);
 
 export { Cart };
