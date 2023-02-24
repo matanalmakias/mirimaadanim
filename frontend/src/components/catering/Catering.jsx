@@ -2,22 +2,9 @@ import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { CateringContext } from "../../context/CateringContext";
 import { StoreContext } from "../../context/StoreContext";
-const categories = [
-  "סלטים",
-  "בשרים",
-  "שתייה",
-  "לחם",
-  "דגים",
-  "עופות",
-  "על האש",
-  "צמחוני",
-  "טבעוני",
-  "פשטידות",
-  "מטוגנים",
-  "תוספות",
-];
+
 const Catering = () => {
-  const { caterings } = useContext(CateringContext);
+  const { categories, caterings } = useContext(CateringContext);
   const { addToCart, cart, checkout } = useContext(StoreContext);
 
   if (!caterings) return;

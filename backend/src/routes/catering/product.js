@@ -19,8 +19,8 @@ router.get("/:id", (req, res) => {
 // GET All ProductS
 router.get("/", async (req, res) => {
   try {
-    const Products = await Product.find({});
-    res.send(products);
+    const products = await Product.find({});
+    res.json(products);
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");

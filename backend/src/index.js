@@ -9,6 +9,7 @@ import nodeEvents from "./nodeEvents/nodeEvents.js";
 import { managerRouter } from "./routes/catering/manager.js";
 import { productRouter } from "./routes/catering/product.js";
 import { cartRouter } from "./routes/cart.js";
+import { categoryRouter } from "./routes/categories.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/manager", managerRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/category", categoryRouter);
 
 //404:
 app.use(notFound);

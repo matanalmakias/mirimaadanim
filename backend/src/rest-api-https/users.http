@@ -1,4 +1,5 @@
-
+### GET All Categories
+GET http://localhost:3001/api/category
 
 ### Create an order package from cart
 POST http://localhost:3001/api/cart/createOrderPackage
