@@ -1,25 +1,24 @@
 import axios from "axios";
+const url = `http://localhost:3001/api`;
+const removeProduct = async (productId) => {
+  return axios.delete(`${url}/manager/product/deleteProduct/${productId}`, {
+    headers: { Authorization: localStorage.getItem("token") },
+  });
+};
 
 const getAllCategories = async (setState) => {
-  try {
-    const url = `http://localhost:3001/api/category`;
-    const categories = await axios
-      .get(url)
-      .then((res) => {
-        setState(res);
-      })
-      .catch((error) => console.log(error));
-  } catch (error) {
-    console.log(error);
-  }
+  const url = `http://localhost:3001/api/category`;
+  return axios.get(url).then((res) => setState(res.data));
 };
-const createProducts = async (object) => {
-  try {
-    const url = `http://localhost:3001/api/manager/product/createProduct`;
-    return await axios.post(url, object);
-  } catch (error) {
-    console.log(error);
-  }
+const createProducts = async (setState, product) => {
+  return axios
+    .post("http://localhost:3001/api/manager/product/createProduct", product, {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => setState(res.data));
 };
 const getAllProducts = async (setState) => {
   try {
@@ -33,15 +32,24 @@ const getAllProducts = async (setState) => {
 const deleteAllProducts = async () => {
   try {
     const url = `http://localhost:3001/api/manager/product/deleteAll`;
-    const deleted = await axios.delete(url);
+    await axios.delete(url, {
+      headers: { Authorization: localStorage.getItem("token") },
+    });
   } catch (error) {
     console.log(error);
   }
 };
 
-export { getAllCategories, deleteAllProducts, createProducts, getAllProducts };
+export {
+  removeProduct,
+  getAllCategories,
+  deleteAllProducts,
+  createProducts,
+  getAllProducts,
+};
 
 const cateringService = {
+  removeProduct,
   getAllCategories,
   deleteAllProducts,
   createProducts,

@@ -19,9 +19,9 @@ const NavBar = () => {
     }
   };
   return (
-    <div className="d-flex justify-content-center align-items-center">
+    <div className="d-flex justify-content-center align-items-center text-center">
       <Navbar className=" m-3 p-3" bg="light" expand="lg">
-        <Navbar.Brand className="m-1" href="/">
+        <Navbar.Brand className="" href="/">
           מירי מעדנים
         </Navbar.Brand>
         <br />

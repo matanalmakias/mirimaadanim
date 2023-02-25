@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", async (req, res) => {
   try {
     const categories = await Category.find({});
-    console.log(categories);
+    res.json(categories);
   } catch (error) {
     console.log(error);
   }

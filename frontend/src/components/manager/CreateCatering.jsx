@@ -1,18 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import "./create-catering.css";
+import * as Yup from "yup";
 import cateringService from "../../services/catering.service";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import { Formik } from "formik";
 function CreateCatering() {
   const { isManager } = useContext(AuthContext);
   const [fields, setFields] = useState([]);
+
+  const [priceInput, setPriceInput] = useState(0);
+  const [descriptionInput, setDescriptionInput] = useState();
+  const [titleInput, setTitleInput] = useState();
+  const [categoryInput, setCategoryInput] = useState();
+  const [imageInput, setImageInput] = useState();
+
+  const [createdProduct, setCreatedProduct] = useState();
+
   const nav = useNavigate();
-  const createField = () => {
-    setFields([...fields, { name: "", price: 0 }]);
-  };
   const categories = [
     "סלטים",
     "בשרים",
@@ -27,44 +34,48 @@ function CreateCatering() {
     "מטוגנים",
     "תוספות",
   ];
+  const formData = new FormData();
+  formData.append("title", titleInput);
+  formData.append("category", categoryInput);
+  formData.append("description", descriptionInput);
+  formData.append("price", priceInput);
+  formData.append("image", imageInput);
 
-  const handleFieldChange = (index, event) => {
-    const newFields = [...fields];
-    newFields[index][event.target.name] = event.target.value;
-    setFields(newFields);
+  const formSubmit = async (e) => {
+    e.preventDefault();
+    cateringService.createProducts(setCreatedProduct, formData).then((res) => {
+      console.log(`ress`);
+    });
   };
-  const formSubmit = async () => {
-    try {
-      cateringService.createCaterings(fields).then(() => {});
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const deleteAll = () => {
-    cateringService.deleteAllGathers();
+    cateringService.deleteAllProducts();
   };
 
+  useEffect(() => {
+    console.log(imageInput);
+  }, [imageInput]);
   return (
     <Container className="text-center">
-      <Form
-        className="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          formSubmit(e);
-        }}
-      >
-        <h3 className="h3 mb-4">הוספת פריט לקייטרינג</h3>
-        {fields.map((field, index) => (
-          <div className="container p-2 m-2 d-flex" key={index}>
+      <Form onSubmit={(e) => formSubmit(e)} className="form p-2">
+        <h2 className="h3 mb-4">הוספת פריט לקייטרינג</h2>
+        <div className="d-grid mb-2">
+          <div className="row gap-2">
             <input
               className="form-control"
-              type="number"
-              name="price"
-              placeholder="הכנס מחיר פריט"
-              value={field.value}
-              onChange={(event) => handleFieldChange(index, event)}
+              type="text"
+              name="title"
+              placeholder="שם פריט"
+              onChange={(event) => setTitleInput(event.target.value)}
             />
-            <select>
+
+            <select
+              onChange={(event) => setCategoryInput(event.target.value)}
+              className="form-select"
+            >
+              <option value="" disabled selected>
+                קטגוריה
+              </option>
               {categories.map((category, index) => (
                 <option key={index} value={category}>
                   {category}
@@ -73,33 +84,42 @@ function CreateCatering() {
             </select>
 
             <textarea
-              className="form-control"
+              className="form-control p-4"
               name="description"
-              placeholder="הכנס תיאור המוצר"
-              value={field.description}
-              onChange={(event) => handleFieldChange(index, event)}
+              placeholder="תיאור המוצר"
+              onChange={(event) => setDescriptionInput(event.target.value)}
             />
 
             <input
+              className="form-control p-2"
+              type="number"
+              name="price"
+              placeholder="מחיר פריט"
+              onChange={(event) => setPriceInput(event.target.value)}
+            />
+            <label htmlFor="תמונת פריט">תמונת פריט</label>
+            <input
               className="form-control"
-              type="text"
-              name="name"
-              placeholder="הכנס שם פריט"
-              value={field.name}
-              onChange={(event) => handleFieldChange(index, event)}
+              type="file"
+              accept="image/*"
+              name="image"
+              onChange={(event) => setImageInput(event.target.files[0])}
             />
           </div>
-        ))}
-        <Button className="btn btn-primary my-3" onClick={createField}>
-          הוסף פריט
-        </Button>
-        <Button className="btn btn-success mx-2" type="submit">
-          הוסף את החבילה לשרת
-        </Button>
+        </div>
 
-        <Button className="btn btn-danger" onClick={deleteAll}>
-          מחק את הכל
-        </Button>
+        <div className="d-flex align-items-center">
+          <div className="col">
+            <Button className="btn btn-success" type="submit">
+              הוסף פריט
+            </Button>
+          </div>
+          <div className="col">
+            <Button className="btn btn-danger" onClick={deleteAll}>
+              מחק הכל
+            </Button>
+          </div>
+        </div>
       </Form>
     </Container>
   );

@@ -8,6 +8,20 @@ import { isManager } from "../../middleware/roles/isManager.js";
 import shortid from "shortid";
 import { mongoose } from "mongoose";
 
+import multer from "multer";
+
+// Set up multer storage options
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
 // -------- Give Discount ---------
 
 // -------- DELETE All Products --------
@@ -31,21 +45,23 @@ router.post(
   "/product/createProduct",
   validateToken,
   isManager,
+  upload.single("image"),
   async (req, res) => {
     try {
-      const body = _.pick(
-        req.body,
-        "title",
-        "description",
-        "price",
-        "category"
-      );
+      let body = _.pick(req.body, "title", "description", "price", "category");
 
-      // Check if the category already exists
+      // Check if a file was uploaded
+      if (req.file) {
+        let image = req.file.path;
+        image = image.replace(/\\/g, "/");
+        body.image = image.replace("public/", "");
+      }
+
+      // // Check if the category already exists
       let category = await Category.findOne({ name: body.category });
 
       if (!category) {
-        // If the category does not exist, create a new category
+        //   //   // If the category does not exist, create a new category
         category = new Category({
           name: body.category,
         });
@@ -53,19 +69,20 @@ router.post(
         await category.save();
       }
 
-      // Create a new product with the specified category
+      // // // Create a new product with the specified category
       const newProduct = new Product({
         title: body.title,
         description: body.description,
         price: body.price,
         category: category._id,
+        image: body.image,
       });
 
       const savedProduct = await newProduct.save();
 
       const product = await Product.findById(savedProduct._id)
         .populate("category", "name")
-        .select("id title description price category");
+        .select("id title description price category image");
 
       res.status(201).json({
         message: "Product item created successfully",

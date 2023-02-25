@@ -13,14 +13,16 @@ function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/" element={<Home />} />
-        {isManager && <Route exact path="/manager" element={<Manager />} />}
-        {!isLoggedIn && <Route path="/login" element={<Login />} />}
-        {!isLoggedIn && <Route path="/register" element={<Register />} />}
-      </Routes>
+      <div className="bg-ligh">
+        <Header />
+        <Routes>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/" element={<Home />} />
+          {isManager && <Route exact path="/manager" element={<Manager />} />}
+          {!isLoggedIn && <Route path="/login" element={<Login />} />}
+          {!isLoggedIn && <Route path="/register" element={<Register />} />}
+        </Routes>
+      </div>
     </>
   );
 }

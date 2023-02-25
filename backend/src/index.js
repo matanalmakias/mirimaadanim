@@ -19,6 +19,7 @@ connect().catch((e) => {
 });
 
 //middlewares:
+app.use(express.static("public"));
 app.use(
   cors({
     origin: "http://localhost:3000",

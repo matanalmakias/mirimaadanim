@@ -6,7 +6,7 @@ import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
-import { CateringProvider } from "./context/CateringContext";
+import { CateringProvider, SocketContext } from "./context/CateringContext";
 import StoreProvider from "./context/StoreContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
