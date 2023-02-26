@@ -1,30 +1,39 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../../context/StoreContext";
-import { Button, Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 const Cart = () => {
-  const { checkout, cart } = useContext(StoreContext);
+  const { checkout } = useContext(StoreContext);
+  const cart = JSON.parse(localStorage.getItem("cart"));
   return (
     <>
-      {cart.map((item, index) => (
-        <Row key={index}>
-          <span className="fw-bolder p-2">
-            מחיר: {"   "}
-            {item.price}
-          </span>
-          <span className="fw-bolder p-2">
-            תיאור: {"   "}
-            {item.description}{" "}
-          </span>
-          <Col>
-            <span className="fw-bolder p-2">
-              כמות: {"   "}
-              {item.quantity}{" "}
-            </span>
-          </Col>
-        </Row>
-      ))}
-      <Button onClick={checkout}>Checkout</Button>
+      {cart.length > 0 && (
+        <div className="text-center">
+          <h1 className="h1">סל הקניות</h1>
+          <hr />
+          {cart.map((item, index) => (
+            <Row className="flex-row-reverse" key={index}>
+              <Col className="d-flex justify-content-center ">
+                שם פריט
+                <br />
+                {item.title}
+              </Col>
+              <Col className="d-flex justify-content-center">
+                כמות <br />
+                {item.quantity}
+              </Col>
+              <Col className="d-flex justify-content-center">
+                כמות <br />
+                {item.quantity}
+              </Col>
+            </Row>
+          ))}
+          <hr />
+          <Button className="w-100" onClick={checkout}>
+            Checkout
+          </Button>
+        </div>
+      )}
     </>
   );
 };

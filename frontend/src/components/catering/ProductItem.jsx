@@ -49,12 +49,14 @@ const ProductItem = ({ product, index }) => {
     <div key={index}>
       <div className="card p-3 text-center" key={product._id}>
         <Row>
-          <Col className="card p-1">שם פריט:{product.title}</Col>
+          <Col className="border ">
+            <p className=""> {product.title}</p>
+          </Col>
 
-          <Col className="card p-1">מחיר:{product.price}</Col>
+          <Col className="border ">מחיר:{product.price}</Col>
         </Row>
         <Row>
-          <Col className="card p-1">תיאור:{product.description}</Col>
+          <Col className="border ">{product.description}</Col>
         </Row>
         <Row>
           <Col className="p-1 ">
@@ -71,11 +73,11 @@ const ProductItem = ({ product, index }) => {
           <Col className="">
             {isProductAlreadyInCart === false ? (
               <Button onClick={() => addToCart(product, product._id, setRes)}>
-                <p className="fs-5"> הוסף מוצר לסל</p>
+                הוסף מוצר לסל
               </Button>
             ) : (
               <Button onClick={() => removeFromCart(product._id)}>
-                <p className="fs-5"> הסר מוצר מהסל</p>
+                הסר מוצר מהסל
               </Button>
             )}
           </Col>

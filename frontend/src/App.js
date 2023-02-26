@@ -17,7 +17,6 @@ function App() {
       <div className="bg-light">
         <Header />
         <Routes>
-          <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Home />} />
           {isManager && <Route exact path="/manager" element={<Manager />} />}
           {isManager && (
@@ -27,6 +26,7 @@ function App() {
               element={<UpdateProduct />}
             />
           )}
+          {isLoggedIn && <Route path="/user/cart" element={<Cart />} />}
           {!isLoggedIn && <Route path="/login" element={<Login />} />}
           {!isLoggedIn && <Route path="/register" element={<Register />} />}
         </Routes>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import storeService from "../services/store.service";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,6 +15,20 @@ const StoreProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const socket = useContext(SocketContext);
 
+  useEffect(() => {
+    storeService.getCart();
+    socket.on("update", () => {
+      storeService.getCart();
+    });
+    return () => {
+      socket.off("update");
+    };
+  }, [socket]);
+  const getCart = () => {
+    storeService.getCart().then((res) => setCart(res.data));
+    socket.emit("update");
+  };
+
   const removeFromCart = (productId) => {
     storeService.removeFromCart(productId).then((res) => {
       toast(res.data.message);
@@ -29,7 +43,6 @@ const StoreProvider = ({ children }) => {
       setRes(res.data);
       toast(res.data.message);
     });
-    setCart([...cart, item]);
     socket.emit("update");
   };
 
@@ -39,7 +52,7 @@ const StoreProvider = ({ children }) => {
   return (
     <>
       <StoreContext.Provider
-        value={{ checkout, addToCart, cart, removeFromCart }}
+        value={{ checkout, addToCart, cart, removeFromCart, getCart }}
       >
         {children}
       </StoreContext.Provider>

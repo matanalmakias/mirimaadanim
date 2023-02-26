@@ -4,10 +4,41 @@ import { User } from "../../db/models/user.js";
 import _ from "underscore";
 import { Product } from "../../db/models/product.js";
 import { Order } from "../../db/models/order.js";
+import { Category } from "../../db/models/category.js";
 import { CartItem } from "../../db/models/cart.js";
 import { mongoose } from "mongoose";
 const router = Router();
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
+
+// <------- Get All Cart Products -------->
+router.get("/", validateToken, async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.userId });
+    let products = [];
+    const promises = user.cart.map(async (item) => {
+      const foundProduct = await Product.findOne({ _id: item.product });
+      const foundCategory = await Category.findOne({
+        _id: foundProduct.category,
+      });
+      const newproduct = {
+        _id: item.product,
+        title: foundProduct.title,
+        description: foundProduct.description,
+        category: foundCategory.name,
+        price: foundProduct.price,
+        quantity: item.quantity,
+      };
+      return newproduct;
+    });
+
+    products = await Promise.all(promises);
+
+    res.json(products);
+    nodeEvents.emit("update");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // ---------- Create Package ----------
 router.post("/createOrderPackage", validateToken, async (req, res, next) => {

@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <div className="d-flex justify-content-center align-items-center text-center">
       <Navbar className=" m-3 p-3" bg="light" expand="lg">
-        <Navbar.Brand className="" href="/">
+        <Navbar.Brand className="" onClick={() => nav("/")}>
           מירי מעדנים
         </Navbar.Brand>
         <br />
@@ -32,40 +32,23 @@ const NavBar = () => {
           <Nav className="mr-auto">
             <Nav.Link href="#about">אודות</Nav.Link>
             <Nav.Link href="#contact">צור קשר</Nav.Link>
+            {isLoggedIn && (
+              <Nav.Link onClick={() => nav("/user/cart")}>סל קניות</Nav.Link>
+            )}
+
             {isLoggedIn === false ? (
               <>
-                <Nav.Link href="/register">הרשמה</Nav.Link>
-                <Nav.Link href="/login">התחברות</Nav.Link>
+                <Nav.Link onClick={() => nav("/register")}>הרשמה</Nav.Link>
+                <Nav.Link onClick={() => nav("/login")}>התחברות</Nav.Link>
               </>
             ) : (
               <Nav.Link onClick={logoutButton}>התנתקות</Nav.Link>
             )}
-            {isManager && <Nav.Link href="/manager">כניסה למנהלים</Nav.Link>}
+
+            {isManager && (
+              <Nav.Link onClick={() => nav("/manager")}>כניסה למנהלים</Nav.Link>
+            )}
           </Nav>
-          {cart.length > 0 && (
-            <div>
-              <h4>Cart:</h4>
-              {cart.map((item, index) => (
-                <Row key={index}>
-                  <span className="fw-bolder p-2">
-                    מחיר: {"   "}
-                    {item.price}
-                  </span>
-                  <span className="fw-bolder p-2">
-                    תיאור: {"   "}
-                    {item.description}{" "}
-                  </span>
-                  <Col>
-                    <span className="fw-bolder p-2">
-                      כמות: {"   "}
-                      {item.quantity}{" "}
-                    </span>
-                  </Col>
-                </Row>
-              ))}
-              <Button onClick={checkout}>Checkout</Button>
-            </div>
-          )}
         </Navbar.Collapse>
       </Navbar>
     </div>
