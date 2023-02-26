@@ -10,7 +10,8 @@ export const StoreContext = createContext({
 const StoreProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (item) => {
+  const addToCart = (item, productId) => {
+    storeService.addToCart(productId);
     setCart([...cart, item]);
   };
 

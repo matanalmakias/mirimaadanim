@@ -43,18 +43,13 @@ function CreateCatering() {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    cateringService.createProducts(setCreatedProduct, formData).then((res) => {
-      console.log(`ress`);
-    });
+    cateringService.createProducts(setCreatedProduct, formData);
   };
 
   const deleteAll = () => {
     cateringService.deleteAllProducts();
   };
 
-  useEffect(() => {
-    console.log(imageInput);
-  }, [imageInput]);
   return (
     <Container className="text-center">
       <Form onSubmit={(e) => formSubmit(e)} className="form p-2">
