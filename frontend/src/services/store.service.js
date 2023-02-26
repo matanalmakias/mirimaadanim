@@ -1,18 +1,32 @@
 import axios from "axios";
 const url = `http://localhost:3001/api`;
-const addToCart = async (productId) => {
+const removeFromCart = async (productId) => {
+  const token = localStorage.getItem("token");
   const config = {
     headers: {
-      Authorization: localStorage.getItem("token"),
+      Authorization: token,
     },
   };
-  return await axios.post(`${url}/cart/addToCart/${productId}`, config);
+  return await axios.delete(
+    `${url}/cart/deleteFromCart/${productId}`,
+
+    config
+  );
 };
+const addToCart = async (productId) => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  return await axios.post(`${url}/cart/addToCart/${productId}`, {}, config);
+};
+
 const checkout = async (cartState, setCartState) => {
   const fetch = await axios
     .post("http://localhost:3001/api/store/buy", { items: cartState })
     .then((response) => {
-      console.log(response.data);
       setCartState([]);
     })
     .catch((error) => {
@@ -20,7 +34,7 @@ const checkout = async (cartState, setCartState) => {
     });
 };
 
-export { checkout, addToCart };
+export { checkout, addToCart, removeFromCart };
 
-const storeService = { checkout, addToCart };
+const storeService = { checkout, addToCart, removeFromCart };
 export default storeService;

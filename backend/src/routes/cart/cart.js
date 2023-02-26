@@ -1,12 +1,13 @@
 import { Router } from "express";
-import { validateToken } from "../middleware/user/validateToken.js";
-import { User } from "../db/models/user.js";
+import { validateToken } from "../../middleware/user/validateToken.js";
+import { User } from "../../db/models/user.js";
 import _ from "underscore";
-import { Product } from "../db/models/product.js";
-import { Order } from "../db/models/order.js";
-import { CartItem } from "../db/models/cart.js";
+import { Product } from "../../db/models/product.js";
+import { Order } from "../../db/models/order.js";
+import { CartItem } from "../../db/models/cart.js";
 import { mongoose } from "mongoose";
 const router = Router();
+import nodeEvents from "../../nodeEvents/nodeEvents.js";
 
 // ---------- Create Package ----------
 router.post("/createOrderPackage", validateToken, async (req, res, next) => {
@@ -142,6 +143,7 @@ router.delete("/deleteFromCart/:productId", validateToken, async (req, res) => {
     await user.save();
 
     res.json({ message: "Product deleted from cart" });
+    return nodeEvents.emit("update");
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
@@ -166,7 +168,6 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
     const isProductAlreadyInCart = cart.some(
       (item) => item.product.toString() === productId
     );
-
     if (isProductAlreadyInCart) {
       res.json({ message: `This product is already in cart` });
     } else {
@@ -175,6 +176,7 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
       user.cart = cart;
       await user.save();
       res.json({ message: `Product added to cart` });
+      return nodeEvents.emit("update");
     }
   } catch (error) {
     console.error(error);

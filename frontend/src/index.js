@@ -8,6 +8,7 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./context/AuthContext";
 import { CateringProvider, SocketContext } from "./context/CateringContext";
 import StoreProvider from "./context/StoreContext";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

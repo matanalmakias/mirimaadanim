@@ -16,17 +16,19 @@ const CateringContext = createContext({
 const CateringProvider = ({ children }) => {
   const [caterings, setCaterings] = useState();
   const [categories, setCategories] = useState();
+  const [isProductInCart, setIsProductInCart] = useState();
 
   useEffect(() => {
-    cateringService.getAllCategories(setCategories);
     cateringService.getAllProducts(setCaterings);
-  }, []);
+    cateringService.getAllCategories(setCategories);
 
-  useEffect(() => {
     socket.on("update", () => {
       cateringService.getAllProducts(setCaterings);
       cateringService.getAllCategories(setCategories);
     });
+    return () => {
+      socket.off("update");
+    };
   }, []);
 
   return (

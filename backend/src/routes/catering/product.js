@@ -8,11 +8,13 @@ import { Order } from "../../db/models/order.js";
 const router = Router();
 
 // GET single ProductS
-router.get("/:id", (req, res) => {
+router.get("/:id", validateToken, async (req, res) => {
   const id = req.params.id;
-  Product.findOne({ _id: id })
-    .then((products) => {
-      res.json(products);
+  const user = await User.findOne({ _id: req.userId });
+  const foundProduct = user.cart.some((item) => item.product.toString() === id);
+  await Product.findOne({ _id: id })
+    .then((product) => {
+      res.json({ product, isProductInCart: foundProduct });
     })
     .catch((e) => res.status(500).json({ message: "Error", error: e }));
 });
@@ -20,7 +22,10 @@ router.get("/:id", (req, res) => {
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find({});
-    res.json(products);
+    res.json({
+      product: products,
+      message: `This is all the products of catering`,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");

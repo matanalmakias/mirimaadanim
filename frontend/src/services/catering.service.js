@@ -1,5 +1,20 @@
 import axios from "axios";
 const url = `http://localhost:3001/api`;
+const getSingleProduct = async (productId) => {
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  };
+  return await axios.get(`${url}/product/${productId}`, config);
+};
+const isProductInCart = async (productId, setState) => {
+  return await axios
+    .get(`${url}/is/isProductInCart/${productId}`)
+    .then((res) => {
+      setState(res.data);
+    });
+};
 
 const editProduct = async (productId, productData) => {
   const config = {
@@ -43,8 +58,9 @@ const createProducts = async (setState, product) => {
 };
 const getAllProducts = async (setState) => {
   return await axios.get(`http://localhost:3001/api/product`).then((res) => {
-    setState(res.data);
-    localStorage.setItem("caterings", JSON.stringify(res.data));
+    setState(res.data.product);
+
+    localStorage.setItem("caterings", JSON.stringify(res.data.product));
   });
 };
 const deleteAllProducts = async () => {
@@ -65,6 +81,8 @@ export {
   createProducts,
   getAllProducts,
   editProduct,
+  isProductInCart,
+  getSingleProduct,
 };
 
 const cateringService = {
@@ -74,5 +92,7 @@ const cateringService = {
   createProducts,
   getAllProducts,
   editProduct,
+  isProductInCart,
+  getSingleProduct,
 };
 export default cateringService;

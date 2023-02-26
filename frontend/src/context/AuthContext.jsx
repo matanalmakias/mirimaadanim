@@ -40,7 +40,7 @@ const AuthContextProvider = ({ children }) => {
       if (isModeratorTest) {
         setIsModerator(true);
       }
-      // isModerator ???
+      // isManager ???
       let isManagerTest = isAdmin("ROLE_MANAGER", roles);
 
       if (isManagerTest) {
@@ -48,6 +48,11 @@ const AuthContextProvider = ({ children }) => {
       }
     }
   }, []);
+  useEffect(() => {
+    isLoggedIn === true
+      ? localStorage.setItem("isLoggedIn", true)
+      : localStorage.setItem("isLoggedIn", false);
+  }, [isLoggedIn]);
 
   const login = (username, email, token) => {
     setIsLoggedIn(true);

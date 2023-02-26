@@ -8,8 +8,9 @@ import { Server } from "socket.io";
 import nodeEvents from "./nodeEvents/nodeEvents.js";
 import { managerRouter } from "./routes/catering/manager.js";
 import { productRouter } from "./routes/catering/product.js";
-import { cartRouter } from "./routes/cart.js";
+import { cartRouter } from "./routes/cart/cart.js";
 import { categoryRouter } from "./routes/categories.js";
+import { isQuestionsRouter } from "./routes/cart/isQuestions.js";
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/api/manager", managerRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/category", categoryRouter);
+app.use("/api/is", isQuestionsRouter);
 
 //404:
 app.use(notFound);
@@ -47,7 +49,7 @@ const server = app.listen(PORT, () =>
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "DELETE"],
     credentials: true,
   },
 });
