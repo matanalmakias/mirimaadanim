@@ -10,6 +10,20 @@ import { mongoose } from "mongoose";
 const router = Router();
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 
+// <------- Get Single Cart Product -------->
+router.get("/:productId", validateToken, async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const user = await User.findOne({
+      _id: req.userId,
+      "cart.product": productId,
+    });
+
+    res.json(user.cart[0]);
+  } catch (error) {
+    console.log(error);
+  }
+});
 // <------- Get All Cart Products -------->
 router.get("/", validateToken, async (req, res) => {
   try {
@@ -34,7 +48,6 @@ router.get("/", validateToken, async (req, res) => {
     products = await Promise.all(promises);
 
     res.json(products);
-    nodeEvents.emit("update");
   } catch (error) {
     console.log(error);
   }
@@ -91,13 +104,15 @@ router.post(
     const isProductExistOnCart = user.cart.some(
       (item) => item.product.toString() === productId
     );
-
     if (isProductExistOnCart) {
-      const result = await User.updateOne(
-        { _id: req.userId, "cart._id": productId },
-        { $inc: { "cart.$.quantity": -1 } }
+      await User.findOneAndUpdate(
+        { _id: req.userId, "cart.product": productId },
+        { $inc: { "cart.$.quantity": -1 } },
+        { new: true }
       );
       res.json({ message: `Cart decrement successfully` });
+
+      return nodeEvents.emit("update");
     } else {
       res.status(500).json({ message: `The product is not exist on cart` });
       next();
@@ -119,13 +134,15 @@ router.post(
     const isProductExistOnCart = user.cart.some(
       (item) => item.product.toString() === productId
     );
-    console.log(isProductExistOnCart);
     if (isProductExistOnCart) {
-      const result = await User.updateOne(
-        { _id: req.userId, "cart._id": productId },
-        { $inc: { "cart.$.quantity": 1 } }
+      await User.findOneAndUpdate(
+        { _id: req.userId, "cart.product": productId },
+        { $inc: { "cart.$.quantity": 1 } },
+        { new: true }
       );
       res.json({ message: `Cart increment successfully` });
+
+      return nodeEvents.emit("update");
     } else {
       res.status(500).json({ message: `The product is not exist on cart` });
       next();

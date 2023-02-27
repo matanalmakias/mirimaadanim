@@ -1,0 +1,127 @@
+.btns {
+  position: relative;
+  background-color: #04aa6d;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 3px;
+  margin: 4px;
+  width: 55px;
+  padding-left: 10px !important;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.btns:hover {
+  background-color: #ff0606;
+}
+.btns:after {
+  content: "";
+  background: #ff380b;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.btns:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+.btns-2 {
+  background-color: #ff0606;
+  border-radius: 6px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  padding: 5px;
+  margin: 4px;
+  width: 92px;
+  padding-left: 10px !important;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+.btns-2:hover {
+  background-color: #daff06;
+}
+.btns-2:after {
+  content: "";
+  background: #ff380b;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px !important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.btns-2:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+
+.col1 {
+  background-color: #9a5bff;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 7px;
+  border-radius: 10px;
+  font-weight: 520;
+  font-size: 14px;
+}
+.col2 {
+  background-color: #ff4613;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 7px;
+  border-radius: 10px;
+  font-weight: 520;
+  font-size: 14px;
+}
+.col3 {
+  background-color: #004bf9;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  padding: 7px;
+  border-radius: 10px;
+  font-weight: 520;
+  font-size: 14px;
+}
+
+.fontsize {
+  font-size: 13px !important;
+  background-color: #fd1515;
+  padding: 2px !important;
+  color: whitesmoke;
+  width: 55px;
+  margin-left: 5px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.2s; /* Safari */
+  transition-duration: 0.2s;
+}
+.fontsize:hover {
+  background-color: rgb(11, 139, 71) !important;
+}
+
+.hide_class {
+  display: none;
+}

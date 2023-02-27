@@ -4,33 +4,56 @@ import storeService from "../services/store.service";
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
 import { SocketContext } from "./CateringContext";
+import axios from "axios";
+
 //create the context:
 export const StoreContext = createContext({
   cart: [],
   addToCart: () => {},
+  removeFromCart: () => {},
   checkout: () => {},
+  decQuantity: () => {},
+  incQuantity: () => {},
 });
 
 const StoreProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
   const socket = useContext(SocketContext);
 
   useEffect(() => {
-    storeService.getCart();
+    storeService.getCart(setCart);
+
     socket.on("update", () => {
-      storeService.getCart();
+      storeService.getCart(setCart);
     });
+
     return () => {
       socket.off("update");
     };
   }, [socket]);
-  const getCart = () => {
-    storeService.getCart().then((res) => setCart(res.data));
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const decQuantity = async (productId) => {
+    await storeService.decQuantity(productId).then((res) => {
+      toast(res.data.message);
+    });
     socket.emit("update");
   };
 
-  const removeFromCart = (productId) => {
-    storeService.removeFromCart(productId).then((res) => {
+  const incQuantity = async (productId) => {
+    await storeService.incQuantity(productId).then((res) => {
+      toast(res.data.message);
+    });
+    socket.emit("update");
+  };
+
+  const removeFromCart = async (productId) => {
+    await storeService.removeFromCart(productId).then((res) => {
       toast(res.data.message);
     });
 
@@ -38,21 +61,28 @@ const StoreProvider = ({ children }) => {
     socket.emit("update");
   };
 
-  const addToCart = (item, productId, setRes) => {
-    storeService.addToCart(productId).then((res) => {
+  const addToCart = async (item, productId, setRes) => {
+    await storeService.addToCart(productId).then((res) => {
       setRes(res.data);
       toast(res.data.message);
     });
     socket.emit("update");
   };
 
-  const checkout = async () => {
-    storeService.checkout(cart, setCart).then((res) => console.log(res));
+  const checkout = async (setData) => {
+    await storeService.checkout().then((res) => setData(res.data));
   };
   return (
     <>
       <StoreContext.Provider
-        value={{ checkout, addToCart, cart, removeFromCart, getCart }}
+        value={{
+          incQuantity,
+          decQuantity,
+          checkout,
+          addToCart,
+          cart,
+          removeFromCart,
+        }}
       >
         {children}
       </StoreContext.Provider>

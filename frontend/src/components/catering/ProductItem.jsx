@@ -5,16 +5,15 @@ import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import RemoveProductButton from "../manager/RemoveProductButton";
 import cateringService from "../../services/catering.service";
-import { io } from "socket.io-client";
-const socket = io("http://localhost:3001", {
-  withCredentials: true,
-});
+import { SocketContext } from "../../context/CateringContext";
 const ProductItem = ({ product, index }) => {
   const [showPicture, setShowPicture] = useState(false);
   const [res, setRes] = useState();
   const [isProductAlreadyInCart, setIsProductAlreadyInCart] = useState(null);
   const { isManager, isLoggedIn } = useContext(AuthContext);
   const { removeFromCart, addToCart } = useContext(StoreContext);
+  const socket = useContext(SocketContext);
+
   const nav = useNavigate();
   const imagesUrl = `http://localhost:3001`;
 
@@ -41,7 +40,7 @@ const ProductItem = ({ product, index }) => {
     return () => {
       socket.off("update");
     };
-  }, [isLoggedIn, product._id]);
+  }, [isLoggedIn, product._id, socket]);
   const toggleSetShowPicture = () => {
     setShowPicture((state) => !state);
   };
@@ -84,7 +83,7 @@ const ProductItem = ({ product, index }) => {
         </Row>
         {isManager && (
           <>
-            <Row className="p-1 mt-1 ">
+            <Row className="p-1  mt-1 ">
               <Col className="">
                 <Button
                   onClick={() => {

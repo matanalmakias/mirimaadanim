@@ -1,23 +1,36 @@
 import axios from "axios";
 const url = `http://localhost:3001/api`;
 
-const getCart = async () => {
+const decQuantity = async (productId) => {
   const token = localStorage.getItem("token");
   const config = {
     headers: {
       Authorization: token,
     },
   };
+  return await axios.post(`${url}/cart/decQuantity/${productId}`, {}, config);
+};
+const incQuantity = async (productId) => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  return await axios.post(`${url}/cart/incQuantity/${productId}`, {}, config);
+};
+const getCart = async (setState) => {
   return await axios
-    .get(
-      `${url}/cart`,
-
-      config
-    )
+    .get(`http://localhost:3001/api/cart`, {
+      headers: { Authorization: localStorage.getItem("token") },
+    })
     .then((res) => {
-      localStorage.setItem("caterings", JSON.stringify(res.data));
+      setState(res.data);
+
+      localStorage.setItem("cart", JSON.stringify(res.data));
     });
 };
+
 const removeFromCart = async (productId) => {
   const token = localStorage.getItem("token");
   const config = {
@@ -25,11 +38,7 @@ const removeFromCart = async (productId) => {
       Authorization: token,
     },
   };
-  return await axios.delete(
-    `${url}/cart/deleteFromCart/${productId}`,
-
-    config
-  );
+  return await axios.delete(`${url}/cart/deleteFromCart/${productId}`, config);
 };
 const addToCart = async (productId) => {
   const token = localStorage.getItem("token");
@@ -41,18 +50,31 @@ const addToCart = async (productId) => {
   return await axios.post(`${url}/cart/addToCart/${productId}`, {}, config);
 };
 
-const checkout = async (cartState, setCartState) => {
-  const fetch = await axios
-    .post("http://localhost:3001/api/store/buy", { items: cartState })
-    .then((response) => {
-      setCartState([]);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+const checkout = async () => {
+  const token = localStorage.getItem("token");
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  return await axios.post(`${url}/cart/createOrderPackage/`, {}, config);
 };
 
-export { checkout, addToCart, removeFromCart, getCart };
+export {
+  decQuantity,
+  incQuantity,
+  checkout,
+  addToCart,
+  removeFromCart,
+  getCart,
+};
 
-const storeService = { checkout, addToCart, removeFromCart, getCart };
+const storeService = {
+  decQuantity,
+  incQuantity,
+  checkout,
+  addToCart,
+  removeFromCart,
+  getCart,
+};
 export default storeService;
