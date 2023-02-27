@@ -7,7 +7,7 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Header from "./components/header/Header";
 import Manager from "./pages/manager/Manager";
-import Cart from "./components/store/Cart";
+import Cart from "./components/store/cart/Cart";
 import UpdateProduct from "./components/manager/UpdateProduct";
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
               element={<UpdateProduct />}
             />
           )}
+          {isLoggedIn && <Route path="/order/:orderId" element={<Cart />} />}
           {isLoggedIn && <Route path="/user/cart" element={<Cart />} />}
           {!isLoggedIn && <Route path="/login" element={<Login />} />}
           {!isLoggedIn && <Route path="/register" element={<Register />} />}

@@ -9,6 +9,7 @@ import nodeEvents from "./nodeEvents/nodeEvents.js";
 import { managerRouter } from "./routes/catering/manager.js";
 import { productRouter } from "./routes/catering/product.js";
 import { cartRouter } from "./routes/cart/cart.js";
+import { orderRouter } from "./routes/order/order.js";
 import { categoryRouter } from "./routes/categories.js";
 import { isQuestionsRouter } from "./routes/cart/isQuestions.js";
 
@@ -36,6 +37,7 @@ app.use("/api/manager", managerRouter);
 app.use("/api/product", productRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/category", categoryRouter);
+app.use("/api/order", orderRouter);
 app.use("/api/is", isQuestionsRouter);
 
 //404:

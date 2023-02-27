@@ -1,15 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StoreContext } from "../../context/StoreContext";
+import { StoreContext } from "../../../context/StoreContext";
 import { Row, Col, Button } from "react-bootstrap";
 import "./cart.css";
 import CartItem from "./CartItem";
-import OrderPackage from "./OrderPackage";
+import OrderPackage from "../order/OrderPackage";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const [cartState, setCartState] = useState();
-  const [orderPackageData, setOrderPackageData] = useState([]);
+  const [orderPackageData, setOrderPackageData] = useState(null);
   const [showOrder, setShowOrder] = useState(false);
-  const { checkout } = useContext(StoreContext);
-
+  const nav = useNavigate();
+  useEffect(() => {
+    console.log(orderPackageData);
+  }, [orderPackageData]);
+  const submitOrderPackage = async () => {
+    await axios
+      .post(
+        "http://localhost:3001/api/cart/createOrderPackage",
+        {},
+        { headers: { Authorization: localStorage.getItem("token") } }
+      )
+      .then((res) => setOrderPackageData(res.data));
+  };
   const { cart } = useContext(StoreContext);
 
   if (cart === undefined || !cart) return;
@@ -26,15 +39,11 @@ const Cart = () => {
           <Button
             className="w-100"
             onClick={() => {
-              checkout(setOrderPackageData);
-              setShowOrder(true);
+              submitOrderPackage();
             }}
           >
             Checkout
           </Button>
-          <div className={showOrder ? "" : "hide_class"}>
-            <OrderPackage data={orderPackageData} />
-          </div>
         </div>
       )}
     </>

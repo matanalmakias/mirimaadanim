@@ -84,7 +84,8 @@ router.post("/createOrderPackage", validateToken, async (req, res, next) => {
     await user.save();
     await order.save();
     res.json({ order: order, totalPrice });
-    console.log(user);
+
+    return nodeEvents.emit("update");
   } catch (err) {
     console.error(err);
   }

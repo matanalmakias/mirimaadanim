@@ -1,3 +1,11 @@
+### GET Single Order
+GET http://localhost:3001/api/order/63fd017f53dbc33ac452a8c4
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzUxNzU5MCwiZXhwIjoxNjgwMTA5NTkwfQ.4fAKDDr6i8ckYhKTDsrj0m-vUcuCXILtSCUAoFMjcE0
+
+### GET All Orders
+GET http://localhost:3001/api/order
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzUxNzU5MCwiZXhwIjoxNjgwMTA5NTkwfQ.4fAKDDr6i8ckYhKTDsrj0m-vUcuCXILtSCUAoFMjcE0
+
 ### GET Single Cart Product
 GET http://localhost:3001/api/cart/63f970d02972e5d94952d761
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzUxNzU5MCwiZXhwIjoxNjgwMTA5NTkwfQ.4fAKDDr6i8ckYhKTDsrj0m-vUcuCXILtSCUAoFMjcE0
@@ -14,7 +22,7 @@ GET http://localhost:3001/api/category
 
 ### Create an order package from cart
 POST http://localhost:3001/api/cart/createOrderPackage
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzUxNzU5MCwiZXhwIjoxNjgwMTA5NTkwfQ.4fAKDDr6i8ckYhKTDsrj0m-vUcuCXILtSCUAoFMjcE0
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjhkZjMyNTY2ZTBiMzBkZDYwMDdlYyIsImlhdCI6MTY3NzUyNDc0MCwiZXhwIjoxNjgwMTE2NzQwfQ.s3rofNwblWCcsuCNnG1F2nXUqDLuM0WQ1Li6A6Zof6U
 
 ### decrement Quantity in cart
 POST http://localhost:3001/api/cart/decQuantity/63f970d02972e5d94952d761

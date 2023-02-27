@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import { StoreContext } from "../../context/StoreContext";
+import { StoreContext } from "../../../context/StoreContext";
 import { ToastContainer } from "react-toastify";
 const CartItem = ({ item, index }) => {
   const { removeFromCart, decQuantity, incQuantity } = useContext(StoreContext);

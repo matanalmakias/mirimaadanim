@@ -4,11 +4,14 @@ import storeService from "../services/store.service";
 import { ToastContainer, toast } from "react-toastify";
 import { useContext } from "react";
 import { SocketContext } from "./CateringContext";
-import axios from "axios";
 
 //create the context:
 export const StoreContext = createContext({
   cart: [],
+  orders: [],
+  submitOrderPackage: () => {},
+  getSingleOrder: () => {},
+  getAllOrders: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
   checkout: () => {},
@@ -38,6 +41,16 @@ const StoreProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const submitOrderPackage = async (setData) => {
+    await storeService.submitOrderPackage().then((res) => setData(res.data));
+    socket.emit("update");
+  };
+  const getSingleOrder = async (orderId) => {
+    await storeService.getSingleOrder(orderId).then((res) => {});
+  };
+  const getAllOrders = async (orderId) => {
+    await storeService.getAllOrders(orderId).then((res) => {});
+  };
   const decQuantity = async (productId) => {
     await storeService.decQuantity(productId).then((res) => {
       toast(res.data.message);
@@ -82,6 +95,9 @@ const StoreProvider = ({ children }) => {
           addToCart,
           cart,
           removeFromCart,
+          getSingleOrder,
+          getAllOrders,
+          submitOrderPackage,
         }}
       >
         {children}
