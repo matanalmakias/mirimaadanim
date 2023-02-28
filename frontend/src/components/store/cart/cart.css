@@ -6,7 +6,9 @@
   font-weight: 600;
   color: #ffffff;
   padding: 3px;
-  margin: 4px;
+  margin: 3px;
+  margin-top: 5px;
+  height: 50px;
   width: 55px;
   padding-left: 10px !important;
   text-align: center;
@@ -113,7 +115,8 @@
   padding: 2px !important;
   color: whitesmoke;
   width: 55px;
-  margin-left: 5px;
+  height: 50px;
+  margin-top: 5px;
   cursor: pointer;
   -webkit-transition-duration: 0.2s; /* Safari */
   transition-duration: 0.2s;

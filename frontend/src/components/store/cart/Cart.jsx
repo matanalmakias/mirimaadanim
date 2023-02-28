@@ -14,8 +14,7 @@ const Cart = () => {
   const [showOrder, setShowOrder] = useState(false);
   const nav = useNavigate();
   const socket = useContext(SocketContext);
-  useEffect(() => {
-  }, [orderPackageData]);
+  useEffect(() => {}, [orderPackageData]);
   const submitOrderPackage = async () => {
     await axios
       .post(
@@ -46,7 +45,7 @@ const Cart = () => {
           <h1 className="h1">סל הקניות</h1>
           <hr />
           {cart.map((item, index) => (
-            <CartItem item={item} index={index} />
+            <CartItem key={index} item={item} index={index} />
           ))}
           <hr />
           <Button

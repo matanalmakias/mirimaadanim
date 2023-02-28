@@ -7,7 +7,7 @@ const CartItem = ({ item, index }) => {
 
   return (
     <>
-      <Row className="flex-row-reverse" key={index}>
+      <Row className="flex-row-reverse p-4" key={index}>
         <Col className="col2 d-flex justify-content-center ">
           שם פריט
           <br />
@@ -22,15 +22,13 @@ const CartItem = ({ item, index }) => {
           מחיר <br />
           {item.price}
         </Col>
-        <Col>
-          <div>
-            <p onClick={() => incQuantity(item._id)} className="btns">
-              הוסף
-            </p>
-            <p onClick={() => decQuantity(item._id)} className="btns">
-              הורד
-            </p>
-          </div>
+        <Col className="d-flex justify-content-center">
+          <p onClick={() => incQuantity(item._id)} className="btns">
+            הוסף
+          </p>
+          <p onClick={() => decQuantity(item._id)} className="btns">
+            הורד
+          </p>
 
           <p onClick={() => removeFromCart(item._id)} className=" fontsize">
             הסרה מהסל

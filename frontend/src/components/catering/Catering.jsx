@@ -18,7 +18,7 @@ const Catering = () => {
           {productList
             ?.filter((catering) => catering.category === category._id)
             ?.map((catering, index) => (
-              <ProductItem product={catering} index={index} />
+              <ProductItem key={index} product={catering} index={index} />
             ))}
         </div>
       ))}
