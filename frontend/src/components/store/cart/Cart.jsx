@@ -6,13 +6,15 @@ import CartItem from "./CartItem";
 import OrderPackage from "../order/OrderPackage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { SocketContext } from "../../../context/CateringContext";
+import OrderItem from "../order/OrderItem";
 const Cart = () => {
   const [cartState, setCartState] = useState();
   const [orderPackageData, setOrderPackageData] = useState(null);
   const [showOrder, setShowOrder] = useState(false);
   const nav = useNavigate();
+  const socket = useContext(SocketContext);
   useEffect(() => {
-    console.log(orderPackageData);
   }, [orderPackageData]);
   const submitOrderPackage = async () => {
     await axios
@@ -21,9 +23,20 @@ const Cart = () => {
         {},
         { headers: { Authorization: localStorage.getItem("token") } }
       )
-      .then((res) => setOrderPackageData(res.data));
+      .then((res) => {
+        setOrderPackageData(res.data);
+      })
+      .finally(() => {
+        setShowOrder(true);
+      });
+    socket.emit("update");
   };
+
   const { cart } = useContext(StoreContext);
+
+  // if (orderPackageData !== null) {
+  //   nav(`/order/${orderPackageData.order._id}`);
+  // }
 
   if (cart === undefined || !cart) return;
   return (
@@ -46,6 +59,9 @@ const Cart = () => {
           </Button>
         </div>
       )}
+      <div className={showOrder ? "" : "hide_class"}>
+        <OrderItem data={orderPackageData} />
+      </div>
     </>
   );
 };

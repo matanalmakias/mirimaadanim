@@ -21,8 +21,6 @@ const OrderPackage = ({ show, data }) => {
   return (
     <>
       {order?.items.forEach((item) => {
-        console.log(item);
-
         return (
           <>
             <OrderItem item={item} />
