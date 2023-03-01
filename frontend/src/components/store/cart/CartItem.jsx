@@ -23,18 +23,20 @@ const CartItem = ({ item, index }) => {
     };
   }, [socket]);
 
- 
   const signWorker = async (workerId, productId) => {
     storeService
       .signWorker(workerId, productId)
       .then((res) => console.log(res.data));
   };
   let cartItem;
-  let isWorkerIsSigned
+
   if (userData !== null) {
     cartItem = userData?.cart.find((cartItem) => cartItem.product === item._id);
-    isWorkerIsSigned = cartItem.workers.some(item=>)
   }
+  const isWorkerIsSigned = async (id) => {
+    const result = cartItem.workers.some((item) => item.id === id);
+    return result;
+  };
   return (
     <>
       <Row>
@@ -60,6 +62,7 @@ const CartItem = ({ item, index }) => {
                   key={worker?.id}
                 >
                   {worker?.name}
+                  {isWorkerIsSigned(worker?.id) === true ? `true` : `false`}
                 </div>
               ))}
           </div>
