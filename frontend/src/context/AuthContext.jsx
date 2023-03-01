@@ -1,8 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import isAdmin from "../functions/isAdmin.model";
 import authService from "../services/auth.service";
+import { SocketContext } from "./CateringContext";
 
 const initialState = {
+  userData: [],
   isLoggedIn: false,
   login(username, email, token) {},
   logout() {},
@@ -11,6 +13,7 @@ const initialState = {
 const AuthContext = createContext(initialState);
 
 const AuthContextProvider = ({ children }) => {
+  const [userData, setUserData] = useState(null);
   const [isAdminState, setIsAdminState] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
   const [isManager, setIsManager] = useState(false);
@@ -18,6 +21,17 @@ const AuthContextProvider = ({ children }) => {
   const [username, setUsername] = useState(undefined);
   const [email, setEmail] = useState(undefined);
   const [token, setToken] = useState(undefined);
+
+  const socket = useContext(SocketContext);
+  useEffect(() => {
+    authService.getSingleUser().then((res) => setUserData(res.data));
+    socket.on("update", () => {
+      authService.getSingleUser().then((res) => setUserData(res.data));
+    });
+    return () => {
+      socket.off("update");
+    };
+  }, [socket]);
 
   useEffect(() => {
     const userData = localStorage.getItem("user");
@@ -92,6 +106,7 @@ const AuthContextProvider = ({ children }) => {
     isModerator,
     isAdminState,
     isManager,
+    userData,
   };
   return (
     <AuthContext.Provider value={contextValues}>

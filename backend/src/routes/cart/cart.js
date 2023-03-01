@@ -10,7 +10,7 @@ const router = Router();
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { v4 } from "uuid";
 
-// Sign a worker to Cart Item in user.cart
+// <------- Sign a worker to Cart Item in user.cart ------->
 router.post(
   "/signWorker/:workerId/:productId",
   validateToken,
@@ -31,13 +31,22 @@ router.post(
       );
 
       if (isWorkerAlreadyInCartItem === false) {
+        if (foundProduct.quantity === foundProduct.workers.length) {
+          res.json({ message: `עליך להוסיף כמות בשביל להוסיף עוד עובדים .` });
+          return nodeEvents.emit("update");
+        }
         foundProduct.workers.push(worker);
         // mark the modified field 'workers' in the foundProduct document
         foundProduct.markModified("workers");
         await user.save();
-        return res.status(200).json({ message: "העובד התווסף בהצלחה" });
+        res.status(200).json({ message: "העובד התווסף בהצלחה" });
+        return nodeEvents.emit("update");
       } else {
-        return res.json({ message: `עובד זה כבר רשום במוצר זה` });
+        foundProduct.workers.pull(worker);
+        foundProduct.markModified("workers");
+        await user.save();
+        res.json({ message: `העובד הוסר בהצלחה` });
+        return nodeEvents.emit("update");
       }
     } catch (error) {
       console.log(error);
@@ -46,7 +55,7 @@ router.post(
   }
 );
 
-// Add a worker to workers list in user.workers
+// -------- Add a worker to workers list in user.workers ----------
 router.post("/addWorker", validateToken, async (req, res) => {
   try {
     const user = await User.findById(req.userId);
@@ -159,6 +168,15 @@ router.post(
   async (req, res, next) => {
     const productId = req.params.productId;
     const user = await User.findById(req.userId);
+    const foundProduct = user.cart.find(
+      (item) => item.product.toString() === productId
+    );
+    if (foundProduct.quantity === foundProduct.workers.length) {
+      await res.json({
+        message: `עליך להסיר שמות עובדים בשביל להוריד מהכמות של המוצר`,
+      });
+      return nodeEvents.emit("update");
+    }
 
     if (!user) {
       return res.status(404).json({ message: "המשתמש לא קיים במערכת" });

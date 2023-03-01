@@ -1,42 +1,39 @@
 import { useContext, useEffect, useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { StoreContext } from "../../../context/StoreContext";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import authService from "../../../services/auth.service";
 import { SocketContext } from "../../../context/CateringContext";
 import storeService from "../../../services/store.service";
+import AuthContext from "../../../context/AuthContext";
 const CartItem = ({ item, index }) => {
-  const [userData, setUserData] = useState();
-
+  const [isSignedWorker, setIsSignedWorker] = useState();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [showUserData, setShowUserData] = useState(false);
   const { removeFromCart, decQuantity, incQuantity } = useContext(StoreContext);
   const socket = useContext(SocketContext);
-
-  useEffect(() => {
-    authService.getSingleUser().then((res) => setUserData(res.data));
-    socket.on("update", () => {
-      authService.getSingleUser().then((res) => setUserData(res.data));
-    });
-    return () => {
-      socket.off("update");
-    };
-  }, [socket]);
+  const { userData } = useContext(AuthContext);
 
   const signWorker = async (workerId, productId) => {
-    storeService
-      .signWorker(workerId, productId)
-      .then((res) => console.log(res.data));
+    storeService.signWorker(workerId, productId).then((res) => {
+      toast(res.data.message);
+    });
+    socket.emit("update");
   };
   let cartItem;
 
   if (userData !== null) {
     cartItem = userData?.cart.find((cartItem) => cartItem.product === item._id);
   }
-  const isWorkerIsSigned = async (id) => {
+  const isWorkerIsSigned = async (id, cartItem) => {
     const result = cartItem.workers.some((item) => item.id === id);
-    return result;
+    if (result === true) {
+      setIsSignedWorker(true);
+    } else {
+      setIsSignedWorker(false);
+    }
   };
+
   return (
     <>
       <Row>
@@ -53,7 +50,7 @@ const CartItem = ({ item, index }) => {
           >
             {showUserData ? "סגור" : "הצמד מוצר זה לעובדים"}
           </p>
-          <div className={showUserData ? "" : "hide_class"}>
+          <div className={showUserData ? "d-flex" : "hide_class"}>
             {userData?.workers.length > 0 &&
               userData?.workers.map((worker) => (
                 <div
@@ -61,8 +58,18 @@ const CartItem = ({ item, index }) => {
                   className="btn card m-1 p-1"
                   key={worker?.id}
                 >
-                  {worker?.name}
-                  {isWorkerIsSigned(worker?.id) === true ? `true` : `false`}
+                  <p
+                    className="mb-1"
+                    style={{ padding: `1px`, fontSize: `10px` }}
+                  >
+                    {worker?.name}
+                  </p>
+                  {cartItem &&
+                    cartItem.workers.some((item) => item.id === worker.id) && (
+                      <>
+                        <i class="ri-check-line"></i>
+                      </>
+                    )}
                 </div>
               ))}
           </div>
@@ -84,13 +91,13 @@ const CartItem = ({ item, index }) => {
           {item?.price}
         </Col>
         <Col className="d-flex justify-content-center">
-          <p onClick={() => incQuantity(item?._id)} className="btns">
-            הוסף
-          </p>
+          {" "}
           <p onClick={() => decQuantity(item?._id)} className="btns">
             הורד
           </p>
-
+          <p onClick={() => incQuantity(item?._id)} className="btns">
+            הוסף
+          </p>
           <p onClick={() => removeFromCart(item?._id)} className=" fontsize">
             הסרה מהסל
           </p>

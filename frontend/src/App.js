@@ -9,6 +9,7 @@ import Header from "./components/header/Header";
 import Manager from "./pages/manager/Manager";
 import Cart from "./components/store/cart/Cart";
 import UpdateProduct from "./components/manager/UpdateProduct";
+import UserManagement from "./pages/user-management/UserManagement";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -28,6 +29,9 @@ function App() {
           )}
           {isLoggedIn && <Route path="/order/:orderId" element={<Cart />} />}
           {isLoggedIn && <Route path="/user/cart" element={<Cart />} />}
+          {isLoggedIn && (
+            <Route path="/user-management" element={<UserManagement />} />
+          )}
           {!isLoggedIn && <Route path="/login" element={<Login />} />}
           {!isLoggedIn && <Route path="/register" element={<Register />} />}
         </Routes>

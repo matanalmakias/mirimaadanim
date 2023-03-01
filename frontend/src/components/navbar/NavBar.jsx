@@ -44,7 +44,11 @@ const NavBar = () => {
             ) : (
               <Nav.Link onClick={logoutButton}>התנתקות</Nav.Link>
             )}
-
+            {isLoggedIn && (
+              <Nav.Link onClick={() => nav("/user-management")}>
+                ניהול חשבון
+              </Nav.Link>
+            )}
             {isManager && (
               <Nav.Link onClick={() => nav("/manager")}>כניסה למנהלים</Nav.Link>
             )}
