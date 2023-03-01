@@ -11,12 +11,40 @@ import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { v4 } from "uuid";
 
 // Sign a worker to Cart Item in user.cart
-router.post("/signWorker/:workerId", validateToken, async (req, res) => {
-  try {
-  } catch (error) {
-    console.log(error);
+router.post(
+  "/signWorker/:workerId/:productId",
+  validateToken,
+  async (req, res) => {
+    try {
+      const workerId = req.params.workerId;
+      const productId = req.params.productId;
+      const user = await User.findOne({ _id: req.userId });
+      const worker = await user.workers.find((item) => item.id === workerId);
+      let foundProduct = user.cart.find(
+        (item) => item.product.toString() === productId
+      );
+      if (!foundProduct.workers) {
+        foundProduct.workers = [];
+      }
+      const isWorkerAlreadyInCartItem = foundProduct.workers.some(
+        (worker) => worker.id === workerId
+      );
+
+      if (isWorkerAlreadyInCartItem === false) {
+        foundProduct.workers.push(worker);
+        // mark the modified field 'workers' in the foundProduct document
+        foundProduct.markModified("workers");
+        await user.save();
+        return res.status(200).json({ message: "העובד התווסף בהצלחה" });
+      } else {
+        return res.json({ message: `עובד זה כבר רשום במוצר זה` });
+      }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Something went wrong" });
+    }
   }
-});
+);
 
 // Add a worker to workers list in user.workers
 router.post("/addWorker", validateToken, async (req, res) => {

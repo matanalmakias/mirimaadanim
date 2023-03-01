@@ -2,21 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { StoreContext } from "../../../context/StoreContext";
 import { ToastContainer } from "react-toastify";
-import AuthContext from "../../../context/AuthContext";
 import authService from "../../../services/auth.service";
 import { SocketContext } from "../../../context/CateringContext";
+import storeService from "../../../services/store.service";
 const CartItem = ({ item, index }) => {
   const [userData, setUserData] = useState();
+
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [showUserData, setShowUserData] = useState(false);
   const { removeFromCart, decQuantity, incQuantity } = useContext(StoreContext);
-  const { getSingleUser } = useContext(AuthContext);
   const socket = useContext(SocketContext);
-
-  useEffect(() => {
-    authService.getSingleUser().then((res) => setUserData(res.data));
-  }, []);
-  console.log(userData);
 
   useEffect(() => {
     authService.getSingleUser().then((res) => setUserData(res.data));
@@ -26,24 +21,45 @@ const CartItem = ({ item, index }) => {
     return () => {
       socket.off("update");
     };
-  }, []);
+  }, [socket]);
 
+ 
+  const signWorker = async (workerId, productId) => {
+    storeService
+      .signWorker(workerId, productId)
+      .then((res) => console.log(res.data));
+  };
+  let cartItem;
+  let isWorkerIsSigned
+  if (userData !== null) {
+    cartItem = userData?.cart.find((cartItem) => cartItem.product === item._id);
+    isWorkerIsSigned = cartItem.workers.some(item=>)
+  }
   return (
     <>
       <Row>
         <Col>
           <p
             onClick={() => setShowUserData((state) => !state)}
-            style={{ padding: `2px`, textAlign: `center` }}
-            className="card btn text-secondary"
+            style={{
+              backgroundColor: `burlywood`,
+              color: `white`,
+              padding: `2px`,
+              textAlign: `center`,
+            }}
+            className="card btn"
           >
             {showUserData ? "סגור" : "הצמד מוצר זה לעובדים"}
           </p>
           <div className={showUserData ? "" : "hide_class"}>
             {userData?.workers.length > 0 &&
-              userData?.workers.map((item) => (
-                <div className="card m-1 p-1" key={item?.id}>
-                  {item?.name}
+              userData?.workers.map((worker) => (
+                <div
+                  onClick={() => signWorker(worker.id, item._id)}
+                  className="btn card m-1 p-1"
+                  key={worker?.id}
+                >
+                  {worker?.name}
                 </div>
               ))}
           </div>

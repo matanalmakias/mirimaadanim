@@ -11,6 +11,11 @@ const cartItemSchema = new Schema({
     required: true,
     default: 1,
   },
+  workers: {
+    type: Array,
+    required: false,
+    default: [],
+  },
   _id: false,
 });
 

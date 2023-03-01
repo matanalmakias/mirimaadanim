@@ -1,51 +1,35 @@
 import axios from "axios";
 const url = `http://localhost:3001/api`;
+const token = localStorage.getItem("token");
+const headers = {
+  headers: {
+    Authorization: token,
+  },
+};
+const signWorker = async (workerId, productId) => {
+  return await axios.post(
+    `${url}/cart/signWorker/${workerId}/${productId}`,
+    {},
+    headers
+  );
+};
 
 const sendWorker = async (workerInput) => {
-  const token = localStorage.getItem("token");
   const body = { name: workerInput };
-  const headers = {
-    headers: {
-      Authorization: token,
-    },
-  };
+
   return await axios.post(`${url}/cart/addWorker`, body, headers);
 };
 const getAllOrders = async (orderId) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.get(`${url}/order`, config);
+  return await axios.get(`${url}/order`, headers);
 };
 const getSingleOrder = async (orderId) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.get(`${url}/order/${orderId}`, config);
+  return await axios.get(`${url}/order/${orderId}`, headers);
 };
 const decQuantity = async (productId) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.post(`${url}/cart/decQuantity/${productId}`, {}, config);
+  return await axios.post(`${url}/cart/decQuantity/${productId}`, {}, headers);
 };
 const incQuantity = async (productId) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.post(`${url}/cart/incQuantity/${productId}`, {}, config);
+  return await axios.post(`${url}/cart/incQuantity/${productId}`, {}, headers);
 };
 const getCart = async (setState) => {
   return await axios
@@ -60,41 +44,17 @@ const getCart = async (setState) => {
 };
 
 const removeFromCart = async (productId) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.delete(`${url}/cart/deleteFromCart/${productId}`, config);
+  return await axios.delete(`${url}/cart/deleteFromCart/${productId}`, headers);
 };
 const addToCart = async (productId) => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.post(`${url}/cart/addToCart/${productId}`, {}, config);
+  return await axios.post(`${url}/cart/addToCart/${productId}`, {}, headers);
 };
 
 const submitOrderPackage = async () => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.post(`${url}/cart/createOrderPackage`, {}, config);
+  return await axios.post(`${url}/cart/createOrderPackage`, {}, headers);
 };
 const checkout = async () => {
-  const token = localStorage.getItem("token");
-  const config = {
-    headers: {
-      Authorization: token,
-    },
-  };
-  return await axios.post(`${url}/cart/createOrderPackage/`, {}, config);
+  return await axios.post(`${url}/cart/createOrderPackage/`, {}, headers);
 };
 
 export {
@@ -108,6 +68,7 @@ export {
   getAllOrders,
   submitOrderPackage,
   sendWorker,
+  signWorker,
 };
 
 const storeService = {
@@ -121,5 +82,6 @@ const storeService = {
   getAllOrders,
   submitOrderPackage,
   sendWorker,
+  signWorker,
 };
 export default storeService;
