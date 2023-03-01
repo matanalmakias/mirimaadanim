@@ -59,7 +59,6 @@ const createProducts = async (setState, product) => {
 const getAllProducts = async (setState) => {
   return await axios.get(`http://localhost:3001/api/product`).then((res) => {
     setState(res.data.product);
-
     localStorage.setItem("caterings", JSON.stringify(res.data.product));
   });
 };

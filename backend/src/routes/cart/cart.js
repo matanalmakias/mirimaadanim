@@ -6,9 +6,42 @@ import { Product } from "../../db/models/product.js";
 import { Order } from "../../db/models/order.js";
 import { Category } from "../../db/models/category.js";
 import { CartItem } from "../../db/models/cart.js";
-import { mongoose } from "mongoose";
 const router = Router();
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
+import { v4 } from "uuid";
+
+// Sign a worker to Cart Item in user.cart
+router.post("/signWorker/:workerId", validateToken, async (req, res) => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Add a worker to workers list in user.workers
+router.post("/addWorker", validateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    const foundWorker = user.workers.find(
+      (item) => item.name === req.body.name
+    );
+    if (foundWorker !== undefined) {
+      return await res.json({
+        message: "השם ששלחת קיים במערכת, אנא בחר שם אחר",
+      });
+    } else if (req.body.name === null) {
+      return await res.json({
+        message: `השם ששלחת לא תקין, הקלד שם ושלח שוב.`,
+      });
+    }
+    user.workers = [...user.workers, { id: v4(), name: req.body.name }];
+    await user.save();
+    await res.json({ message: "העובד התווסף בהצלחה!" });
+    return nodeEvents.emit("update");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // <------- Get Single Cart Product -------->
 router.get("/:productId", validateToken, async (req, res) => {
@@ -60,7 +93,7 @@ router.post("/createOrderPackage", validateToken, async (req, res, next) => {
     let cart = user.cart;
 
     if (cart.length === 0) {
-      return res.json({ message: `Cart is empty!` });
+      return res.json({ message: `סל הקניות שלך ריק!` });
     }
 
     let totalPrice = 0;
@@ -100,7 +133,7 @@ router.post(
     const user = await User.findById(req.userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "המשתמש לא קיים במערכת" });
     }
     const isProductExistOnCart = user.cart.some(
       (item) => item.product.toString() === productId
@@ -111,11 +144,11 @@ router.post(
         { $inc: { "cart.$.quantity": -1 } },
         { new: true }
       );
-      res.json({ message: `Cart decrement successfully` });
+      res.json({ message: `הורדת כמות המוצר התבצעה בהצלחה` });
 
       return nodeEvents.emit("update");
     } else {
-      res.status(500).json({ message: `The product is not exist on cart` });
+      res.status(500).json({ message: `המוצר אינו נמצא בסל הקניות` });
       next();
     }
   }
@@ -130,7 +163,7 @@ router.post(
     const user = await User.findById(req.userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "המשתמש לא קיים במערכת" });
     }
     const isProductExistOnCart = user.cart.some(
       (item) => item.product.toString() === productId
@@ -141,11 +174,11 @@ router.post(
         { $inc: { "cart.$.quantity": 1 } },
         { new: true }
       );
-      res.json({ message: `Cart increment successfully` });
+      res.json({ message: `הוספת כמות המוצר התבצעה בהצלחה` });
 
       return nodeEvents.emit("update");
     } else {
-      res.status(500).json({ message: `The product is not exist on cart` });
+      res.status(500).json({ message: `המוצר אינו נמצא בסל הקניות` });
       next();
     }
   }
@@ -172,7 +205,7 @@ router.delete("/deleteFromCart/:productId", validateToken, async (req, res) => {
 
     const user = await User.findById(userId);
     if (!user) {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "המשתמש לא קיים במערכת" });
       return;
     }
 
@@ -182,7 +215,7 @@ router.delete("/deleteFromCart/:productId", validateToken, async (req, res) => {
     );
 
     if (foundIndex === -1) {
-      res.status(404).json({ message: "Product not found in cart" });
+      res.status(404).json({ message: "המוצר אינו נמצא בסל הקניות" });
       return;
     }
     const foundProduct = user.cart.find(
@@ -191,7 +224,7 @@ router.delete("/deleteFromCart/:productId", validateToken, async (req, res) => {
     user.cart.pull(foundProduct);
     await user.save();
 
-    res.json({ message: "Product deleted from cart" });
+    res.json({ message: "המוצר נמחק מסל הקניות בהצלחה" });
     return nodeEvents.emit("update");
   } catch (error) {
     console.error(error);
@@ -209,7 +242,7 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
     const user = await User.findById(userId);
 
     if (!user) {
-      res.status(404).json({ message: "User not found" });
+      res.status(404).json({ message: "המשתמש לא קיים במערכת" });
       return;
     }
 
@@ -218,13 +251,13 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
       (item) => item.product.toString() === productId
     );
     if (isProductAlreadyInCart) {
-      res.json({ message: `This product is already in cart` });
+      res.json({ message: `המוצר הזה כבר נמצא בסל הקניות` });
     } else {
       const cartItem = new CartItem({ product: productId, quantity: 1 });
       cart.push(cartItem);
       user.cart = cart;
       await user.save();
-      res.json({ message: `Product added to cart` });
+      res.json({ message: `המוצר התווסף לסל בהצלחה` });
       return nodeEvents.emit("update");
     }
   } catch (error) {

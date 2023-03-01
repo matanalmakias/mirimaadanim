@@ -5,6 +5,7 @@ import _ from "underscore";
 import { User } from "../db/models/user.js";
 import { validateSignUp } from "../middleware/user/verifySignupBody.js";
 import { userAlreadyExists } from "../middleware/user/userAlreadyExists.js";
+import { validateToken } from "../middleware/user/validateToken.js";
 
 import bcrypt from "bcryptjs";
 import { validateSignIn } from "../middleware/user/verifySignInBody.js";
@@ -20,10 +21,9 @@ router.delete("/deleteAll", async (req, res) => {
   }
 });
 
-// GET single USERS
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  User.findOne({ _id: id })
+// GET Self USER
+router.get("/getSelfUser", validateToken, async (req, res) => {
+  User.findOne({ _id: req.userId })
     .then((user) => {
       res.json(user);
     })
@@ -50,6 +50,7 @@ router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
     //for each user -> save the role id of user
     user.roles = [(await Role.findOne({ name: "user" }))._id];
     user.cart = [];
+    user.workers = [];
     await user.save();
     return res.json({ message: "user saved", id: user._id });
   } catch (e) {

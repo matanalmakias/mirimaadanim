@@ -6,6 +6,7 @@ const userSchema = new Schema({
   email: String,
   password: String,
   cart: [cartItemSchema] || [],
+  workers: Array,
   roles: [
     {
       type: Schema.Types.ObjectId,

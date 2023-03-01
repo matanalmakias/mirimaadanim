@@ -1,6 +1,16 @@
 import axios from "axios";
 const url = `http://localhost:3001/api`;
 
+const sendWorker = async (workerInput) => {
+  const token = localStorage.getItem("token");
+  const body = { name: workerInput };
+  const headers = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  return await axios.post(`${url}/cart/addWorker`, body, headers);
+};
 const getAllOrders = async (orderId) => {
   const token = localStorage.getItem("token");
   const config = {
@@ -97,6 +107,7 @@ export {
   getSingleOrder,
   getAllOrders,
   submitOrderPackage,
+  sendWorker,
 };
 
 const storeService = {
@@ -109,5 +120,6 @@ const storeService = {
   getSingleOrder,
   getAllOrders,
   submitOrderPackage,
+  sendWorker,
 };
 export default storeService;

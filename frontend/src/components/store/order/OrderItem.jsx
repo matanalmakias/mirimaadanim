@@ -31,7 +31,7 @@ const OrderItem = ({ data }) => {
       <hr />
       {productList.map((item) => {
         return (
-          <div className="card p-2 bg-light" key={item._id}>
+          <div className="text-center card p-2 bg-light" key={item._id}>
             שם {item?.title}
             <hr />
             תיאור {item?.description}
@@ -39,11 +39,11 @@ const OrderItem = ({ data }) => {
             מחיר {item?.price}
             <hr />
             <img
-              src={`http:localhost:3001/${item?.image}`}
+              src={`http://localhost:3001/${item?.image}`}
               alt=""
-              style={{ width: `50%` }}
+              className=""
+              style={{ width: `100%` }}
             />
-            {item?.image}{" "}
           </div>
         );
       })}

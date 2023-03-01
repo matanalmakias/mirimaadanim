@@ -2,6 +2,12 @@ import axios from "axios";
 
 const baseUrl = "http://localhost:3001/api/auth";
 
+const getSingleUser = async () => {
+  return axios.get(`${baseUrl}/getSelfUser`, {
+    headers: { Authorization: localStorage.getItem("token") },
+  });
+};
+
 const register = async (username, email, password) => {
   return axios.post(baseUrl + "/signup", { username, email, password });
 };
@@ -27,7 +33,7 @@ const logout = async () => {
   localStorage.removeItem("token");
 };
 
-export { register, login, logout };
+export { register, login, logout, getSingleUser };
 
-const authService = { register, login, logout };
+const authService = { register, login, logout, getSingleUser };
 export default authService;

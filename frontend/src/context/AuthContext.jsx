@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import isAdmin from "../functions/isAdmin.model";
+import authService from "../services/auth.service";
 
 const initialState = {
   isLoggedIn: false,
