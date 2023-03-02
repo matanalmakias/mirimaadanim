@@ -1,10 +1,17 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 const url = `http://localhost:3001/api`;
 const token = localStorage.getItem("token");
 const headers = {
   headers: {
     Authorization: token,
   },
+};
+
+const deleteWorkerPermanently = async (workerId) => {
+  return await axios
+    .delete(`${url}/cart/deleteWorkerPermanently/${workerId}`, headers)
+    .then((res) => toast(res.data.message));
 };
 const signWorker = async (workerId, productId) => {
   return await axios.post(
@@ -69,6 +76,7 @@ export {
   submitOrderPackage,
   sendWorker,
   signWorker,
+  deleteWorkerPermanently,
 };
 
 const storeService = {
@@ -83,5 +91,6 @@ const storeService = {
   submitOrderPackage,
   sendWorker,
   signWorker,
+  deleteWorkerPermanently,
 };
 export default storeService;

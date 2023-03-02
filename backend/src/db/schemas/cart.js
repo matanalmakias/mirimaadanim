@@ -11,6 +11,11 @@ const cartItemSchema = new Schema({
     required: true,
     default: 1,
   },
+  totalPrice: {
+    type: Number,
+    required: false,
+    default: 1,
+  },
   workers: {
     type: Array,
     required: false,

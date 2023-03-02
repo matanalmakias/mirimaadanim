@@ -1,6 +1,23 @@
 import axios from "axios";
-
+import { toast } from "react-toastify";
+const token = localStorage.getItem("token");
+const headers = {
+  headers: {
+    Authorization: token,
+  },
+};
 const baseUrl = "http://localhost:3001/api/auth";
+
+const editEmail = async (emailInput) => {
+  return await axios
+    .post(`${baseUrl}/editEmail`, { email: emailInput }, headers)
+    .then((res) => toast(res.data.message));
+};
+const editPassword = async (passwordInput) => {
+  return await axios
+    .post(`${baseUrl}/editPassword`, { password: passwordInput }, headers)
+    .then((res) => toast(res.data.message));
+};
 
 const getSingleUser = async () => {
   return axios.get(`${baseUrl}/getSelfUser`, {
@@ -33,7 +50,14 @@ const logout = async () => {
   localStorage.removeItem("token");
 };
 
-export { register, login, logout, getSingleUser };
+export { register, login, logout, getSingleUser, editPassword, editEmail };
 
-const authService = { register, login, logout, getSingleUser };
+const authService = {
+  register,
+  login,
+  logout,
+  getSingleUser,
+  editPassword,
+  editEmail,
+};
 export default authService;

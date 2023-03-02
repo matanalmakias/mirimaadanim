@@ -10,6 +10,37 @@ const router = Router();
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { v4 } from "uuid";
 
+// <------- Delete worker permanently FOREVER --------->>
+router.delete(
+  "/deleteWorkerPermanently/:workerId",
+  validateToken,
+  async (req, res) => {
+    try {
+      const workerId = req.params.workerId;
+      const user = await User.findOne({ _id: req.userId });
+
+      // Check if the worker exists in the user's workers array
+      const foundWorker = user.workers.find((item) => item.id === workerId);
+      if (!foundWorker) {
+        res.status(404).json({ message: "העובד לא נמצא במערכת" });
+
+        return nodeEvents.emit("update");
+      }
+
+      // Remove the worker from the workers array
+      user.workers.pull(foundWorker);
+      await user.save();
+
+      // Return a success message
+      res.json({ message: "עובד זה נמחק בהצלחה." });
+      return nodeEvents.emit("update");
+    } catch (error) {
+      console.error(error);
+      // Return an error message
+      res.status(500).json({ message: "Internal server error" });
+    }
+  }
+);
 // <------- Sign a worker to Cart Item in user.cart ------->
 router.post(
   "/signWorker/:workerId/:productId",
@@ -207,7 +238,8 @@ router.post(
   async (req, res, next) => {
     const productId = req.params.productId;
     const user = await User.findById(req.userId);
-
+    const foundProduct = await Product.findOne({ _id: productId });
+    const totalPrice = foundProduct.price * foundProduct.quantity;
     if (!user) {
       return res.status(404).json({ message: "המשתמש לא קיים במערכת" });
     }
@@ -216,11 +248,18 @@ router.post(
     );
     if (isProductExistOnCart) {
       await User.findOneAndUpdate(
-        { _id: req.userId, "cart.product": productId },
-        { $inc: { "cart.$.quantity": 1 } },
-        { new: true }
+        { _id: req.userId },
+        {
+          $inc: { "cart.$[elem].quantity": 1 },
+          $set: { "cart.$[elem].totalPrice": totalPrice },
+        },
+        {
+          new: true,
+          arrayFilters: [{ "elem.product": productId }],
+        }
       );
-      res.json({ message: `הוספת כמות המוצר התבצעה בהצלחה` });
+
+      await res.json({ message: `הוספת כמות המוצר התבצעה בהצלחה` });
 
       return nodeEvents.emit("update");
     } else {
