@@ -13,7 +13,6 @@ const CartItem = ({ item, index }) => {
   const { removeFromCart, decQuantity, incQuantity } = useContext(StoreContext);
   const socket = useContext(SocketContext);
   const { userData } = useContext(AuthContext);
-
   const signWorker = async (workerId, productId) => {
     storeService.signWorker(workerId, productId).then((res) => {
       toast(res.data.message);
@@ -24,15 +23,9 @@ const CartItem = ({ item, index }) => {
 
   if (userData !== null) {
     cartItem = userData?.cart.find((cartItem) => cartItem.product === item._id);
+  } else {
+    return <>סל הקניות ריק.</>;
   }
-  const isWorkerIsSigned = async (id, cartItem) => {
-    const result = cartItem.workers.some((item) => item.id === id);
-    if (result === true) {
-      setIsSignedWorker(true);
-    } else {
-      setIsSignedWorker(false);
-    }
-  };
 
   return (
     <>
@@ -75,7 +68,9 @@ const CartItem = ({ item, index }) => {
           </div>
         </Col>
       </Row>
-      <Row className="flex-row-reverse p-4" key={index}>
+
+      {/* <------------ ProductItem ------------> */}
+      <Row className="flex-row-reverse p-1 bb" key={index}>
         <Col className="col2 d-flex justify-content-center ">
           שם פריט
           <br />
@@ -88,7 +83,7 @@ const CartItem = ({ item, index }) => {
         </Col>
         <Col className="col1 d-flex justify-content-center">
           מחיר <br />
-          {item?.price}
+          {cartItem?.totalPrice}
         </Col>
         <Col className="d-flex justify-content-center">
           {" "}

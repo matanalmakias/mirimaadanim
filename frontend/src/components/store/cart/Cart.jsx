@@ -3,11 +3,10 @@ import { StoreContext } from "../../../context/StoreContext";
 import { Row, Col, Button } from "react-bootstrap";
 import "./cart.css";
 import CartItem from "./CartItem";
-import OrderPackage from "../order/OrderPackage";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { SocketContext } from "../../../context/CateringContext";
-import OrderItem from "../order/OrderItem";
+import OrderItem from "../order-package/OrderItem";
 import storeService from "../../../services/store.service";
 import { ToastContainer, toast } from "react-toastify";
 const Cart = () => {
@@ -19,7 +18,6 @@ const Cart = () => {
   const nav = useNavigate();
   const socket = useContext(SocketContext);
   const inputRef = useRef(null);
-  useEffect(() => {}, [orderPackageData]);
   const submitOrderPackage = async () => {
     await axios
       .post(
@@ -42,7 +40,7 @@ const Cart = () => {
   //   nav(`/order/${orderPackageData.order._id}`);
   // }
 
-  if (cart === undefined || !cart) return;
+  if (cart === undefined || !cart) return <>סל הקניות ריק.</>;
 
   const sendWorker = async () => {
     setShowAddWorker((state) => !state);
@@ -57,16 +55,16 @@ const Cart = () => {
   };
   return (
     <>
-      <div className="p-4 d-flex justify-content-center">
-        <span className="" style={{ fontSize: `13px` }}>
+      <div dir="rtl" className=" p-4 d-flex justify-content-center">
+        <span className="" style={{ fontSize: `15px` }}>
           מעוניין להוסיף שמות של עובדים?
         </span>
         <br />
         <span className="">
           <Button
             onClick={() => openWorkerField()}
-            className=""
-            style={{ fontSize: `12px`, padding: `2px` }}
+            className="mb-1"
+            style={{ fontSize: `12px`, padding: `3px` }}
           >
             {showAddWorker ? "סגור" : "הוסף שם"}
           </Button>

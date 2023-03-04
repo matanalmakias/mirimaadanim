@@ -6,8 +6,6 @@ import Catering from "../../components/catering/Catering";
 const Home = () => {
   return (
     <>
-      <WorkPlaces />
-
       <Catering />
     </>
   );

@@ -199,10 +199,11 @@ router.post(
   async (req, res, next) => {
     const productId = req.params.productId;
     const user = await User.findById(req.userId);
-    const foundProduct = user.cart.find(
+    const product = await Product.findOne({ _id: productId });
+    const foundProductInCart = user.cart.find(
       (item) => item.product.toString() === productId
     );
-    if (foundProduct.quantity === foundProduct.workers.length) {
+    if (foundProductInCart.quantity === foundProductInCart.workers.length) {
       await res.json({
         message: `עליך להסיר שמות עובדים בשביל להוריד מהכמות של המוצר`,
       });
@@ -212,15 +213,34 @@ router.post(
     if (!user) {
       return res.status(404).json({ message: "המשתמש לא קיים במערכת" });
     }
+
+    const totalPrice = foundProductInCart.totalPrice - product.price;
+
+    if (!user) {
+      return res.status(404).json({ message: "המשתמש לא קיים במערכת" });
+    }
     const isProductExistOnCart = user.cart.some(
       (item) => item.product.toString() === productId
     );
     if (isProductExistOnCart) {
+      if (foundProductInCart.quantity === 1) {
+        user.cart.pull(foundProductInCart);
+        await user.save();
+        return nodeEvents.emit("update");
+      }
+
       await User.findOneAndUpdate(
-        { _id: req.userId, "cart.product": productId },
-        { $inc: { "cart.$.quantity": -1 } },
-        { new: true }
+        { _id: req.userId },
+        {
+          $inc: { "cart.$[elem].quantity": -1 },
+          $set: { "cart.$[elem].totalPrice": totalPrice },
+        },
+        {
+          new: true,
+          arrayFilters: [{ "elem.product": productId }],
+        }
       );
+
       res.json({ message: `הורדת כמות המוצר התבצעה בהצלחה` });
 
       return nodeEvents.emit("update");
@@ -239,7 +259,11 @@ router.post(
     const productId = req.params.productId;
     const user = await User.findById(req.userId);
     const foundProduct = await Product.findOne({ _id: productId });
-    const totalPrice = foundProduct.price * foundProduct.quantity;
+    const foundProductInCart = user.cart.find(
+      (item) => item.product.toString() === productId
+    );
+
+    const totalPrice = foundProduct.price * (foundProductInCart.quantity + 1);
     if (!user) {
       return res.status(404).json({ message: "המשתמש לא קיים במערכת" });
     }
@@ -259,7 +283,7 @@ router.post(
         }
       );
 
-      await res.json({ message: `הוספת כמות המוצר התבצעה בהצלחה` });
+      res.json({ message: `הוספת כמות המוצר התבצעה בהצלחה` });
 
       return nodeEvents.emit("update");
     } else {
@@ -338,7 +362,11 @@ router.post("/addToCart/:productId", validateToken, async (req, res) => {
     if (isProductAlreadyInCart) {
       res.json({ message: `המוצר הזה כבר נמצא בסל הקניות` });
     } else {
-      const cartItem = new CartItem({ product: productId, quantity: 1 });
+      const cartItem = new CartItem({
+        product: productId,
+        quantity: 1,
+        totalPrice: product?.price,
+      });
       cart.push(cartItem);
       user.cart = cart;
       await user.save();

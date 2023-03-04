@@ -46,15 +46,15 @@ const ProductItem = ({ product, index }) => {
   };
   return (
     <div key={index}>
-      <div className="card p-3 text-center" key={product._id}>
-        <Row>
+      <div dir="rtl" className="border p-3 text-center" key={product._id}>
+        <Row className="product-row">
           <Col className="border ">
             <p className=""> {product.title}</p>
           </Col>
 
           <Col className="border ">מחיר:{product.price}</Col>
         </Row>
-        <Row>
+        <Row className="product-row">
           <Col className="border ">{product.description}</Col>
         </Row>
         <Row>
@@ -64,7 +64,7 @@ const ProductItem = ({ product, index }) => {
             </Button>
           </Col>
 
-          <Col className={showPicture ? "card p-2" : "hide_class"}>
+          <Col className={showPicture ? "border p-2" : "hide_class"}>
             <img src={`${imagesUrl}/${product.image}`} alt={product.name} />
           </Col>
         </Row>

@@ -11,7 +11,6 @@ export const StoreContext = createContext({
   orders: [],
   submitOrderPackage: () => {},
   getSingleOrder: () => {},
-  getAllOrders: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
   checkout: () => {},
@@ -48,9 +47,7 @@ const StoreProvider = ({ children }) => {
   const getSingleOrder = async (orderId) => {
     await storeService.getSingleOrder(orderId).then((res) => {});
   };
-  const getAllOrders = async (orderId) => {
-    await storeService.getAllOrders(orderId).then((res) => {});
-  };
+
   const decQuantity = async (productId) => {
     await storeService.decQuantity(productId).then((res) => {
       toast(res.data.message);
@@ -96,7 +93,6 @@ const StoreProvider = ({ children }) => {
           cart,
           removeFromCart,
           getSingleOrder,
-          getAllOrders,
           submitOrderPackage,
         }}
       >

@@ -1,3 +1,6 @@
+.bb {
+  background-color: var(--);
+}
 .btns {
   position: relative;
   background-color: #04aa6d;

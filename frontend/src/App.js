@@ -10,12 +10,14 @@ import Manager from "./pages/manager/Manager";
 import Cart from "./components/store/cart/Cart";
 import UpdateProduct from "./components/manager/UpdateProduct";
 import UserManagement from "./pages/user-management/UserManagement";
+import AllOrders from "./components/store/orders/AllOrders";
+import OrderDetails from "./components/store/orders/OrderDetails";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
   return (
-    <>
-      <div className="bg-light">
+    <div>
+      <div className="text-white">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +29,10 @@ function App() {
               element={<UpdateProduct />}
             />
           )}
+          {isLoggedIn && (
+            <Route path="/user/order/:orderId" element={<OrderDetails />} />
+          )}
+          {isLoggedIn && <Route path="/user/orders" element={<AllOrders />} />}
           {isLoggedIn && <Route path="/order/:orderId" element={<Cart />} />}
           {isLoggedIn && <Route path="/user/cart" element={<Cart />} />}
           {isLoggedIn && (
@@ -36,7 +42,7 @@ function App() {
           {!isLoggedIn && <Route path="/register" element={<Register />} />}
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 

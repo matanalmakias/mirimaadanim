@@ -4,7 +4,7 @@ import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
 import { StoreContext } from "../../context/StoreContext";
-
+import "./navbar.css";
 const NavBar = () => {
   const { isLoggedIn, logout, isManager } = useContext(AuthContext);
   const { checkout, cart } = useContext(StoreContext);
@@ -21,7 +21,7 @@ const NavBar = () => {
   return (
     <div className="d-flex justify-content-center align-items-center text-center">
       <Navbar className=" m-3 p-3" bg="light" expand="lg">
-        <Navbar.Brand className="" onClick={() => nav("/")}>
+        <Navbar.Brand className="title" onClick={() => nav("/")}>
           מירי מעדנים
         </Navbar.Brand>
         <br />
@@ -30,27 +30,50 @@ const NavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#about">אודות</Nav.Link>
-            <Nav.Link href="#contact">צור קשר</Nav.Link>
+            <Nav.Link className="navbar-item" href="#about">
+              אודות
+            </Nav.Link>
+            <Nav.Link className="navbar-item" href="#contact">
+              צור קשר
+            </Nav.Link>
             {isLoggedIn && (
-              <Nav.Link onClick={() => nav("/user/cart")}>סל קניות</Nav.Link>
+              <Nav.Link
+                className="navbar-item"
+                onClick={() => nav("/user/cart")}
+              >
+                סל קניות
+              </Nav.Link>
             )}
 
             {isLoggedIn === false ? (
               <>
-                <Nav.Link onClick={() => nav("/register")}>הרשמה</Nav.Link>
-                <Nav.Link onClick={() => nav("/login")}>התחברות</Nav.Link>
+                <Nav.Link
+                  className="navbar-item"
+                  onClick={() => nav("/register")}
+                >
+                  הרשמה
+                </Nav.Link>
+                <Nav.Link className="navbar-item" onClick={() => nav("/login")}>
+                  התחברות
+                </Nav.Link>
               </>
             ) : (
-              <Nav.Link onClick={logoutButton}>התנתקות</Nav.Link>
+              <Nav.Link className="navbar-item" onClick={logoutButton}>
+                התנתקות
+              </Nav.Link>
             )}
             {isLoggedIn && (
-              <Nav.Link onClick={() => nav("/user-management")}>
+              <Nav.Link
+                className="navbar-item"
+                onClick={() => nav("/user-management")}
+              >
                 ניהול חשבון
               </Nav.Link>
             )}
             {isManager && (
-              <Nav.Link onClick={() => nav("/manager")}>כניסה למנהלים</Nav.Link>
+              <Nav.Link className="navbar-item" onClick={() => nav("/manager")}>
+                כניסה למנהלים
+              </Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>

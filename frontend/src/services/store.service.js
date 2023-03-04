@@ -26,7 +26,7 @@ const sendWorker = async (workerInput) => {
 
   return await axios.post(`${url}/cart/addWorker`, body, headers);
 };
-const getAllOrders = async (orderId) => {
+const getAllOrders = async () => {
   return await axios.get(`${url}/order`, headers);
 };
 const getSingleOrder = async (orderId) => {

@@ -5,9 +5,7 @@ import { Category } from "../../db/models/category.js";
 const router = Router();
 import { validateToken } from "../../middleware/user/validateToken.js";
 import { isManager } from "../../middleware/roles/isManager.js";
-import shortid from "shortid";
-import { mongoose } from "mongoose";
-
+import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import multer from "multer";
 
 // Set up multer storage options
@@ -122,10 +120,11 @@ router.post(
       );
       if (product) {
         // The product was updated successfully
-        res.status(200).json({ message: "Product updated" });
+        res.status(200).json({ message: "המוצר עודכן בהצלחה." });
+        return nodeEvents.emit("update");
       } else {
         // The product was not found
-        res.status(404).json({ message: "Product not found" });
+        res.status(404).json({ message: "המוצר אינו נמצא." });
       }
     } catch (error) {
       // An error occurred during the update process
@@ -146,7 +145,8 @@ router.delete(
       const product = await Product.deleteOne({ _id: productId });
       if (product.deletedCount === 1) {
         // The product was deleted successfully
-        res.status(200).json({ message: "Product deleted" });
+        res.status(200).json({ message: " המוצר נמחק." });
+        return nodeEvents.emit("update");
       } else {
         // The product was not found
         res.status(404).json({ message: "Product not found" });

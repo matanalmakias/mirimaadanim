@@ -1,0 +1,11 @@
+.title {
+  cursor: pointer;
+}
+.navbar-item {
+  background-color: var(--light-color) !important;
+  color: var(--secondary-color) !important;
+}
+.navbar-item:hover {
+  background-color: var(--dark-color) !important;
+  color: var(--light-color) !important;
+}

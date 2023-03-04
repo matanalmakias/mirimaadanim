@@ -6,6 +6,7 @@ import storeService from "../../services/store.service";
 import { SocketContext } from "../../context/CateringContext";
 import { ToastContainer, toast } from "react-toastify";
 import authService from "../../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const UserManagement = () => {
   const [showPasswordUpdate, setShowPasswordUpdate] = useState(false);
@@ -16,6 +17,7 @@ const UserManagement = () => {
   const [emailInput, setEmailInput] = useState(null);
   const [passwordInput, setPasswordInput] = useState(null);
   const inputRef = useRef(null);
+  const nav = useNavigate();
 
   const { userData } = useContext(AuthContext);
   const socket = useContext(SocketContext);
@@ -42,12 +44,18 @@ const UserManagement = () => {
   };
 
   return (
-    <>
+    <div dir="rtl">
+      <p
+        onClick={() => nav("/user/orders")}
+        className="text-white btn card bg-primary"
+      >
+        כל ההזמנות
+      </p>
       {/* <---------------- Email Input --------------> */}
       <div className="text-center">
         <span className="fw-bold">אימייל</span>
         <div className="gap-2 p-1 d-flex justify-content-center">
-          <span className="card p-2"> {userData?.email}</span>
+          <span className="card text-black p-2"> {userData?.email}</span>
           <p
             onClick={() => toggleShow(setShowEmailUpdate)}
             className="btn bg-dark text-white mt-2"
@@ -76,7 +84,7 @@ const UserManagement = () => {
 
         <span className="fw-bold">סיסמא</span>
         <div className="gap-2 p-1 d-flex justify-content-center">
-          <span className="card p-2"> ***********************</span>
+          <span className="text-black card p-2"> ***********************</span>
           <p
             onClick={() => toggleShow(setShowPasswordUpdate)}
             className="btn bg-dark text-white mt-2"
@@ -106,7 +114,10 @@ const UserManagement = () => {
         {/* <---------------- workers Input --------------> */}
 
         <div className="p-4 d-flex justify-content-center">
-          <span className="" style={{ fontSize: `13px` }}>
+          <span
+            className=""
+            style={{ paddingTop: `5px`, fontWeight: `600`, fontSize: `15px` }}
+          >
             מעוניין להוסיף שמות של עובדים?
           </span>
           <br />
@@ -150,7 +161,7 @@ const UserManagement = () => {
           <div className="d-flex flex-row gap-1">
             {userData?.workers.map((item) => (
               <div key={item.id} className="card p-1">
-                <p className=""> {item.name}</p>
+                <p className="text-secondary"> {item.name}</p>
                 <p
                   onClick={() => deleteWorkerPermanently(item.id)}
                   className="btn card bg-secondary p-1 text-white"
@@ -163,7 +174,7 @@ const UserManagement = () => {
         </div>
       </div>
       <ToastContainer autoClose={1370} />
-    </>
+    </div>
   );
 };
 

@@ -10,11 +10,10 @@ const Catering = () => {
 
   return (
     <>
-      <h1 className="h1 text-center">חבילות קייטרינג</h1>
       <hr />
       {categoryList?.map((category) => (
-        <div className="container-fluid" key={category._id}>
-          <h2 className="h2 text-center">{category.name}</h2>
+        <div dir="rtl" className="container-fluid" key={category._id}>
+          <h2 className="category-name h2 text-center">{category.name}</h2>
           {productList
             ?.filter((catering) => catering.category === category._id)
             ?.map((catering, index) => (
