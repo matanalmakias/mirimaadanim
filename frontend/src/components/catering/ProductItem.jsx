@@ -45,46 +45,54 @@ const ProductItem = ({ product, index }) => {
     setShowPicture((state) => !state);
   };
   return (
-    <div key={index}>
+    <div className="d-flex flex-column" key={index}>
       <div dir="rtl" className="border p-3 text-center" key={product._id}>
-        <Row className="product-row">
-          <Col className="border ">
+        <div className="product-row row">
+          <div className="border col ">
             <p className=""> {product.title}</p>
-          </Col>
+          </div>
 
-          <Col className="border ">מחיר:{product.price}</Col>
-        </Row>
-        <Row className="product-row">
+          <div className="border col">מחיר:{product.price}</div>
+        </div>
+        <div className="row product-row">
           <Col className="border ">{product.description}</Col>
-        </Row>
-        <Row>
-          <Col className="p-1 ">
-            <Button onClick={toggleSetShowPicture}>
-              {showPicture ? "סגור תמונה" : "פתח תמונה"}
-            </Button>
-          </Col>
+        </div>
+        <div className="d-flex row flex-row">
+          {imagesUrl !== `http://localhost:3001` && (
+            <>
+              <div className="col p-1">
+                <Button onClick={toggleSetShowPicture}>
+                  {showPicture ? "סגור תמונה" : "פתח תמונה"}
+                </Button>
+              </div>
 
-          <Col className={showPicture ? "border p-2" : "hide_class"}>
-            <img src={`${imagesUrl}/${product.image}`} alt={product.name} />
-          </Col>
-        </Row>
-        <Row>
-          <Col className="">
+              <div className={showPicture ? "col border p-2" : "hide_class"}>
+                <img src={`${imagesUrl}/${product.image}`} alt={product.name} />
+              </div>
+            </>
+          )}
+          <div className="col">
             {isProductAlreadyInCart === false ? (
-              <Button onClick={() => addToCart(product, product._id, setRes)}>
+              <Button
+                className="my_btn"
+                onClick={() => addToCart(product, product._id, setRes)}
+              >
                 הוסף מוצר לסל
               </Button>
             ) : (
-              <Button onClick={() => removeFromCart(product._id)}>
+              <Button
+                className="my_btn"
+                onClick={() => removeFromCart(product._id)}
+              >
                 הסר מוצר מהסל
               </Button>
             )}
-          </Col>
-        </Row>
+          </div>
+        </div>
         {isManager && (
           <>
-            <Row className="p-1  mt-1 ">
-              <Col className="">
+            <div className="p-1 row mt-1 ">
+              <div className="col">
                 <Button
                   onClick={() => {
                     nav(`/manager/editProduct/${product._id}`);
@@ -93,11 +101,11 @@ const ProductItem = ({ product, index }) => {
                 >
                   עריכת מוצר
                 </Button>
-              </Col>
-              <Col>
+              </div>
+              <div className="col">
                 <RemoveProductButton productId={product._id} />
-              </Col>
-            </Row>
+              </div>
+            </div>
           </>
         )}
       </div>

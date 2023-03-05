@@ -10,7 +10,7 @@
 
 .product-row {
   background-color: var(--light-color);
-  padding: 5px;
+  padding: 10px;
   color: var(--dark-color);
   font-weight: 600;
   text-align: center;

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
 import { StoreContext } from "../../context/StoreContext";
 import "./navbar.css";
+import logo from "../../images/logo.png";
+
 const NavBar = () => {
   const { isLoggedIn, logout, isManager } = useContext(AuthContext);
   const { checkout, cart } = useContext(StoreContext);
@@ -21,14 +23,12 @@ const NavBar = () => {
   return (
     <div className="d-flex justify-content-center align-items-center text-center">
       <Navbar className=" m-3 p-3" bg="light" expand="lg">
-        <Navbar.Brand className="title" onClick={() => nav("/")}>
-          מירי מעדנים
+        <Navbar.Brand className="title " onClick={() => nav("/")}>
+          <img src={logo} alt="" className="my_img " />
         </Navbar.Brand>
-        <br />
-        <br />
-        <br />
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+
+        <Navbar.Toggle aria-controls=" basic-navbar-nav" />
+        <Navbar.Collapse className="" id="basic-navbar-nav">
           <Nav className="mr-auto">
             <Nav.Link className="navbar-item" href="#about">
               אודות

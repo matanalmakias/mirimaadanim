@@ -11,9 +11,11 @@ const Catering = () => {
   return (
     <>
       <hr />
+
       {categoryList?.map((category) => (
         <div dir="rtl" className="container-fluid" key={category._id}>
           <h2 className="category-name h2 text-center">{category.name}</h2>
+
           {productList
             ?.filter((catering) => catering.category === category._id)
             ?.map((catering, index) => (
