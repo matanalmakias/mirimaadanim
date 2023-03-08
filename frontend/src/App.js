@@ -12,6 +12,9 @@ import UpdateProduct from "./components/manager/UpdateProduct";
 import UserManagement from "./pages/user-management/UserManagement";
 import AllOrders from "./components/store/orders/AllOrders";
 import OrderDetails from "./components/store/orders/OrderDetails";
+import Daily from "./pages/daily/Daily";
+import Footer from "./components/footer/Footer";
+import Catering from "./components/catering/Catering";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -21,6 +24,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/daily" element={<Daily />} />
+          {isManager && (
+            <Route exact path="/manager/products" element={<Catering />} />
+          )}
           {isManager && <Route exact path="/manager" element={<Manager />} />}
           {isManager && (
             <Route
@@ -42,6 +49,7 @@ function App() {
           {!isLoggedIn && <Route path="/register" element={<Register />} />}
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }

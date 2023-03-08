@@ -1,0 +1,34 @@
+.my_btn {
+  text-align: center;
+  background-color: rgb(255, 99, 47) !important;
+  width: 100% !important;
+  color: rgb(0, 0, 0);
+  transition: 0.3s;
+  border: 1px solid rgba(255, 0, 0, 0.059);
+  cursor: pointer;
+  padding: 1px !important;
+  font-weight: 600;
+  font-size: 15px !important;
+  border-radius: 8px;
+}
+.my_btn:hover {
+  background-color: rgb(130, 30, 7) !important;
+  color: white;
+}
+.my_btn2 {
+  text-align: center;
+  background-color: rgb(47, 64, 255) !important;
+  width: 100% !important;
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+  border: 1px solid rgba(255, 0, 0, 0.059);
+  cursor: pointer;
+  padding: 1px !important;
+  font-weight: 600;
+  font-size: 15px !important;
+  border-radius: 8px;
+}
+.my_btn2:hover {
+  background-color: rgb(16, 40, 108) !important;
+  color: white;
+}

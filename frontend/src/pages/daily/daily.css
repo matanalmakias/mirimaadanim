@@ -1,0 +1,13 @@
+.my_p {
+  background-color: whitesmoke !important;
+  color: rgb(152, 99, 1);
+  width: 100% !important;
+  padding: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.my_p:hover {
+  background-color: rgb(12, 37, 0) !important;
+  color: rgb(239, 255, 238);
+}

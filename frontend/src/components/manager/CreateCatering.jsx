@@ -51,9 +51,11 @@ function CreateCatering() {
   };
 
   return (
-    <Container className="text-center">
+    <Container dir="rtl" className="text-center">
       <Form onSubmit={(e) => formSubmit(e)} className="form p-2">
-        <h2 className="h3 mb-4">הוספת פריט לקייטרינג</h2>
+        <h2 className=" bg-light text-black  p-2 mt-1 h3 mb-3">
+          הוספת פריט לקייטרינג
+        </h2>
         <div className="d-grid mb-2">
           <div className="row gap-2">
             <input

@@ -12,6 +12,7 @@ import { cartRouter } from "./routes/cart/cart.js";
 import { orderRouter } from "./routes/order/order.js";
 import { categoryRouter } from "./routes/categories.js";
 import { isQuestionsRouter } from "./routes/cart/isQuestions.js";
+import { daysRouter } from "./routes/days/day.js";
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/is", isQuestionsRouter);
+app.use("/api/days", daysRouter);
 
 //404:
 app.use(notFound);
@@ -51,7 +53,7 @@ const server = app.listen(PORT, () =>
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   },
 });

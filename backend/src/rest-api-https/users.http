@@ -1,3 +1,6 @@
+### GET Products from some Date
+GET http://localhost:3001/api/days/Sunday
+
 ### Edit Password - USERS -------
 POST http://localhost:3001/api/auth/editPassword
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3Nzg5NjEyMSwiZXhwIjoxNjgwNDg4MTIxfQ.gv0Vx-q46g6NrpVWL1F-3_bYKbFAFJn2GRvxmRSI_A0

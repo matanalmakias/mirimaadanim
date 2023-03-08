@@ -1,7 +1,15 @@
+### ---- הסרת מוצר מיום מסויים ----
+PUT http://localhost:3001/api/days/removeProduct/63f970d02972e5d94952d761/Sunday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+
+### ---- הוספת מוצר ליום מסויים ----
+PUT http://localhost:3001/api/days/addProduct/63f970d02972e5d94952d761/Wednesday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+
 ### הוספת פריט לקייטרינגים
 POST http://localhost:3001/api/manager/product/createProduct
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
 
 {
     "title":"סלט ירקות",
@@ -13,7 +21,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2Qx
 ### עדכון/עריכת פריט
 POST http://localhost:3001/api/manager/product/editProduct/63f7a6a4e06a0b2e7d9601a0
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
 
 {
     "title":"דשגשדגשדגשדגשדגשדשדשדגשדגש"
@@ -21,7 +29,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2Qx
 
 ### מחיקת פריט
 DELETE http://localhost:3001/api/manager/product/deleteProduct/63f7a6f9e06a0b2e7d9601ab
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3NzEyMzE4MSwiZXhwIjoxNjc5NzE1MTgxfQ.kgJLK6BTd2xrSTC17enKG2v4W1eMxeH8y1M_v7kESX8
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
 
 ### מחיקת כל הפריטים
 DELETE http://localhost:3001/api/manager/product/deleteAll/

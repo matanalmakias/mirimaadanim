@@ -7,7 +7,9 @@ const headers = {
     Authorization: token,
   },
 };
-
+const getDayProducts = async (dayName) => {
+  return await axios.get(`${url}/days/${dayName}`);
+};
 const deleteWorkerPermanently = async (workerId) => {
   return await axios
     .delete(`${url}/cart/deleteWorkerPermanently/${workerId}`, headers)
@@ -77,6 +79,7 @@ export {
   sendWorker,
   signWorker,
   deleteWorkerPermanently,
+  getDayProducts,
 };
 
 const storeService = {
@@ -92,5 +95,6 @@ const storeService = {
   sendWorker,
   signWorker,
   deleteWorkerPermanently,
+  getDayProducts,
 };
 export default storeService;
