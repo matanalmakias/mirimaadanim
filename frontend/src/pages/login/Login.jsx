@@ -53,7 +53,7 @@ const Login = () => {
     return <Navigate to="/" />;
   }
   return (
-    <div>
+    <div className="my_div">
       {errMessage && <div>${errMessage}</div>}
       {isLoading && (
         <div className="mx-auto w-25">

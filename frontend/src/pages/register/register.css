@@ -1,16 +1,12 @@
 .my_btn {
-  padding: 27px !important;
-  margin: 17px;
   width: 29% !important;
 }
 .my_label {
   background-color: orange;
-  padding: 25px;
-  margin: 12px;
-  width: 200px;
+
+  width: 100%;
 }
 .my_field {
-  padding: 25px;
   background-color: rgb(245, 245, 245);
 }
 .my_container {

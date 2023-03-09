@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
-import { StoreContext } from "../../context/StoreContext";
-import AuthContext from "../../context/AuthContext";
+import { StoreContext } from "../src/context/StoreContext";
+import AuthContext from "../src/context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import RemoveProductButton from "../manager/RemoveProductButton";
-import cateringService from "../../services/catering.service";
-import { SocketContext } from "../../context/CateringContext";
+import RemoveProductButton from "../src/components/manager/RemoveProductButton";
+import cateringService from "../src/services/catering.service";
+import { SocketContext } from "../src/context/CateringContext";
 const ProductItem = ({ product, index }) => {
   const [showPicture, setShowPicture] = useState(false);
   const [res, setRes] = useState();

@@ -7,6 +7,8 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
+import { SocketContext } from "../../context/CateringContext";
+import { toast } from "react-toastify";
 function CreateCatering() {
   const { isManager } = useContext(AuthContext);
   const [fields, setFields] = useState([]);
@@ -18,7 +20,7 @@ function CreateCatering() {
   const [imageInput, setImageInput] = useState();
 
   const [createdProduct, setCreatedProduct] = useState();
-
+  const socket = useContext(SocketContext);
   const nav = useNavigate();
   const categories = [
     "סלטים",
@@ -43,11 +45,17 @@ function CreateCatering() {
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    cateringService.createProducts(setCreatedProduct, formData);
+    cateringService.createProducts(setCreatedProduct, formData).then((res) => {
+      toast(res.data.message);
+      socket.emit("update");
+    });
   };
 
   const deleteAll = () => {
-    cateringService.deleteAllProducts();
+    cateringService.deleteAllProducts().then((res) => {
+      socket.emit("update");
+      toast(res.data.message);
+    });
   };
 
   return (

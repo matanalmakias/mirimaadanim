@@ -1,26 +1,57 @@
 import "./caterings.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect } from "react";
-import cateringService from "../../services/catering.service";
 import ProductItem from "./ProductItem";
+import { useContext } from "react";
+import { CateringContext } from "../../context/CateringContext";
+import { useState } from "react";
+
 const Catering = () => {
-  useEffect(() => {}, []);
-  const productList = JSON.parse(localStorage.getItem("caterings"));
-  const categoryList = JSON.parse(localStorage.getItem("categories"));
+  const { caterings, categories } = useContext(CateringContext);
+  const [showCategory, setShowCategory] = useState({});
+  useEffect(() => {
+    if (categories) {
+      setShowCategory(
+        categories.reduce(
+          (obj, category) => ({
+            ...obj,
+            [category.name]: false,
+          }),
+          {}
+        )
+      );
+    }
+  }, [categories]);
+  if (categories === undefined) {
+    return <>Loading....</>;
+  }
 
   return (
     <>
       <hr />
 
-      {categoryList?.map((category) => (
+      {categories?.map((category) => (
         <div dir="rtl" className="container-fluid" key={category._id}>
-          <h2 className="category-name h2 text-center">{category.name}</h2>
-
-          {productList
-            ?.filter((catering) => catering.category === category._id)
-            ?.map((catering, index) => (
-              <ProductItem key={index} product={catering} index={index} />
-            ))}
+          <h2
+            onClick={() => {
+              setShowCategory((state) => ({
+                ...state,
+                [category.name]: !state[category.name],
+              }));
+            }}
+            className="category-name h2 text-center"
+          >
+            {category?.name}
+          </h2>
+          <div className={showCategory[category.name] ? "" : "hide_class"}>
+            {caterings
+              ?.filter((item) => item?.category === category?.name)
+              ?.map((item) => (
+                <div key={item?._id}>
+                  <ProductItem product={item} />
+                </div>
+              ))}
+          </div>
         </div>
       ))}
 

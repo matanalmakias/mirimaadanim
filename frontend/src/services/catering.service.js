@@ -1,5 +1,26 @@
 import axios from "axios";
 const url = `http://localhost:3001/api`;
+const config = {
+  headers: {
+    Authorization: localStorage.getItem("token"),
+  },
+};
+
+const removeProductFromDays = async (productId, daysArray) => {
+  return await axios.put(
+    `${url}/days/removeProduct/${productId}`,
+    daysArray,
+    config
+  );
+};
+const addProductToDays = async (productId, daysArray) => {
+  return await axios.put(
+    `${url}/days/addProduct/${productId}`,
+    { days: daysArray },
+    config
+  );
+};
+
 const getSingleProduct = async (productId) => {
   const config = {
     headers: {
@@ -82,6 +103,8 @@ export {
   editProduct,
   isProductInCart,
   getSingleProduct,
+  addProductToDays,
+  removeProductFromDays,
 };
 
 const cateringService = {
@@ -93,5 +116,7 @@ const cateringService = {
   editProduct,
   isProductInCart,
   getSingleProduct,
+  addProductToDays,
+  removeProductFromDays,
 };
 export default cateringService;

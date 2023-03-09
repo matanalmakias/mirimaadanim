@@ -1,15 +1,27 @@
-### ---- הסרת מוצר מיום מסויים ----
-PUT http://localhost:3001/api/days/removeProduct/63f970d02972e5d94952d761/Sunday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+PUT http://localhost:3001/api/days/removeProduct/63f91c2102bb15f055bf13f2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODMwODE5NywiZXhwIjoxNjgwOTAwMTk3fQ.51ZuyH6vleaAbaZ6Lm1t_zRgp29cewsEEHk0LQ8t40w
+Content-Type: application/json
+
+["Sunday", "Monday"]
 
 ### ---- הוספת מוצר ליום מסויים ----
-PUT http://localhost:3001/api/days/addProduct/63f970d02972e5d94952d761/Wednesday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+PUT http://localhost:3001/api/days/addProduct/63f91c2102bb15f055bf13f2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODMwODE5NywiZXhwIjoxNjgwOTAwMTk3fQ.51ZuyH6vleaAbaZ6Lm1t_zRgp29cewsEEHk0LQ8t40w
+Content-Type: application/json
+
+{
+  "days": ["Sunday", "Monday"]
+}
 
 ### הוספת פריט לקייטרינגים
 POST http://localhost:3001/api/manager/product/createProduct
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODMwODE5NywiZXhwIjoxNjgwOTAwMTk3fQ.51ZuyH6vleaAbaZ6Lm1t_zRgp29cewsEEHk0LQ8t40w
+Content-Type: application/json
+
+{
+
+}
 
 {
     "title":"סלט ירקות",
@@ -21,7 +33,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2Qx
 ### עדכון/עריכת פריט
 POST http://localhost:3001/api/manager/product/editProduct/63f7a6a4e06a0b2e7d9601a0
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODMwODE5NywiZXhwIjoxNjgwOTAwMTk3fQ.51ZuyH6vleaAbaZ6Lm1t_zRgp29cewsEEHk0LQ8t40w
+Content-Type: application/json
+
+{
+
+}
 
 {
     "title":"דשגשדגשדגשדגשדגשדשדשדגשדגש"
@@ -29,7 +46,12 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2Qx
 
 ### מחיקת פריט
 DELETE http://localhost:3001/api/manager/product/deleteProduct/63f7a6f9e06a0b2e7d9601ab
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODI4MjYzOSwiZXhwIjoxNjgwODc0NjM5fQ.XudcJAK1jhj1Zqbs6HxCD9DSaJT9VLLXE3wkIaaPhzk
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODMwODE5NywiZXhwIjoxNjgwOTAwMTk3fQ.51ZuyH6vleaAbaZ6Lm1t_zRgp29cewsEEHk0LQ8t40w
+Content-Type: application/json
+
+{
+
+}
 
 ### מחיקת כל הפריטים
 DELETE http://localhost:3001/api/manager/product/deleteAll/

@@ -86,6 +86,7 @@ router.post(
         message: "Product item created successfully",
         product,
       });
+      return nodeEvents.emit("update");
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Unable to create Product item" });

@@ -16,7 +16,6 @@ const CateringContext = createContext({
 const CateringProvider = ({ children }) => {
   const [caterings, setCaterings] = useState();
   const [categories, setCategories] = useState();
-  const [isProductInCart, setIsProductInCart] = useState();
 
   useEffect(() => {
     cateringService.getAllProducts(setCaterings);
@@ -30,7 +29,6 @@ const CateringProvider = ({ children }) => {
       socket.off("update");
     };
   }, []);
-
   return (
     <SocketContext.Provider value={socket}>
       <CateringContext.Provider

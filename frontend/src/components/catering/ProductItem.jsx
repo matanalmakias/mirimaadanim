@@ -1,58 +1,48 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Row, Col, Button } from "react-bootstrap";
-import { StoreContext } from "../../context/StoreContext";
 import AuthContext from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import RemoveProductButton from "../manager/RemoveProductButton";
 import cateringService from "../../services/catering.service";
 import { SocketContext } from "../../context/CateringContext";
-const ProductItem = ({ product, index }) => {
-  const [showPicture, setShowPicture] = useState(false);
-  const [res, setRes] = useState();
+import "./caterings.css";
+import ShekelIcon from "../shekel/ShekelIcon";
+import EditDaysItem from "./EditDaysItem";
+const ProductItem = ({ product }) => {
+  const [showEditDays, setShowEditDays] = useState(false);
   const [isProductAlreadyInCart, setIsProductAlreadyInCart] = useState(null);
   const { isManager, isLoggedIn } = useContext(AuthContext);
-  const { removeFromCart, addToCart } = useContext(StoreContext);
   const socket = useContext(SocketContext);
-
-  const nav = useNavigate();
   const imagesUrl = `http://localhost:3001`;
-
-  useEffect(() => {
-    if (isLoggedIn === true) {
-      cateringService
-        .getSingleProduct(product._id)
-        .then((res) => setIsProductAlreadyInCart(res.data.isProductInCart));
-    }
-  }, [isLoggedIn, product._id]);
-  useEffect(() => {
-    if (isLoggedIn === true) {
-      cateringService
-        .getSingleProduct(product._id)
-        .then((res) => setIsProductAlreadyInCart(res.data.isProductInCart));
-    }
-    socket.on("update", () => {
-      if (isLoggedIn === true) {
-        cateringService
-          .getSingleProduct(product._id)
-          .then((res) => setIsProductAlreadyInCart(res.data.isProductInCart));
-      }
-    });
-    return () => {
-      socket.off("update");
-    };
-  }, [isLoggedIn, product._id, socket]);
-  const toggleSetShowPicture = () => {
-    setShowPicture((state) => !state);
+  const navigate = (url) => {
+    window.location.href = url;
   };
+
   return (
-    <div
-      className="d-flex flex-column"
-      dir="rtl
-  
-  
-  
-  "
-    ></div>
+    <>
+      <div
+        className="mb-1 d-flex flex-row align-items-center justify-content-center text-center gap-1"
+        dir="rtl"
+      >
+        <span className="text-black bg-light p-2"> {product.title}</span>
+        <span className=" text-black bg-light p-2">
+          {product.price}
+          <ShekelIcon />
+        </span>
+        <img
+          onClick={() => navigate(`${imagesUrl}/${product.image}`)}
+          className="my_img  p-2"
+          src={`${imagesUrl}/${product.image}`}
+          alt=""
+        />
+        <span
+          onClick={() => setShowEditDays((state) => !state)}
+          className="btn11"
+        >
+          לתזמון מוצר
+        </span>
+      </div>
+      <div className={showEditDays ? "" : "hide_class"}>
+        <EditDaysItem item={product} />
+      </div>
+    </>
   );
 };
 

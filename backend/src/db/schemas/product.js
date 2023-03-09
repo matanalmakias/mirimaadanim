@@ -10,6 +10,7 @@ const productSchema = new mongoose.Schema({
     required: true,
   },
   image: { type: String, required: false },
+  days: { type: Array, required: false },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

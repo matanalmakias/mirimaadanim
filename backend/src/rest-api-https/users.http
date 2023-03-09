@@ -112,7 +112,6 @@ Content-Type: application/json
 GET http://localhost:3001/api/auth/
 
 
-### קנייה של פריטים מסל הקניות
-
-
+### הצגה של כל המוצרים
+GET http://localhost:3001/api/product
 
