@@ -2,14 +2,18 @@ import { Router } from "express";
 import { validateToken } from "../../middleware/user/validateToken.js";
 import _, { pick } from "underscore";
 import { isManager } from "../../middleware/roles/isManager.js";
-import stripe from ('stripe')('YOUR_SECRET_API_KEY');
-
+import { Payu } from "payu-node";
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { Day } from "../../db/models/day.js";
 import { Product } from "../../db/models/product.js";
 import { User } from "../../db/models/user.js";
 const router = Router();
-
+const payu = new Payu({
+  apiUsername: "<your_api_username>",
+  apiPassword: "<your_api_password>",
+  posId: "<your_pos_id>",
+  sandbox: true, // or false for production
+});
 // <------------ Schudle Delivery Time For Each Day ------------>>
 router.post("/schudleDelivery/:productId", validateToken, async (req, res) => {
   try {
