@@ -6,8 +6,49 @@ import { isManager } from "../../middleware/roles/isManager.js";
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { Day } from "../../db/models/day.js";
 import { Product } from "../../db/models/product.js";
+import { User } from "../../db/models/user.js";
 const router = Router();
 
+// <<--------- Remove Product From Daily Cart ---------->>
+router.delete("/addToCart/:productId", validateToken, async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findOne({ _id: productId });
+    const user = await User.findOne({ _id: req.userId });
+    const isProductInCart = user.dailyCart.some(
+      (item) => item._id.toString() === productId
+    );
+    if (isProductInCart === false) {
+      return res.json({ message: `המוצר לא נמצא בסל הקניות` });
+    }
+    user.dailyCart.pull(product);
+    await user.save();
+    res.json({ message: `המוצר התווסף בהצלחה.` });
+    return nodeEvents.emit("update");
+  } catch (error) {
+    console.log(error);
+  }
+});
+// <<--------- Add Product To Daily Cart ---------->>
+router.post("/addToCart/:productId", validateToken, async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    const product = await Product.findOne({ _id: productId });
+    const user = await User.findOne({ _id: req.userId });
+    const isProductInCart = user.dailyCart.some(
+      (item) => item._id.toString() === productId
+    );
+    if (isProductInCart === true) {
+      return res.json({ message: `המוצר כבר נמצא בסל הקניות` });
+    }
+    user.dailyCart.push(product);
+    await user.save();
+    res.json({ message: `המוצר התווסף בהצלחה.` });
+    return nodeEvents.emit("update");
+  } catch (error) {
+    console.log(error);
+  }
+});
 // <---------- Remove Product From Some Day ---------->
 router.put(
   "/removeProduct/:productId",

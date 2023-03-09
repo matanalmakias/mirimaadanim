@@ -13,7 +13,11 @@ import { orderRouter } from "./routes/order/order.js";
 import { categoryRouter } from "./routes/categories.js";
 import { isQuestionsRouter } from "./routes/cart/isQuestions.js";
 import { daysRouter } from "./routes/days/day.js";
+import { weeklyRouter } from "./routes/weekly/weekly.js";
+import job from "./routes/cron.js";
 
+// Start the cron job
+job.start();
 const app = express();
 
 //once app starts: connect to db: and fill the roles collection
@@ -41,6 +45,7 @@ app.use("/api/category", categoryRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/is", isQuestionsRouter);
 app.use("/api/days", daysRouter);
+app.use("/api/weekly", weeklyRouter);
 
 //404:
 app.use(notFound);
