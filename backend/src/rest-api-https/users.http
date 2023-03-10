@@ -1,3 +1,7 @@
+### פתיחת הזמנה
+POST http://localhost:3001/api/weekly/createOrder
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
 ### קביעת זמן משלוח עבור כל יום
 POST http://localhost:3001/api/weekly/schudleDelivery/64089050a993875b42822d95
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M

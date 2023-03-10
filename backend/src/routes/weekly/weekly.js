@@ -2,18 +2,14 @@ import { Router } from "express";
 import { validateToken } from "../../middleware/user/validateToken.js";
 import _, { pick } from "underscore";
 import { isManager } from "../../middleware/roles/isManager.js";
-import { Payu } from "payu-node";
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { Day } from "../../db/models/day.js";
-import { Product } from "../../db/models/product.js";
+import { Product } from "../../db/models/products/product.js";
 import { User } from "../../db/models/user.js";
+import { WeeklyOrder } from "../../db/models/orders/weeklyOrder.js";
+import shortid from "shortid";
 const router = Router();
-const payu = new Payu({
-  apiUsername: "<your_api_username>",
-  apiPassword: "<your_api_password>",
-  posId: "<your_pos_id>",
-  sandbox: true, // or false for production
-});
+
 // <------------ Schudle Delivery Time For Each Day ------------>>
 router.post("/schudleDelivery/:productId", validateToken, async (req, res) => {
   try {
@@ -161,7 +157,7 @@ router.post(
 );
 // <<----------- Remove Product From Weekly Cart SomeDays ------------>>
 router.delete(
-  "/removeProductToWeekly/:productId",
+  "/removeProductFromWeekly/:productId",
   validateToken,
   async (req, res) => {
     try {
@@ -187,5 +183,42 @@ router.delete(
     }
   }
 );
+
+// <<--------------- Create A Order ------------------>>
+router.post("/createOrder", validateToken, async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.userId });
+    let id = shortid.generate();
+    const generateUniqueId = async () => {
+      let id = shortid.generate();
+      const existingOrder = await WeeklyOrder.findOne({ id: id });
+      if (existingOrder) {
+        return generateUniqueId();
+      }
+      return id;
+    };
+    let totalPriceArr = [];
+    user.weeklyCart.forEach((item) => {
+      totalPriceArr.push(item.totalPrice);
+    });
+    let sumedTotalPrice = totalPriceArr.reduce((acc, val) => acc + val, 0);
+
+    const order = new WeeklyOrder({
+      id: await generateUniqueId(),
+      user: user._id,
+      items: user.weeklyCart,
+      total: sumedTotalPrice,
+    });
+    user.weeklyOrders.push(order);
+    await user.save();
+    await order.save();
+    console.log(WeeklyOrder.schema.indexes());
+
+    res.json({ message: `ההזמנה בוצעה בהצלחה` });
+    return nodeEvents.emit("update");
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export { router as weeklyRouter };

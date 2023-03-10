@@ -2,8 +2,8 @@ import { Router } from "express";
 import { validateToken } from "../../middleware/user/validateToken.js";
 import { User } from "../../db/models/user.js";
 import _ from "underscore";
-import { Product } from "../../db/models/product.js";
-import { Category } from "../../db/models/category.js";
+import { Product } from "../../db/models/products/product.js";
+import { Category } from "../../db/models/products/category.js";
 import mongoose from "mongoose";
 const router = Router();
 

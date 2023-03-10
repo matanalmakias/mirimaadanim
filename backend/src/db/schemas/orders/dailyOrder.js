@@ -1,14 +1,19 @@
 // Order Schema
 import mongoose from "mongoose";
-import { cartItemSchema } from "../schemas/cart.js";
+import { dailyCartItemSchema } from "../cart/dailyCartItem.js";
 
-const orderSchema = new mongoose.Schema({
+const dailyOrderSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
   },
-  items: [cartItemSchema],
+  items: [dailyCartItemSchema],
   total: {
     type: Number,
     required: true,
@@ -18,4 +23,4 @@ const orderSchema = new mongoose.Schema({
     default: Date.now,
   },
 });
-export { orderSchema };
+export { dailyOrderSchema };

@@ -1,9 +1,10 @@
 import { Schema } from "mongoose";
-import { productSchema } from "./product.js";
+import { productSchema } from "../products/product.js";
 
 const weeklyCartItemSchema = new Schema({
+  _id: false,
   days: { type: Array, required: true },
-  product: productSchema,
+  product: { type: Object },
   quantity: {
     type: Number,
     required: true,

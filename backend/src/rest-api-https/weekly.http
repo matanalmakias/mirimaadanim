@@ -1,0 +1,41 @@
+### קביעת זמן משלוח עבור כל יום
+POST http://localhost:3001/api/weekly/schudleDelivery/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Content-Type: application/json
+
+{
+    "date": "2023-09-03T12:00:00Z"
+}
+
+### כפתור קבלת הנחה על הזמנה
+POST http://localhost:3001/api/weekly/getDisFullOrder
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
+### הורדת כמות מוצר בסל הקניות השבועי
+POST http://localhost:3001/api/weekly/decQuan/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
+### העלאת כמות מוצר בסל הקניות השבועי
+POST http://localhost:3001/api/weekly/incQuan/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
+### שינוי ימים של מוצר כלשהוא בסל הקניות השבועי
+POST http://localhost:3001/api/weekly/EditDays/64089050a993875b42822d95/Monday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
+### הסרת מוצר מסל הקניות השבועי
+DELETE http://localhost:3001/api/weekly/removeProductToWeekly/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
+### הוספת מוצר לסל הקניות השבועי
+POST http://localhost:3001/api/weekly/addProductToWeekly/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Content-Type: application/json
+
+{
+"days":["Sunday"]
+}
+
+### פתיחת הזמנה
+POST http://localhost:3001/api/weekly/createOrder
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M

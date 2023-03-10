@@ -1,6 +1,8 @@
 import { Schema } from "mongoose";
+import { productSchema } from "../products/product.js";
 
 const dailyCartItemSchema = new Schema({
+  product: productSchema,
   quantity: {
     type: Number,
     required: true,

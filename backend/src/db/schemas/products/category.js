@@ -8,6 +8,4 @@ const categorySchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-categorySchema.index({ _id: 1 }, { unique: true });
-
 export { categorySchema };

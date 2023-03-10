@@ -1,0 +1,10 @@
+### GET Products from some Date
+GET http://localhost:3001/api/days/Sunday
+
+### הוספת מוצר לסל קניות היומי
+POST http://localhost:3001/api/days/addToCart/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+
+### הסרת מוצר מסל קניות היומי
+DELETE http://localhost:3001/api/days/addToCart/64089050a993875b42822d95
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M

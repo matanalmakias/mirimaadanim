@@ -16,18 +16,13 @@ Content-Type: application/json
 
 ### הוספת פריט לקייטרינגים
 POST http://localhost:3001/api/manager/product/createProduct
-Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
 Content-Type: application/json
 
 {
-
-}
-
-{
     "title":"סלט ירקות",
     "description":"סלט עם עגבנייה, מלפפון ובצל",
-    "category":"salads",
+    "category":"סלטים",
     "price":5
 }
 
