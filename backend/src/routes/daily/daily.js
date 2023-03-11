@@ -8,12 +8,19 @@ import { DailyOrder } from "../../db/models/orders/dailyOrder.js";
 import { isManager } from "../../middleware/roles/isManager.js";
 const router = Router();
 
+// <<------ Restore an Order to make an order again ----------->>
+router.post("/restoreOrderToCart", validateToken, async (req, res) => {
+  const user = await User.findOne({ _id: req.userId });
+});
 // <<--------------- Create A Order ------------------>>
 router.post("/createOrder", validateToken, async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.userId });
     if (!user.dailyCart || user.dailyCart.length === 0) {
       return res.json({ message: "הסל ריק" });
+    }
+    if (user.isComplete === false) {
+      return res.json({ message: `מלא את פרטיך לפני שתוכל ליצור הזמנה` });
     }
 
     const totalPriceArr = user.dailyCart.map((item) => item.totalPrice);
@@ -50,15 +57,15 @@ router.post("/addProduct/:productId", validateToken, async (req, res) => {
   const productId = req.params.productId;
   const user = await User.findOne({ _id: req.userId });
   const product = await Product.findOne({ _id: productId });
-  const isProductInCart = user.dailyCart?.some(
-    (item) => item.product._id.toString() === productId
+
+  const isProductInCart = user?.dailyCart?.some(
+    (item) => item?.product?.toString() === productId
   );
   if (isProductInCart === true) {
     return res.json({ message: `המוצר כבר נמצא בסל הקניות השבועי` });
   }
   user.dailyCart?.push({
     product: product._id,
-    days: req.body.days,
     quantity: 1,
     totalPrice: product.price,
   });

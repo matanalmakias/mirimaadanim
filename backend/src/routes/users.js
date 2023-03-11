@@ -7,13 +7,12 @@ import { Role } from "../db/models/role.js";
 import { validateToken } from "../middleware/user/validateToken.js";
 import { isManager } from "../middleware/roles/isManager.js";
 import bcrypt from "bcryptjs";
-import { validateSignIn } from "../middleware/user/verifySignInBody.js";
-
 import nodeEvents from "../nodeEvents/nodeEvents.js";
 import twilio from "twilio";
 const router = Router();
 const accountSid = "AC07d9ac2a1ce71f3d35d5e47dd69d32df";
-const authToken = "fe816a97b37a265cb6479621e38dab8d";
+const authToken = "2cedbe6bae41b7bf5f9fe28a967bc0cb";
+const myTwilioPhone = `+15673623348`;
 const client = twilio(accountSid, authToken);
 
 // <<----------- SMS send ------------>>
@@ -54,7 +53,7 @@ router.post("/editPassword", validateToken, async (req, res) => {
 
     user.password = await bcrypt.hash(password, 12);
     await user.save();
-    await res.json({ message: "הסיסמא עודכנה בהצלחה.", id: user._id });
+    res.json({ message: "הסיסמא עודכנה בהצלחה.", id: user._id });
     return nodeEvents.emit("update");
   } catch (err) {
     console.error(err);
@@ -78,7 +77,7 @@ router.post("/editEmail", validateToken, async (req, res) => {
     }
     user.email = email;
     await user.save();
-    await res.json({ message: "האימייל עודכן בהצלחה." });
+    res.json({ message: "האימייל עודכן בהצלחה." });
     return nodeEvents.emit("update");
   } catch (err) {
     console.error(err);
@@ -118,16 +117,23 @@ router.get("/", (req, res) => {
 router.post("/finalLogin/:phoneNum/:verfCode", async (req, res) => {
   //email and password:
   try {
+    const body = req.body;
     let phoneNum = req.params.phoneNum;
-
     const verfCode = req.params.verfCode;
     let verfCodeAsNumber = parseInt(verfCode);
     phoneNum.replace(/^0/, ""); // Remove leading zero
-
     const user = await User.findOne({ phoneNumber: phoneNum }).populate(
       "roles"
     );
-
+    if (user.isComplete === false) {
+      user.address = {}; // Initialize the address object
+      user.address.city = body.city;
+      user.address.street = body.street;
+      user.address.houseNumber = body.houseNumber;
+      user.address.floor = body.floor;
+      user.isComplete = true;
+      await user.save();
+    }
     if (user.verficationCode === verfCodeAsNumber) {
       const token = jwt.sign({ id: user.id }, authConfig.secret, {
         expiresIn: "30d",
@@ -143,12 +149,14 @@ router.post("/finalLogin/:phoneNum/:verfCode", async (req, res) => {
         accessToken: token,
       });
       return nodeEvents.emit("update");
+    } else {
+      throw new Error("Invalid verification code");
     }
   } catch (e) {
-    return res.status(500).json({ message: "Server error", error: e });
+    console.error(e);
+    return res.status(500).json({ message: "Server error", error: e.message });
   }
 });
-
 //<-----------Login Try HERE --------------->
 router.post("/tryLogin/:phoneNum", async (req, res) => {
   try {
@@ -188,15 +196,12 @@ router.post("/tryLogin/:phoneNum", async (req, res) => {
       client.messages
         .create({
           body: `הקוד שלך הוא ${randomNumber}`,
-          from: "+15673623348",
+          from: myTwilioPhone,
           to: formattedPhoneNumber,
         })
         .then((message) => {
           res.json({ message: `הקוד נשלח לנייד` });
-          nodeEvents.emit("update");
-          return setTimeout(() => {
-            user.verficationCode = null;
-          }, 5 * 60 * 1000);
+          return nodeEvents.emit("update");
         })
         .catch((error) => console.log(error));
     }

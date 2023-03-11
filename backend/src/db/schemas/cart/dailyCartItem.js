@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 const dailyCartItemSchema = new Schema({
+  _id: false,
   product: { unique: false, type: Schema.Types.ObjectId, ref: "Product" },
   totalPrice: {
     type: Number,

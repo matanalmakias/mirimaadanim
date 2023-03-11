@@ -15,7 +15,9 @@ router.post("/createOrder", validateToken, async (req, res) => {
     if (!user.weeklyCart || user.weeklyCart.length === 0) {
       return res.json({ message: "הסל ריק" });
     }
-
+    if (user.isComplete === false) {
+      return res.json({ message: `מלא את פרטיך לפני שתוכל ליצור הזמנה` });
+    }
     const totalPriceArr = user.weeklyCart.map((item) => item.totalPrice);
     const sumedTotalPrice = totalPriceArr.reduce((acc, val) => acc + val, 0);
     const pointsEarned = sumedTotalPrice / 2; // calculate the points earned
