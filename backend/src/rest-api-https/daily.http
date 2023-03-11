@@ -1,6 +1,5 @@
-
 ### קביעת זמן משלוח עבור כל יום
-POST http://localhost:3001/api/weekly/schudleDelivery/640b57fd693e3147323f5ab1
+POST http://localhost:3001/api/daily/schudleDelivery/640b57fd693e3147323f5ab1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 Content-Type: application/json
 
@@ -9,38 +8,34 @@ Content-Type: application/json
 }
 
 ### כפתור קבלת הנחה על הזמנה
-POST http://localhost:3001/api/weekly/getDisFullOrder
+POST http://localhost:3001/api/daily/getDisFullOrder
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### ירידת כמות מוצר בסל הקניות השבועי
-POST http://localhost:3001/api/weekly/decQuan/640b57fd693e3147323f5ab1
+POST http://localhost:3001/api/daily/decQuan/640b57fd693e3147323f5ab1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### תוספת כמות מוצר בסל הקניות השבועי
-POST http://localhost:3001/api/weekly/incQuan/640b57fd693e3147323f5ab1
+POST http://localhost:3001/api/daily/incQuan/640b57fd693e3147323f5ab1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### שינוי ימים של מוצר כלשהוא בסל הקניות השבועי
-POST http://localhost:3001/api/weekly/EditDays/640b57fd693e3147323f5ab1/Monday
+POST http://localhost:3001/api/daily/EditDays/640b57fd693e3147323f5ab1/Monday
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### הסרת מוצר מסל הקניות השבועי
-DELETE http://localhost:3001/api/weekly/removeProduct/640b57fd693e3147323f5ab1
+DELETE http://localhost:3001/api/daily/removeProduct/640b57fd693e3147323f5ab1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### הוספת מוצר לסל הקניות השבועי
-POST http://localhost:3001/api/weekly/addProduct/640b57fd693e3147323f5ab1
+POST http://localhost:3001/api/daily/addProduct/640b57fd693e3147323f5ab1
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 Content-Type: application/json
 
-{
-"days":["Sunday"]
-}
-
 ### פתיחת הזמנה
-POST http://localhost:3001/api/weekly/createOrder
+POST http://localhost:3001/api/daily/createOrder
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### מחיקת כל המסמכים
-DELETE http://localhost:3001/api/weekly/deleteAll
+DELETE http://localhost:3001/api/daily/deleteAll
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA

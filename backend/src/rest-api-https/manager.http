@@ -1,13 +1,13 @@
 ### הסרת מוצר מיום מסויים
 PUT http://localhost:3001/api/days/removeProduct/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODQ2NDk5NiwiZXhwIjoxNjgxMDU2OTk2fQ.A_GwYC19s-M-5Yeh0Lp3DzYWWmn29_KFoRH-kiAIC_Y
 Content-Type: application/json
 
 ["Sunday", "Monday"]
 
 ### ---- הוספת מוצר ליום מסויים ----
 PUT http://localhost:3001/api/days/addProduct/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODQ2NDk5NiwiZXhwIjoxNjgxMDU2OTk2fQ.A_GwYC19s-M-5Yeh0Lp3DzYWWmn29_KFoRH-kiAIC_Y
 Content-Type: application/json
 
 {
@@ -16,7 +16,7 @@ Content-Type: application/json
 
 ### הוספת פריט לקייטרינגים
 POST http://localhost:3001/api/manager/product/createProduct
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODQ2NDk5NiwiZXhwIjoxNjgxMDU2OTk2fQ.A_GwYC19s-M-5Yeh0Lp3DzYWWmn29_KFoRH-kiAIC_Y
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 ### עדכון/עריכת פריט
 POST http://localhost:3001/api/manager/product/editProduct/63f7a6a4e06a0b2e7d9601a0
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODQ2NDk5NiwiZXhwIjoxNjgxMDU2OTk2fQ.A_GwYC19s-M-5Yeh0Lp3DzYWWmn29_KFoRH-kiAIC_Y
 Content-Type: application/json
 
 {
@@ -42,7 +42,7 @@ Content-Type: application/json
 
 ### מחיקת פריט
 DELETE http://localhost:3001/api/manager/product/deleteProduct/63f7a6f9e06a0b2e7d9601ab
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MDhmMzQzNzQ1YTkyMWRhNTRkZGEwZCIsImlhdCI6MTY3ODQ2NDk5NiwiZXhwIjoxNjgxMDU2OTk2fQ.A_GwYC19s-M-5Yeh0Lp3DzYWWmn29_KFoRH-kiAIC_Y
 Content-Type: application/json
 
 {
@@ -70,7 +70,7 @@ Content-Type: application/json
 
 {
     "email":"inviteserv@gmail.com",
-    "password":"123123"
+    "password":"123123123"
 }
 
 ###GET All Users :

@@ -1,18 +1,12 @@
 import { Schema } from "mongoose";
-import { productSchema } from "../products/product.js";
-
 const dailyCartItemSchema = new Schema({
-  product: productSchema,
-  quantity: {
-    type: Number,
-    required: true,
-    default: 1,
-  },
+  product: { unique: false, type: Schema.Types.ObjectId, ref: "Product" },
   totalPrice: {
     type: Number,
     required: false,
     default: 1,
   },
+  quantiy: { type: Number, default: 1, required: false },
 });
 
 export { dailyCartItemSchema };

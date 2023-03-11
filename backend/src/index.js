@@ -12,7 +12,7 @@ import { cartRouter } from "./routes/cart/cart.js";
 import { orderRouter } from "./routes/order/order.js";
 import { categoryRouter } from "./routes/categories.js";
 import { isQuestionsRouter } from "./routes/cart/isQuestions.js";
-import { daysRouter } from "./routes/days/day.js";
+import { dailyRouter } from "./routes/daily/daily.js";
 import { weeklyRouter } from "./routes/weekly/weekly.js";
 import job from "./routes/cron.js";
 
@@ -44,7 +44,7 @@ app.use("/api/cart", cartRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/is", isQuestionsRouter);
-app.use("/api/days", daysRouter);
+app.use("/api/daily", dailyRouter);
 app.use("/api/weekly", weeklyRouter);
 
 //404:

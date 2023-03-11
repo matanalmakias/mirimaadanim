@@ -3,12 +3,13 @@ import jwt from "jsonwebtoken";
 import authConfig from "../db/config/auth.config.js";
 import _ from "underscore";
 import { User } from "../db/models/user.js";
-import { Role } from "../db/models/role.js";
+import { validateSignUp } from "../middleware/user/verifySignupBody.js";
+import { userAlreadyExists } from "../middleware/user/userAlreadyExists.js";
 import { validateToken } from "../middleware/user/validateToken.js";
 import { isManager } from "../middleware/roles/isManager.js";
 import bcrypt from "bcryptjs";
 import { validateSignIn } from "../middleware/user/verifySignInBody.js";
-
+import { Role } from "../db/models/role.js";
 import nodeEvents from "../nodeEvents/nodeEvents.js";
 import twilio from "twilio";
 const router = Router();
@@ -114,94 +115,85 @@ router.get("/", (req, res) => {
     .catch((e) => res.status(500).json({ message: "Error", error: e }));
 });
 
-// < -------------- Final Login ---------------- >
-router.post("/finalLogin/:phoneNum/:verfCode", async (req, res) => {
+//api/auth/signup
+router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
+  try {
+    const body = _.pick(req.body, "username", "email", "password");
+
+    body.password = await bcrypt.hash(body.password, 12);
+    const user = new User(body);
+
+    //before saving the user:
+    //for each user -> save the role id of user
+    user.roles = [(await Role.findOne({ name: "user" }))._id];
+    await user.save();
+    res.json({ message: "user saved", id: user._id });
+    return nodeEvents.emit("update");
+  } catch (e) {
+    return res.status(500).json({ message: "Server DB Error", error: e });
+  }
+});
+// הרשמה קודמת
+// router.post("/signup", validateSignUp, userAlreadyExists, async (req, res) => {
+//   try {
+//     const body = _.pick(req.body, "username", "email", "password");
+
+//     body.password = await bcrypt.hash(body.password, 12);
+//     const user = new User(body);
+
+//     //before saving the user:
+//     //for each user -> save the role id of user
+//     user.roles = [(await Role.findOne({ name: "user" }))._id];
+//     user.cart = [];
+//     user.workers = [];
+//     await user.save();
+//      res.json({ message: "user saved", id: user._id });
+//     return nodeEvents.emit("update");
+//   } catch (e) {
+//     return res.status(500).json({ message: "Server DB Error", error: e });
+//   }
+// });
+
+router.post("/signin", validateSignIn, async (req, res) => {
   //email and password:
   try {
-    let phoneNum = req.params.phoneNum;
-
-    const verfCode = req.params.verfCode;
-    let verfCodeAsNumber = parseInt(verfCode);
-    phoneNum.replace(/^0/, ""); // Remove leading zero
-
-    const user = await User.findOne({ phoneNumber: phoneNum }).populate(
+    //SELECT * FROM user JOIN Roles ON ...
+    const user = await User.findOne({ email: req.body.email }).populate(
       "roles"
     );
 
-    if (user.verficationCode === verfCodeAsNumber) {
-      const token = jwt.sign({ id: user.id }, authConfig.secret, {
-        expiresIn: "30d",
-      });
-      const authorities = [];
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push(`ROLE_` + user.roles[i].name.toUpperCase());
-      }
-      res.status(200).json({
-        id: user.id,
-        phoneNumer: `${phoneNum}`,
-        roles: authorities,
-        accessToken: token,
-      });
-      return nodeEvents.emit("update");
+    if (!user) {
+      return res.status(401).json({ message: "No Such User" });
     }
+
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid Credentials" });
+    }
+
+    const token = jwt.sign({ id: user.id }, authConfig.secret, {
+      expiresIn: "30d",
+    });
+
+    const authorities = [];
+    for (let i = 0; i < user.roles.length; i++) {
+      authorities.push(`ROLE_` + user.roles[i].name.toUpperCase());
+    }
+
+    await res.status(200).json({
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      roles: authorities,
+      accessToken: token,
+    });
+    return nodeEvents.emit("update");
   } catch (e) {
     return res.status(500).json({ message: "Server error", error: e });
-  }
-});
-
-//<-----------Login Try HERE --------------->
-router.post("/tryLogin/:phoneNum", async (req, res) => {
-  try {
-    const phoneNum = req.params.phoneNum;
-
-    const formattedPhoneNumber = "+972" + phoneNum.replace(/^0+/, "");
-    const user = await User.findOne({ phoneNumber: phoneNum });
-
-    let isRegistered = false;
-    let randomNumber = Math.floor(100000 + Math.random() * 900000);
-    if (user !== null) {
-      user.verficationCode = randomNumber;
-      await user.save();
-      isRegistered = true;
-    }
-    if (user === null) {
-      const role = await Role.findOne({ name: "user" });
-      const newUser = new User({
-        phoneNumber: phoneNum,
-        verficationCode: randomNumber,
-        roles: [role],
-      });
-
-      await new Promise(async (resolve, reject) => {
-        newUser.save(async (error, savedUser) => {
-          if (error) {
-            reject(error);
-          } else {
-            isRegistered = true;
-
-            resolve(savedUser);
-          }
-        });
-      });
-    }
-    if (isRegistered === true) {
-      client.messages
-        .create({
-          body: `הקוד שלך הוא ${randomNumber}`,
-          from: "+15673623348",
-          to: formattedPhoneNumber,
-        })
-        .then((message) => {
-          res.json({ message: `הקוד נשלח לנייד` });
-          nodeEvents.emit("update");
-          return setTimeout(() => {
-            user.verficationCode = null;
-          }, 5 * 60 * 1000);
-        })
-        .catch((error) => console.log(error));
-    }
-  } catch (e) {
-    return res.status(500).json({ message: "Server DB Error", error: e });
   }
 });
 

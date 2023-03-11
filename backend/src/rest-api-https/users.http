@@ -1,53 +1,6 @@
-### פתיחת הזמנה
-POST http://localhost:3001/api/weekly/createOrder
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
 ### קביעת זמן משלוח עבור כל יום
-POST http://localhost:3001/api/weekly/schudleDelivery/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-Content-Type: application/json
-
-{
-    "date": "2023-09-03T12:00:00Z"
-}
-
-### כפתור קבלת הנחה על הזמנה
-POST http://localhost:3001/api/weekly/getDisFullOrder
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
-### הורדת כמות מוצר בסל הקניות השבועי
-POST http://localhost:3001/api/weekly/decQuan/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
-### העלאת כמות מוצר בסל הקניות השבועי
-POST http://localhost:3001/api/weekly/incQuan/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
-### שינוי ימים של מוצר כלשהוא בסל הקניות השבועי
-POST http://localhost:3001/api/weekly/EditDays/64089050a993875b42822d95/Monday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
-### הסרת מוצר מסל הקניות השבועי
-DELETE http://localhost:3001/api/weekly/removeProductToWeekly/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
-### הוספת מוצר לסל הקניות השבועי
-POST http://localhost:3001/api/weekly/addProductToWeekly/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-Content-Type: application/json
-
-{
-"days":["Sunday"]
-}
-
-### הוספת מוצר לסל קניות היומי
-POST http://localhost:3001/api/days/addToCart/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
-### הסרת מוצר מסל קניות היומי
-DELETE http://localhost:3001/api/days/addToCart/64089050a993875b42822d95
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
-
+POST http://localhost:3001/api/auth/send/0526757706
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGJiNTUzMTg4YmNhNGVhODNkN2E4NiIsImlhdCI6MTY3ODQ4ODkzOCwiZXhwIjoxNjgxMDgwOTM4fQ.mcNtmC2RTteHQ2x-BYLOAF5XsEgx7CBp25HbMU9tzXA
 
 ### GET Products from some Date
 GET http://localhost:3001/api/days/Sunday
@@ -140,15 +93,11 @@ DELETE http://localhost:3001/api/cart/deleteFromCart/63f970d02972e5d94952d761
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjZkZTRiNTc2Y2QxNzhmYWI1MDhjZSIsImlhdCI6MTY3ODMwMDY4MywiZXhwIjoxNjgwODkyNjgzfQ.IxtLxHVZbHzzDjfQrLN1gBP2AeW4VCcLKfUHHVWTI9M
 
-###POST to add user:
-POST http://localhost:3001/api/auth/signup
-Content-Type: application/json
+### Login Try ------->>
+POST http://localhost:3001/api/auth/tryLogin/0526757706
 
-{
-    "username":"matan", 
-    "email":"inviteserv@gmail.com",
-    "password":"123123123"
-}
+###<-- Final Login ---------->>
+POST http://localhost:3001/api/auth/finalLogin/0526757706/982220
 
 ###POST to sign in user:
 POST http://localhost:3001/api/auth/signin

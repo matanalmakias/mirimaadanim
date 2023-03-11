@@ -5,7 +5,6 @@ import _ from "underscore";
 import { Product } from "../../db/models/products/product.js";
 import { Order } from "../../db/models/orders/order.js";
 import { Category } from "../../db/models/products/category.js";
-import { CartItem } from "../../db/models/cart/cart.js";
 const router = Router();
 import nodeEvents from "../../nodeEvents/nodeEvents.js";
 import { v4 } from "uuid";

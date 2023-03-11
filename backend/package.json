@@ -30,6 +30,7 @@
     "socket-io": "^1.0.0",
     "socket.io": "^4.6.1",
     "stripe": "^11.13.0",
+    "twilio": "^4.8.0",
     "underscore": "^1.13.6",
     "uuid": "^9.0.0"
   }

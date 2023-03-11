@@ -1,20 +1,13 @@
 import { Schema } from "mongoose";
-import { productSchema } from "../products/product.js";
-
 const weeklyCartItemSchema = new Schema({
-  _id: false,
-  days: { type: Array, required: true },
-  product: { type: Object },
-  quantity: {
-    type: Number,
-    required: true,
-    default: 1,
-  },
+  days: { type: Array, required: false },
+  product: { unique: false, type: Schema.Types.ObjectId, ref: "Product" },
   totalPrice: {
     type: Number,
     required: false,
     default: 1,
   },
+  quantiy: { type: Number, default: 1, required: false },
   discount: {
     type: Number,
     required: false,
