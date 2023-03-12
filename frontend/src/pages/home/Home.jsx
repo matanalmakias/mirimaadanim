@@ -8,23 +8,24 @@ const Home = () => {
       dir="rtl"
     >
       <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
-        לתפריט היומי
+        לתפריט
       </p>
-      <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
+
+      {/* <p onClick={() => nav("/")} className="my_btn2 m-1  p-1">
         להזמנת קייטרינג{" "}
       </p>
-      <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
+      <p onClick={() => nav("/")} className="my_btn2 m-1  p-1">
         מארזי סלטים לשישי ולחגים
       </p>
-      <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
+      <p onClick={() => nav("/")} className="my_btn2 m-1  p-1">
         מפעלים
       </p>
-      <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
+      <p onClick={() => nav("/")} className="my_btn2 m-1  p-1">
         אוכל מוכן לשבת
       </p>
-      <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
+      <p onClick={() => nav("/")} className="my_btn2 m-1  p-1">
         מגשי אירוח
-      </p>
+      </p> */}
     </div>
   );
 };

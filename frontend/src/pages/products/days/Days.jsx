@@ -4,18 +4,19 @@ import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../../context/CateringContext";
 import storeService from "../../../services/store.service";
 import DayItem from "./DayItem";
+import axios from "axios";
 const Days = ({ day }) => {
   const [products, setProducts] = useState(null);
 
   const socket = useContext(SocketContext);
-  const newDay = translateDay();
 
   useEffect(() => {
     if (products === null) {
-      storeService.getDayProducts(day).then((res) => setProducts(res.data));
+      // storeService.getAllProducts.then((res) => setProducts(res.data));
+      storeService.getAllProducts(setProducts);
     }
     socket.on("update", () => {
-      storeService.getDayProducts(day).then((res) => setProducts(res.data));
+      storeService.getAllProducts(setProducts);
     });
 
     return () => {
@@ -25,7 +26,6 @@ const Days = ({ day }) => {
   if (products === null) return <div className="text-black"> Loading...</div>;
   return (
     <div dir="rtl" className="bg-light text-black mt-1 text-center">
-      <h1 className="h1 display-6">תפריט יומי של יום {newDay}</h1>
       {products.map((item) => (
         <DayItem key={item._id} item={item} />
       ))}

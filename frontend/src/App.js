@@ -3,8 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
 import Header from "./components/header/Header";
 import Manager from "./pages/manager/Manager";
 import Cart from "./components/store/cart/Cart";
@@ -12,9 +10,10 @@ import UpdateProduct from "./components/manager/UpdateProduct";
 import UserManagement from "./pages/user-management/UserManagement";
 import AllOrders from "./components/store/orders/AllOrders";
 import OrderDetails from "./components/store/orders/OrderDetails";
-import Daily from "./pages/daily/Daily";
+import Daily from "./pages/products/Daily";
 import Footer from "./components/footer/Footer";
 import Catering from "./components/catering/Catering";
+import ProductDetails from "./pages/products/days/ProductDetails";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -23,6 +22,7 @@ function App() {
       <div className="text-white">
         <Header />
         <Routes>
+          <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/" element={<Home />} />
           <Route path="/daily" element={<Daily />} />
           {isManager && (
@@ -45,8 +45,6 @@ function App() {
           {isLoggedIn && (
             <Route path="/user-management" element={<UserManagement />} />
           )}
-          {!isLoggedIn && <Route path="/login" element={<Login />} />}
-          {!isLoggedIn && <Route path="/register" element={<Register />} />}
         </Routes>
       </div>
       <Footer />

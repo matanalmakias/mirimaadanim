@@ -51,6 +51,8 @@ router.delete("/deleteAll", validateToken, isManager, async (req, res) => {
 router.post("/addProduct/:productId", validateToken, async (req, res) => {
   const productId = req.params.productId;
   const user = await User.findOne({ _id: req.userId });
+  console.log(req.body);
+
   const product = await Product.findOne({ _id: productId });
   const isProductInCart = user.weeklyCart?.some(
     (item) => item.product._id.toString() === productId
@@ -60,7 +62,7 @@ router.post("/addProduct/:productId", validateToken, async (req, res) => {
   }
   user.weeklyCart?.push({
     product: product._id,
-    days: req.body.days,
+    dates: [req.body],
     quantity: 1,
     totalPrice: product.price,
   });

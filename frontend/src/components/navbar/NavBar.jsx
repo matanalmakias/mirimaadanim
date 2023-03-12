@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Navbar, Nav, Row, Col, Container, Button } from "react-bootstrap";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
 import { StoreContext } from "../../context/StoreContext";
 import "./navbar.css";
 import logo from "../../images/logo.png";
+import Login from "../../components/login/Login";
 
 const NavBar = () => {
   const [showNavBar, setShowNavBar] = useState(false);
@@ -27,7 +27,7 @@ const NavBar = () => {
   return (
     <>
       <div className="spacer p-1"></div>
-      <div className="gap-4 d-flex flex-row justify-content-center align-items-center text-center bg-dark p-2">
+      <div className="gap-4 d-flex flex-row justify-content-center align-items-center text-center bg-light p-2">
         <img
           className="nav_logo"
           onClick={() => {
@@ -75,23 +75,8 @@ const NavBar = () => {
 
           {isLoggedIn === false ? (
             <>
-              <li
-                className="navbar-item"
-                onClick={() => {
-                  nav("/register");
-                  toggleShowNavBar();
-                }}
-              >
-                הרשמה
-              </li>
-              <li
-                className="navbar-item"
-                onClick={() => {
-                  nav("/login");
-                  toggleShowNavBar();
-                }}
-              >
-                התחברות
+              <li className="navbar-item">
+                <Login />
               </li>
             </>
           ) : (

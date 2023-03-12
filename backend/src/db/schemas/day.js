@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { productSchema } from "./products/product.js";
+import { productSchema } from "../models/products/product.js";
 
 const daySchema = new Schema({
   name: { type: String, unique: true },

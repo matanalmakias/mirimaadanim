@@ -1,16 +1,15 @@
 import { Schema } from "mongoose";
 const weeklyCartItemSchema = new Schema({
-  days: { type: Array, required: false },
-  product: { unique: false, type: Schema.Types.ObjectId, ref: "Product" },
+  _id: false,
+  dates: { type: Array },
+  product: { type: Schema.Types.ObjectId, ref: "Product" },
   totalPrice: {
     type: Number,
-    required: false,
     default: 1,
   },
-  quantiy: { type: Number, default: 1, required: false },
+  quantiy: { type: Number, default: 1 },
   discount: {
     type: Number,
-    required: false,
     default: 0,
     validate: {
       validator: function (value) {
@@ -19,7 +18,7 @@ const weeklyCartItemSchema = new Schema({
       message: "Discount percentage must be between 0 and 100",
     },
   },
-  deliveryTime: { type: Date, required: false },
+  deliveryTime: Object,
 });
 
 export { weeklyCartItemSchema };

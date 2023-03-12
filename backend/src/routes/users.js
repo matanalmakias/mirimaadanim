@@ -15,6 +15,8 @@ const authToken = "2cedbe6bae41b7bf5f9fe28a967bc0cb";
 const myTwilioPhone = `+15673623348`;
 const client = twilio(accountSid, authToken);
 
+// <<------------ Get Self Use ------------->>
+
 // <<----------- SMS send ------------>>
 router.post("/send/:phoneNum", validateToken, async (req, res) => {
   try {
@@ -116,45 +118,40 @@ router.get("/", (req, res) => {
 // < -------------- Final Login ---------------- >
 router.post("/finalLogin/:phoneNum/:verfCode", async (req, res) => {
   //email and password:
-  try {
-    const body = req.body;
-    let phoneNum = req.params.phoneNum;
-    const verfCode = req.params.verfCode;
-    let verfCodeAsNumber = parseInt(verfCode);
-    phoneNum.replace(/^0/, ""); // Remove leading zero
-    const user = await User.findOne({ phoneNumber: phoneNum }).populate(
-      "roles"
-    );
-    if (user.isComplete === false) {
-      user.address = {}; // Initialize the address object
-      user.address.city = body.city;
-      user.address.street = body.street;
-      user.address.houseNumber = body.houseNumber;
-      user.address.floor = body.floor;
-      user.isComplete = true;
-      await user.save();
+
+  const body = req.body;
+  let phoneNum = req.params.phoneNum;
+  const verfCode = req.params.verfCode;
+  let verfCodeAsNumber = parseInt(verfCode);
+  phoneNum.replace(/^0/, ""); // Remove leading zero
+  const user = await User.findOne({ phoneNumber: phoneNum }).populate("roles");
+
+  if (user.isComplete === false) {
+    user.address = {}; // Initialize the address object
+    user.address.city = body.city;
+    user.address.street = body.street;
+    user.address.houseNumber = body.houseNumber;
+    user.address.floor = body.floor;
+    user.isComplete = true;
+    await user.save();
+  }
+  if (user.verficationCode === verfCodeAsNumber) {
+    const token = jwt.sign({ id: user.id }, authConfig.secret, {
+      expiresIn: "30d",
+    });
+    const authorities = [];
+    for (let i = 0; i < user.roles.length; i++) {
+      authorities.push(`ROLE_` + user.roles[i].name.toUpperCase());
     }
-    if (user.verficationCode === verfCodeAsNumber) {
-      const token = jwt.sign({ id: user.id }, authConfig.secret, {
-        expiresIn: "30d",
-      });
-      const authorities = [];
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push(`ROLE_` + user.roles[i].name.toUpperCase());
-      }
-      res.status(200).json({
-        id: user.id,
-        phoneNumer: `${phoneNum}`,
-        roles: authorities,
-        accessToken: token,
-      });
-      return nodeEvents.emit("update");
-    } else {
-      throw new Error("Invalid verification code");
-    }
-  } catch (e) {
-    console.error(e);
-    return res.status(500).json({ message: "Server error", error: e.message });
+    res.status(200).json({
+      id: user.id,
+      phoneNumer: `${phoneNum}`,
+      roles: authorities,
+      accessToken: token,
+    });
+    return nodeEvents.emit("update");
+  } else {
+    throw new Error("Invalid verification code");
   }
 });
 //<-----------Login Try HERE --------------->

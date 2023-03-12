@@ -125,33 +125,33 @@ router.get("/:productId", validateToken, async (req, res) => {
   }
 });
 // <------- Get All Cart Products -------->
-router.get("/", validateToken, async (req, res) => {
-  try {
-    const user = await User.findOne({ _id: req.userId });
-    let products = [];
-    const promises = user.cart.map(async (item) => {
-      const foundProduct = await Product.findOne({ _id: item.product });
-      const foundCategory = await Category.findOne({
-        _id: foundProduct.category,
-      });
-      const newproduct = {
-        _id: item.product,
-        title: foundProduct.title,
-        description: foundProduct.description,
-        category: foundCategory.name,
-        price: foundProduct.price,
-        quantity: item.quantity,
-      };
-      return newproduct;
-    });
+// router.get("/", validateToken, async (req, res) => {
+//   try {
+//     const user = await User.findOne({ _id: req.userId });
+//     let products = [];
+//     const promises = user.cart.map(async (item) => {
+//       const foundProduct = await Product.findOne({ _id: item.product });
+//       const foundCategory = await Category.findOne({
+//         _id: foundProduct.category,
+//       });
+//       const newproduct = {
+//         _id: item.product,
+//         title: foundProduct.title,
+//         description: foundProduct.description,
+//         category: foundCategory.name,
+//         price: foundProduct.price,
+//         quantity: item.quantity,
+//       };
+//       return newproduct;
+//     });
 
-    products = await Promise.all(promises);
+//     products = await Promise.all(promises);
 
-    res.json(products);
-  } catch (error) {
-    console.log(error);
-  }
-});
+//     res.json(products);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 // ---------- Create Package ----------
 router.post("/createOrderPackage", validateToken, async (req, res, next) => {

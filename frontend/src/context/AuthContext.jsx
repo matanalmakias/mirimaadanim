@@ -4,16 +4,16 @@ import authService from "../services/auth.service";
 import { SocketContext } from "./CateringContext";
 
 const initialState = {
-  userData: [],
+  selfUser: [],
   isLoggedIn: false,
-  login(username, email, token) {},
+  login(token) {},
   logout() {},
 };
 
 const AuthContext = createContext(initialState);
 
 const AuthContextProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
+  const [selfUser, setSelfUser] = useState(null);
   const [isAdminState, setIsAdminState] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
   const [isManager, setIsManager] = useState(false);
@@ -24,25 +24,24 @@ const AuthContextProvider = ({ children }) => {
 
   const socket = useContext(SocketContext);
   useEffect(() => {
-    authService.getSingleUser().then((res) => setUserData(res.data));
-    socket.on("update", () => {
-      authService.getSingleUser().then((res) => setUserData(res.data));
-    });
+    if (isLoggedIn) {
+      authService.getSingleUser().then((res) => setSelfUser(res.data));
+      socket.on("update", () => {
+        authService.getSingleUser().then((res) => setSelfUser(res.data));
+      });
+    }
     return () => {
       socket.off("update");
     };
-  }, [socket]);
-
+  }, [isLoggedIn, socket]);
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
       const user = JSON.parse(userData);
       const token = user.token;
-      const email = user.email;
-      const username = user.username;
       const roles = user.roles;
 
-      login(username, email, token);
+      login(token);
       //isAdminTest  ??
       let isAdminTest = isAdmin("ROLE_ADMIN", roles);
 
@@ -69,10 +68,8 @@ const AuthContextProvider = ({ children }) => {
       : localStorage.setItem("isLoggedIn", false);
   }, [isLoggedIn]);
 
-  const login = (username, email, token) => {
+  const login = (token) => {
     setIsLoggedIn(true);
-    setEmail(email);
-    setUsername(username);
     setToken(token);
     return (
       <>
@@ -85,8 +82,6 @@ const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("user");
     setIsLoggedIn(false);
     setToken(undefined);
-    setEmail(undefined);
-    setUsername(undefined);
     return (
       <>
         <p>התנתקת בהצלחה</p>
@@ -106,7 +101,7 @@ const AuthContextProvider = ({ children }) => {
     isModerator,
     isAdminState,
     isManager,
-    userData,
+    selfUser,
   };
   return (
     <AuthContext.Provider value={contextValues}>

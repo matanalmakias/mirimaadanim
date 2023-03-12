@@ -40,17 +40,6 @@ const decQuantity = async (productId) => {
 const incQuantity = async (productId) => {
   return await axios.post(`${url}/cart/incQuantity/${productId}`, {}, headers);
 };
-const getCart = async (setState) => {
-  return await axios
-    .get(`http://localhost:3001/api/cart`, {
-      headers: { Authorization: localStorage.getItem("token") },
-    })
-    .then((res) => {
-      setState(res.data);
-
-      localStorage.setItem("cart", JSON.stringify(res.data));
-    });
-};
 
 const removeFromCart = async (productId) => {
   return await axios.delete(`${url}/cart/deleteFromCart/${productId}`, headers);
@@ -65,6 +54,14 @@ const submitOrderPackage = async () => {
 const checkout = async () => {
   return await axios.post(`${url}/cart/createOrderPackage/`, {}, headers);
 };
+const getSingleProduct = async (setState, productId) => {
+  return await axios
+    .get(`${url}/product/${productId}`, headers)
+    .then((res) => setState(res.data));
+};
+const getAllProducts = async (setState) => {
+  return await axios.get(`${url}/product`).then((res) => setState(res.data));
+};
 
 export {
   decQuantity,
@@ -72,7 +69,6 @@ export {
   checkout,
   addToCart,
   removeFromCart,
-  getCart,
   getSingleOrder,
   getAllOrders,
   submitOrderPackage,
@@ -80,6 +76,8 @@ export {
   signWorker,
   deleteWorkerPermanently,
   getDayProducts,
+  getAllProducts,
+  getSingleProduct,
 };
 
 const storeService = {
@@ -88,7 +86,6 @@ const storeService = {
   checkout,
   addToCart,
   removeFromCart,
-  getCart,
   getSingleOrder,
   getAllOrders,
   submitOrderPackage,
@@ -96,5 +93,7 @@ const storeService = {
   signWorker,
   deleteWorkerPermanently,
   getDayProducts,
+  getAllProducts,
+  getSingleProduct,
 };
 export default storeService;

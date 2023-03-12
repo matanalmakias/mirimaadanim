@@ -25,6 +25,24 @@ const getSingleUser = async () => {
   });
 };
 
+const tryLogin = async (phoneNumber) => {
+  return axios.post(`${baseUrl}/tryLogin/${phoneNumber}`);
+};
+const finalLogin = async (phoneNumber, verfCode) => {
+  return axios
+    .post(`${baseUrl}/finalLogin/${phoneNumber}/${verfCode}`)
+    .then((res) => {
+      const token = res.data.accessToken;
+      const phone = res.data.phoneNumer;
+      const roles = res.data.roles;
+      if (token) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify({ phone, token, roles }));
+      }
+      return res.data;
+    });
+};
+
 const register = async (username, email, password) => {
   return axios.post(baseUrl + "/signup", { username, email, password });
 };
@@ -50,7 +68,16 @@ const logout = async () => {
   localStorage.removeItem("token");
 };
 
-export { register, login, logout, getSingleUser, editPassword, editEmail };
+export {
+  register,
+  login,
+  logout,
+  getSingleUser,
+  editPassword,
+  editEmail,
+  tryLogin,
+  finalLogin,
+};
 
 const authService = {
   register,
@@ -59,5 +86,7 @@ const authService = {
   getSingleUser,
   editPassword,
   editEmail,
+  tryLogin,
+  finalLogin,
 };
 export default authService;

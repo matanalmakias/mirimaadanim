@@ -1,0 +1,7 @@
+.item {
+  background-color: white !important;
+  border-radius: 9px !important;
+}
+.hide_class {
+  display: none;
+}

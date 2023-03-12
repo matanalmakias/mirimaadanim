@@ -24,17 +24,7 @@ const StoreProvider = ({ children }) => {
   );
   const socket = useContext(SocketContext);
 
-  useEffect(() => {
-    storeService.getCart(setCart);
 
-    socket.on("update", () => {
-      storeService.getCart(setCart);
-    });
-
-    return () => {
-      socket.off("update");
-    };
-  }, [socket]);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
