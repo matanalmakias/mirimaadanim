@@ -9,6 +9,7 @@ import { SocketContext } from "../../../context/CateringContext";
 import OrderItem from "../order-package/OrderItem";
 import storeService from "../../../services/store.service";
 import { ToastContainer, toast } from "react-toastify";
+import { serverUrl } from "../../utils/utils";
 const Cart = () => {
   const [cartState, setCartState] = useState();
   const [orderPackageData, setOrderPackageData] = useState(null);
@@ -21,7 +22,7 @@ const Cart = () => {
   const submitOrderPackage = async () => {
     await axios
       .post(
-        "http://localhost:3001/api/cart/createOrderPackage",
+        `${serverUrl}/api/cart/createOrderPackage`,
         {},
         { headers: { Authorization: localStorage.getItem("token") } }
       )

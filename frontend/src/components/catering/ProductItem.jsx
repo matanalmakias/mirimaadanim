@@ -5,12 +5,13 @@ import { SocketContext } from "../../context/CateringContext";
 import "./caterings.css";
 import ShekelIcon from "../shekel/ShekelIcon";
 import EditDaysItem from "./EditDaysItem";
+import { serverUrl } from "../utils/utils";
 const ProductItem = ({ product }) => {
   const [showEditDays, setShowEditDays] = useState(false);
   const [isProductAlreadyInCart, setIsProductAlreadyInCart] = useState(null);
   const { isManager, isLoggedIn } = useContext(AuthContext);
   const socket = useContext(SocketContext);
-  const imagesUrl = `http://localhost:3001`;
+  const imagesUrl = `${serverUrl}/`;
   const navigate = (url) => {
     window.location.href = url;
   };

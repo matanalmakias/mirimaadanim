@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { CateringContext } from "../../../context/CateringContext";
 import OrderItem from "./OrderItem";
+import { serverUrl } from "../../utils/utils";
 
 const OrderPackage = ({ show, data }) => {
   const [order, setOrder] = useState(null);
@@ -10,7 +11,7 @@ const OrderPackage = ({ show, data }) => {
   if (data !== null) {
     const item = data.order;
     axios
-      .get(`http://localhost:3001/api/order/${item._id}`, {
+      .get(`${serverUrl}/api/order/${item._id}`, {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((res) => setOrder(res.data));

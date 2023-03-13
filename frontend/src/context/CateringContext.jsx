@@ -1,14 +1,15 @@
 import { createContext, useEffect, useState } from "react";
 import io from "socket.io-client";
 import cateringService from "../services/catering.service";
+import { serverUrl } from "../components/utils/utils";
 
-const socket = io("http://localhost:3001");
+const socket = io(`${serverUrl}/`);
 const SocketContext = createContext(socket);
 
 const CateringContext = createContext({
   caterings: [],
   categories: [],
-  imagesUrl: `http://localhost:3001`,
+  imagesUrl: `${serverUrl}/`,
   setCaterings: () => {},
   setCategories: () => {},
 });

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-const url = `http://localhost:3001/api`;
+import { serverUrl } from "../components/utils/utils";
+const url = `${serverUrl}/api`;
 const token = localStorage.getItem("token");
 const headers = {
   headers: {

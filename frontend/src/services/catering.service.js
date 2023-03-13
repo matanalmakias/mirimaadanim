@@ -1,5 +1,6 @@
 import axios from "axios";
-const url = `http://localhost:3001/api`;
+import { serverUrl } from "./../components/utils/utils";
+const url = `${serverUrl}/api`;
 const config = {
   headers: {
     Authorization: localStorage.getItem("token"),
@@ -61,7 +62,7 @@ const removeProduct = async (productId) => {
 };
 
 const getAllCategories = async (setState) => {
-  const url = `http://localhost:3001/api/category`;
+  const url = `${serverUrl}/api/category`;
   return await axios.get(url).then((res) => {
     setState(res.data);
     localStorage.setItem("categories", JSON.stringify(res.data));
@@ -69,7 +70,7 @@ const getAllCategories = async (setState) => {
 };
 const createProducts = async (setState, product) => {
   return await axios
-    .post("http://localhost:3001/api/manager/product/createProduct", product, {
+    .post(`${serverUrl}/api/manager/product/createProduct`, product, {
       headers: {
         Authorization: localStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
@@ -78,14 +79,14 @@ const createProducts = async (setState, product) => {
     .then((res) => setState(res.data));
 };
 const getAllProducts = async (setState) => {
-  return await axios.get(`http://localhost:3001/api/product`).then((res) => {
+  return await axios.get(`${serverUrl}/api/product`).then((res) => {
     setState(res.data.product);
     localStorage.setItem("caterings", JSON.stringify(res.data.product));
   });
 };
 const deleteAllProducts = async () => {
   try {
-    const url = `http://localhost:3001/api/manager/product/deleteAll`;
+    const url = `${serverUrl}/api/manager/product/deleteAll`;
     return await axios.delete(url, {
       headers: { Authorization: localStorage.getItem("token") },
     });

@@ -1,12 +1,13 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { serverUrl } from "../components/utils/utils";
 const token = localStorage.getItem("token");
 const headers = {
   headers: {
     Authorization: token,
   },
 };
-const baseUrl = "http://localhost:3001/api/auth";
+const baseUrl = `${serverUrl}/api/auth`;
 
 const editEmail = async (emailInput) => {
   return await axios

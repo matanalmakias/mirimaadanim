@@ -3,7 +3,8 @@ import storeService from "../../../services/store.service";
 import { SocketContext } from "../../../context/CateringContext";
 import { useNavigate, useParams } from "react-router-dom";
 import ShekelIcon from "../../../components/shekel/ShekelIcon";
-const url = `http://localhost:3001/`;
+import { serverUrl } from "../../../components/utils/utils";
+const url = `${serverUrl}/`;
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const socket = useContext(SocketContext);

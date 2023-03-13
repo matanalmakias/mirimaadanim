@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import RemoveProductButton from "../src/components/manager/RemoveProductButton";
 import cateringService from "../src/services/catering.service";
 import { SocketContext } from "../src/context/CateringContext";
+import { serverUrl } from "../src/components/utils/utils";
 const ProductItem = ({ product, index }) => {
   const [showPicture, setShowPicture] = useState(false);
   const [res, setRes] = useState();
@@ -15,7 +16,7 @@ const ProductItem = ({ product, index }) => {
   const socket = useContext(SocketContext);
 
   const nav = useNavigate();
-  const imagesUrl = `http://localhost:3001`;
+  const imagesUrl = `https://madigital.co.il/app`;
 
   useEffect(() => {
     if (isLoggedIn === true) {
@@ -58,7 +59,7 @@ const ProductItem = ({ product, index }) => {
           <Col className="border ">{product.description}</Col>
         </div>
         <div className="d-flex row flex-row">
-          {imagesUrl !== `http://localhost:3001` && (
+          {imagesUrl !== `${serverUrl}` && (
             <>
               <div className="col p-1">
                 <Button onClick={toggleSetShowPicture}>
