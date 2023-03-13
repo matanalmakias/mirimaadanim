@@ -10,21 +10,21 @@ import UpdateProduct from "./components/manager/UpdateProduct";
 import UserManagement from "./pages/user-management/UserManagement";
 import AllOrders from "./components/store/orders/AllOrders";
 import OrderDetails from "./components/store/orders/OrderDetails";
-import Daily from "./pages/products/Daily";
 import Footer from "./components/footer/Footer";
 import Catering from "./components/catering/Catering";
-import ProductDetails from "./pages/products/days/ProductDetails";
+import ProductDetails from "./pages/products/products/ProductDetails";
+import Products from "./pages/products/Products";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
   return (
-    <div>
-      <div className="text-white">
+    <div dir="rtl">
+      <div className="container text-white">
         <Header />
         <Routes>
           <Route path="/product/:productId" element={<ProductDetails />} />
           <Route path="/" element={<Home />} />
-          <Route path="/daily" element={<Daily />} />
+          <Route path="/products" element={<Products />} />
           {isManager && (
             <Route exact path="/manager/products" element={<Catering />} />
           )}

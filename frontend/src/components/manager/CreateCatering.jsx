@@ -46,16 +46,12 @@ function CreateCatering() {
   const formSubmit = async (e) => {
     e.preventDefault();
     cateringService.createProducts(setCreatedProduct, formData).then((res) => {
-      toast(res.data.message);
+      toast(res.message);
       socket.emit("update");
     });
   };
-
   const deleteAll = () => {
-    cateringService.deleteAllProducts().then((res) => {
-      socket.emit("update");
-      toast(res.data.message);
-    });
+    cateringService.deleteAllProducts().then((res) => toast(res.data.message));
   };
 
   return (

@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
-import cateringService from "../../services/catering.service";
 import { SocketContext } from "../../context/CateringContext";
 import "./caterings.css";
 import ShekelIcon from "../shekel/ShekelIcon";
 import EditDaysItem from "./EditDaysItem";
-import { serverUrl } from "../utils/utils";
+import { serverUrl } from "../../utils/utils";
 const ProductItem = ({ product }) => {
   const [showEditDays, setShowEditDays] = useState(false);
   const [isProductAlreadyInCart, setIsProductAlreadyInCart] = useState(null);
@@ -15,22 +14,21 @@ const ProductItem = ({ product }) => {
   const navigate = (url) => {
     window.location.href = url;
   };
-
   return (
     <>
       <div
         className="mb-1 d-flex flex-row align-items-center justify-content-center text-center gap-1"
         dir="rtl"
       >
-        <span className="text-black bg-light p-2"> {product.title}</span>
+        <span className="text-black bg-light p-2"> {product?.title}</span>
         <span className=" text-black bg-light p-2">
           {product.price}
           <ShekelIcon />
         </span>
         <img
-          onClick={() => navigate(`${imagesUrl}/${product.image}`)}
+          onClick={() => navigate(`${imagesUrl}/${product?.image}`)}
           className="my_img  p-2"
-          src={`${imagesUrl}/${product.image}`}
+          src={`${imagesUrl}/${product?.image}`}
           alt=""
         />
         <span

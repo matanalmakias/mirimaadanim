@@ -27,7 +27,7 @@ const NavBar = () => {
   return (
     <>
       <div className="spacer p-1"></div>
-      <div className="gap-4 d-flex flex-row justify-content-center align-items-center text-center bg-light p-2">
+      <div className="gap-4 d-flex flex-column justify-content-center align-items-center text-center bg-light p-2">
         <img
           className="nav_logo"
           onClick={() => {

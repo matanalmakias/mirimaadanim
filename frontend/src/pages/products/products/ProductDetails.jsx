@@ -3,7 +3,7 @@ import storeService from "../../../services/store.service";
 import { SocketContext } from "../../../context/CateringContext";
 import { useNavigate, useParams } from "react-router-dom";
 import ShekelIcon from "../../../components/shekel/ShekelIcon";
-import { serverUrl } from "../../../components/utils/utils";
+import { serverUrl } from "../../../utils/utils";
 const url = `${serverUrl}/`;
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);

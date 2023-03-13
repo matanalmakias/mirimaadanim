@@ -7,10 +7,9 @@ const Home = () => {
       className="p-2 d-flex flex-column align-items-center justify-content-center"
       dir="rtl"
     >
-      <p onClick={() => nav("/daily")} className="my_btn2 m-1  p-1">
+      <p onClick={() => nav("/products")} className="my_btn2 m-1  p-1">
         לתפריט
       </p>
-
       {/* <p onClick={() => nav("/")} className="my_btn2 m-1  p-1">
         להזמנת קייטרינג{" "}
       </p>

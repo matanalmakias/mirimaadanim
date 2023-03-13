@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { serverUrl } from "../components/utils/utils";
+import { serverUrl } from "../utils/utils";
 const token = localStorage.getItem("token");
 const headers = {
   headers: {

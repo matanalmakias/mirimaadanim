@@ -1,13 +1,13 @@
 import { createContext, useEffect, useState } from "react";
 import io from "socket.io-client";
 import cateringService from "../services/catering.service";
-import { serverUrl } from "../components/utils/utils";
+import { serverUrl } from "../utils/utils";
 
 const socket = io(`${serverUrl}/`);
 const SocketContext = createContext(socket);
 
 const CateringContext = createContext({
-  caterings: [],
+  socketUpdate: () => {},
   categories: [],
   imagesUrl: `${serverUrl}/`,
   setCaterings: () => {},
@@ -15,15 +15,15 @@ const CateringContext = createContext({
 });
 
 const CateringProvider = ({ children }) => {
-  const [caterings, setCaterings] = useState();
   const [categories, setCategories] = useState();
 
+  const socketUpdate = async () => {
+    return socket.emit(`update`);
+  };
   useEffect(() => {
-    cateringService.getAllProducts(setCaterings);
     cateringService.getAllCategories(setCategories);
 
     socket.on("update", () => {
-      cateringService.getAllProducts(setCaterings);
       cateringService.getAllCategories(setCategories);
     });
     return () => {
@@ -33,7 +33,11 @@ const CateringProvider = ({ children }) => {
   return (
     <SocketContext.Provider value={socket}>
       <CateringContext.Provider
-        value={{ categories, setCategories, caterings, setCaterings }}
+        value={{
+          socketUpdate,
+          categories,
+          setCategories,
+        }}
       >
         {children}
       </CateringContext.Provider>

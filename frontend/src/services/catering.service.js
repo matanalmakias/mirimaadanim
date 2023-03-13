@@ -1,5 +1,5 @@
 import axios from "axios";
-import { serverUrl } from "./../components/utils/utils";
+import { serverUrl } from "../utils/utils";
 const url = `${serverUrl}/api`;
 const config = {
   headers: {
@@ -69,14 +69,19 @@ const getAllCategories = async (setState) => {
   });
 };
 const createProducts = async (setState, product) => {
-  return await axios
+  let result;
+  await axios
     .post(`${serverUrl}/api/manager/product/createProduct`, product, {
       headers: {
         Authorization: localStorage.getItem("token"),
         "Content-Type": "multipart/form-data",
       },
     })
-    .then((res) => setState(res.data));
+    .then((res) => {
+      setState(res.data);
+      result = res.data;
+    });
+  return result;
 };
 const getAllProducts = async (setState) => {
   return await axios.get(`${serverUrl}/api/product`).then((res) => {

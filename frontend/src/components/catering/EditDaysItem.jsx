@@ -3,14 +3,24 @@ import cateringService from "../../services/catering.service";
 import { toast } from "react-toastify";
 import { useContext } from "react";
 import { CateringContext } from "../../context/CateringContext";
+import { dayList, serverUrl } from "../../utils/utils";
+import axios from "axios";
 
 const EditDaysItem = ({ item }) => {
   const [selectedDays, setSelectedDays] = useState([]);
   const [dayArrToEdit, setDayArrToEdit] = useState();
   const socket = useContext(CateringContext);
-  useEffect(() => {
-    console.log(`dayArrToEdit`, dayArrToEdit);
-  }, [dayArrToEdit]);
+  const editDay = async (index) => {
+    await axios
+      .post(
+        `${serverUrl}/api/product/editDays/${item._id}`,
+        { index },
+        {
+          headers: { Authorization: localStorage.getItem("token") },
+        }
+      )
+      .then((res) => toast(res.data.message));
+  };
   function handleCheckboxChange(event) {
     const { value } = event.target;
     if (selectedDays.includes(value)) {
@@ -19,6 +29,7 @@ const EditDaysItem = ({ item }) => {
       setSelectedDays([...selectedDays, value]);
     }
   }
+
   async function removeDayFromProduct(productId, daysArray) {
     cateringService
       .removeProductFromDays(productId, daysArray)
@@ -31,62 +42,25 @@ const EditDaysItem = ({ item }) => {
       socket.emit("update");
     });
   }
-
-  let daysList = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-  ];
-
-  const filteredDays = daysList.filter((day) => !item.days.includes(day));
+  const filteredDays = dayList.filter((day) => !item.days.includes(day));
   return (
-    <div className="bg-dark text-center" dir="rtl">
-      <h6 className="h6 my_title1">המוצר מתוזמן לימים: </h6>
-      <p>לחץ על יום כדי להסיר אותו</p>
-      <form onSubmit={(e) => handleFormSubmit(e, item.id)}>
-        <div className="d-flex flex-column align-items-center gap-2">
-          <div className="d-flex flex-row gap-2">
-            {item?.days.map((day, index) => (
-              <p
-                onClick={async () => {
-                  // Call the setter function to update the state
-                  await removeDayFromProduct(item.id, [day]);
-                }}
-                className="my_p"
-                key={index}
-              >
-                {day}
-              </p>
-            ))}
-          </div>
+    <div
+      className="bg-dark text-center align-items-center justift-content-center d-flex flex-column"
+      dir="rtl"
+    >
+      <h4 className="h6 bg-info p-2 ">המוצר מתוזמן לימים: </h4>
+      <p className="bg-light text-primary w-50">לחץ על יום כדי להסיר אותו</p>
+      <div className="gap-1 p-1  justify-content-center align-items-center text-center d-flex flex-row">
+        {dayList?.map((item, index) => (
           <div
-            dir="rtl"
-            className="justify-content-center 
-            align-items-center  text-center d-flex flex-row gap-2 my_row"
+            onClick={() => editDay(index)}
+            className="btn p-1 fs-6   rounded  text-light bg-info"
+            key={index}
           >
-            {filteredDays.map((item, index) => (
-              <div key={index}>
-                <label>
-                  <input
-                    type="checkbox"
-                    name={item}
-                    value={item}
-                    onChange={handleCheckboxChange}
-                    checked={selectedDays.includes(item)}
-                  />
-                  {item}
-                </label>
-              </div>
-            ))}
+            {item}
           </div>
-          <button className="my_btn1" type="submit">
-            שנה ימים
-          </button>
-        </div>
-      </form>
+        ))}
+      </div>
     </div>
   );
 };

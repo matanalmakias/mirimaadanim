@@ -5,10 +5,13 @@ import ProductItem from "./ProductItem";
 import { useContext } from "react";
 import { CateringContext } from "../../context/CateringContext";
 import { useState } from "react";
+import { ProductContext } from "./../../context/ProductContext";
 
 const Catering = () => {
-  const { caterings, categories } = useContext(CateringContext);
+  const { categories } = useContext(CateringContext);
+  const { allProducts } = useContext(ProductContext);
   const [showCategory, setShowCategory] = useState({});
+
   useEffect(() => {
     if (categories) {
       setShowCategory(
@@ -44,7 +47,7 @@ const Catering = () => {
             {category?.name}
           </h2>
           <div className={showCategory[category.name] ? "" : "hide_class"}>
-            {caterings
+            {allProducts
               ?.filter((item) => item?.category === category?.name)
               ?.map((item) => (
                 <div key={item?._id}>
