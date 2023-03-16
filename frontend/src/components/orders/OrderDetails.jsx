@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  CateringContext,
-  SocketContext,
-} from "../../../context/CateringContext";
-import storeService from "../../../services/store.service";
+import { CateringContext, SocketContext } from "../../context/CateringContext";
+import storeService from "../../services/store.service";
 const OrderDetails = () => {
   const [order, setOrder] = useState(null);
   const { orderId } = useParams();
@@ -37,7 +34,6 @@ const OrderDetails = () => {
   if (productList.length < 0) {
     return <>Loading........</>;
   }
-  console.log(order);
   return (
     <div>
       <div dir="rtl" className=" bg-dark text-center">

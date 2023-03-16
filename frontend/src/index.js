@@ -21,7 +21,7 @@ import { ProductProvider } from "./context/ProductContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <div className="container">
+  <div className="">
     <BrowserRouter>
       <AuthContextProvider>
         <CateringProvider>

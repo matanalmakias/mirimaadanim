@@ -1,18 +1,27 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import isAdmin from "../functions/isAdmin.model";
 import authService from "../services/auth.service";
 import { SocketContext } from "./CateringContext";
+import { ProductContext } from "./ProductContext";
 
 const initialState = {
   selfUser: [],
   isLoggedIn: false,
   login(token) {},
   logout() {},
+  socketUpdate: () => {},
 };
 
 const AuthContext = createContext(initialState);
 
 const AuthContextProvider = ({ children }) => {
+  const [socketUpdateCount, setSocketUpdateCount] = useState(0);
   const [selfUser, setSelfUser] = useState(null);
   const [isAdminState, setIsAdminState] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
@@ -23,17 +32,25 @@ const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(undefined);
 
   const socket = useContext(SocketContext);
+  const { socketUpdate: productSocketUpdate } = useContext(ProductContext);
   useEffect(() => {
     if (isLoggedIn) {
       authService.getSingleUser().then((res) => setSelfUser(res.data));
       socket.on("update", () => {
-        authService.getSingleUser().then((res) => setSelfUser(res.data));
+        authService
+          .getSingleUser()
+          .then((res) => setSelfUser((prevSelfUser) => res.data));
       });
     }
     return () => {
       socket.off("update");
     };
   }, [isLoggedIn, socket]);
+
+  const socketUpdate = useCallback(async () => {
+    socket.emit(`update`);
+    authService.getSingleUser().then((res) => setSelfUser(res.data));
+  }, [socket]);
   useEffect(() => {
     const userData = localStorage.getItem("user");
     if (userData) {
@@ -71,6 +88,8 @@ const AuthContextProvider = ({ children }) => {
   const login = (token) => {
     setIsLoggedIn(true);
     setToken(token);
+    socketUpdate();
+    productSocketUpdate();
     return (
       <>
         <p>התחברת בהצלחה</p>
@@ -102,6 +121,7 @@ const AuthContextProvider = ({ children }) => {
     isAdminState,
     isManager,
     selfUser,
+    socketUpdate,
   };
   return (
     <AuthContext.Provider value={contextValues}>

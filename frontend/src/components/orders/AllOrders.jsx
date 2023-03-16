@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import storeService from "../../../services/store.service";
-import { SocketContext } from "../../../context/CateringContext";
+import storeService from "../../services/store.service";
+import { SocketContext } from "../../context/CateringContext";
 import OrderItem from "./OrderItem";
 import "./orders.css";
 const AllOrders = () => {

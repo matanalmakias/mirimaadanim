@@ -17,7 +17,7 @@ const ProductItem = ({ product }) => {
   return (
     <>
       <div
-        className="mb-1 d-flex flex-row align-items-center justify-content-center text-center gap-1"
+        className="mb-1 d-flex flex-column align-items-center justify-content-center text-center gap-1"
         dir="rtl"
       >
         <span className="text-black bg-light p-2"> {product?.title}</span>

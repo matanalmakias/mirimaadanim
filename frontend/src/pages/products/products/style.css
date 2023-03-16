@@ -5,3 +5,18 @@
 .hide_class {
   display: none;
 }
+
+.product-title,
+.product-price {
+  word-wrap: break-word;
+}
+.my_text {
+  font-size: 10px;
+}
+.addToCart:hover {
+  background-color: rgb(255, 99, 99) !important;
+}
+.move-to-cart:hover {
+  background-color: rgb(243, 225, 65) !important;
+  color: rgb(82, 82, 82) !important;
+}

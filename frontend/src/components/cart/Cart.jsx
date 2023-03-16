@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import CartItem from "./CartItem";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -10,7 +10,7 @@ const Cart = () => {
   const nav = useNavigate();
   useEffect(() => {
     setCart(selfUser?.cart);
-  }, [selfUser, cart]);
+  }, [selfUser]);
 
   if (cart === null || cart === undefined) {
     return (
@@ -22,10 +22,13 @@ const Cart = () => {
     );
   }
   return (
-    <div className="text-center ">
-      <div className="text-center p-4 d-flex flex-column align-items-center justify-content-center bg-light mt-1 mb-1">
+    <div className="text-center w-100">
+      <div className="text-center w-100 align-items-center justify-content-center bg-light mt-1 mb-1">
         {cart?.map((item, index) => (
-          <CartItem item={item} key={index} />
+          <div key={index}>
+            {index + 1}
+            <CartItem item={item} />
+          </div>
         ))}
       </div>
       <p className="btn bg-info fs-6 p-2 text-light" onClick={() => nav(-1)}>

@@ -1,3 +1,10 @@
+.plus:hover {
+  background-color: rgb(247, 225, 27) !important;
+  color: rgb(66, 66, 66) !important;
+}
+.minus:hover {
+  background-color: rgb(9, 9, 9) !important;
+}
 .bb {
   background-color: var(--);
 }

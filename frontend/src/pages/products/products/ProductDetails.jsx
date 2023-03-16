@@ -15,7 +15,6 @@ const ProductDetails = () => {
     if (product === null) {
       storeService.getSingleProduct(setProduct, productId);
     } else {
-      console.log(product);
     }
     socket.on("update", () => {
       storeService.getSingleProduct(setProduct, productId);

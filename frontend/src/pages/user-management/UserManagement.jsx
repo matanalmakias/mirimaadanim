@@ -28,9 +28,7 @@ const UserManagement = () => {
     });
     socket.emit("update");
   };
-  useEffect(() => {
-    console.log(emailInput, passwordInput);
-  }, [emailInput, passwordInput]);
+
   const deleteWorkerPermanently = async (workerId) => {
     await storeService.deleteWorkerPermanently(workerId);
     return socket.emit("update");

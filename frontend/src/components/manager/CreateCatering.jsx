@@ -7,7 +7,7 @@ import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
-import { SocketContext } from "../../context/CateringContext";
+import { CateringContext, SocketContext } from "../../context/CateringContext";
 import { toast } from "react-toastify";
 function CreateCatering() {
   const { isManager } = useContext(AuthContext);
@@ -18,9 +18,10 @@ function CreateCatering() {
   const [titleInput, setTitleInput] = useState();
   const [categoryInput, setCategoryInput] = useState();
   const [imageInput, setImageInput] = useState();
+  const [additionalInputs, setAdditionalInputs] = useState([]);
 
   const [createdProduct, setCreatedProduct] = useState();
-  const socket = useContext(SocketContext);
+  const { socketUpdate } = useContext(CateringContext);
   const nav = useNavigate();
   const categories = [
     "סלטים",
@@ -36,30 +37,42 @@ function CreateCatering() {
     "מטוגנים",
     "תוספות",
   ];
+
+  const handleAddInput = () => {
+    setAdditionalInputs((prevInputs) => [...prevInputs, ""]);
+  };
+
+  const handleAdditionalInputChange = (index, value) => {
+    const newInputs = [...additionalInputs];
+    newInputs[index] = value;
+    setAdditionalInputs(newInputs);
+  };
   const formData = new FormData();
   formData.append("title", titleInput);
   formData.append("category", categoryInput);
   formData.append("description", descriptionInput);
   formData.append("price", priceInput);
   formData.append("image", imageInput);
+  formData.append("additional", additionalInputs);
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    cateringService.createProducts(setCreatedProduct, formData).then((res) => {
-      toast(res.message);
-      socket.emit("update");
-    });
+    await cateringService
+      .createProducts(setCreatedProduct, formData)
+      .then((res) => {
+        toast(res.message);
+        socketUpdate();
+      });
   };
-  const deleteAll = () => {
-    cateringService.deleteAllProducts().then((res) => toast(res.data.message));
+  const deleteAll = async () => {
+    await cateringService
+      .deleteAllProducts()
+      .then((res) => toast(res.data.message));
   };
-
   return (
     <Container dir="rtl" className="text-center">
-      <Form onSubmit={(e) => formSubmit(e)} className="form p-2">
-        <h2 className=" bg-light text-black  p-2 mt-1 h3 mb-3">
-          הוספת פריט לקייטרינג
-        </h2>
+      <Form onSubmit={(e) => formSubmit(e)} className="">
+        <p className="rounded bg-light text-info">הוספת פריט לקייטרינג</p>
         <div className="d-grid mb-2">
           <div className="row gap-2">
             <input
@@ -91,6 +104,25 @@ function CreateCatering() {
               onChange={(event) => setDescriptionInput(event.target.value)}
             />
 
+            <p
+              onClick={() => handleAddInput()}
+              className="btn shadow btn-info p-1"
+            >
+              הוסף אפשרות לתוספת בתשלום
+            </p>
+            {additionalInputs.map((input, index) => (
+              <input
+                key={index}
+                className="form-control p-2"
+                type="text"
+                name={`additional_${index}`}
+                placeholder={`הכנס תיאור תוספת ${index + 1}`}
+                value={input}
+                onChange={(event) =>
+                  handleAdditionalInputChange(index, event.target.value)
+                }
+              />
+            ))}
             <input
               className="form-control p-2"
               type="number"
@@ -98,7 +130,9 @@ function CreateCatering() {
               placeholder="מחיר פריט"
               onChange={(event) => setPriceInput(event.target.value)}
             />
-            <label htmlFor="תמונת פריט">תמונת פריט</label>
+            <label className="bg-info" htmlFor="תמונת פריט">
+              תמונת פריט
+            </label>
             <input
               className="form-control"
               type="file"
@@ -108,15 +142,20 @@ function CreateCatering() {
             />
           </div>
         </div>
-
+        <span
+          className="mb-3 bg-info btn text-light p-1"
+          onClick={() => nav("/manager/products")}
+        >
+          לשיוך מוצר ליום כלשהוא לחץ פה
+        </span>
         <div className="d-flex align-items-center">
           <div className="col">
-            <Button className="btn btn-success" type="submit">
+            <Button className="btn btn-success p-1" type="submit">
               הוסף פריט
             </Button>
           </div>
           <div className="col">
-            <Button className="btn btn-danger" onClick={deleteAll}>
+            <Button className="btn btn-danger p-1" onClick={deleteAll}>
               מחק הכל
             </Button>
           </div>

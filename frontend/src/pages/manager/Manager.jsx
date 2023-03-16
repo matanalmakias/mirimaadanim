@@ -9,10 +9,13 @@ const Manager = () => {
     <>
       <div className="text-center">
         <br />
-        <span className="btn1" onClick={() => nav("/manager/products")}>
+        <span
+          className="mb-3 bg-info btn text-light p-1"
+          onClick={() => nav("/manager/products")}
+        >
           לשיוך מוצר ליום כלשהוא לחץ פה
         </span>
-        <hr />
+
         <CreateCatering />
       </div>
       <ToastContainer autoClose={2300} />

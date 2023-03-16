@@ -24,6 +24,7 @@ const NavBar = () => {
   const toggleShowNavBar = () => {
     setShowNavBar((state) => !state);
   };
+
   return (
     <>
       <div className="spacer p-1"></div>
@@ -47,7 +48,7 @@ const NavBar = () => {
       <div className={showNavBar ? "text-center" : "hide_class"} dir="rtl">
         <ul className="p-1 d-flex flex-column gap-1">
           <li
-            className="navbar-item"
+            className="navbar-item bg-info text-white"
             onClick={() => {
               nav("/");
               toggleShowNavBar();
@@ -55,15 +56,15 @@ const NavBar = () => {
           >
             דף הבית
           </li>
-          <li className="navbar-item" href="#about">
+          <li className="navbar-item bg-info text-white" href="#about">
             אודות
           </li>
-          <li className="navbar-item" href="#contact">
+          <li className="navbar-item bg-info text-white" href="#contact">
             צור קשר
           </li>
           {isLoggedIn && (
             <li
-              className="navbar-item"
+              className="navbar-item bg-info text-white"
               onClick={() => {
                 nav("/user/cart");
                 toggleShowNavBar();
@@ -75,13 +76,13 @@ const NavBar = () => {
 
           {isLoggedIn === false ? (
             <>
-              <li className="navbar-item">
+              <li className="navbar-item bg-info text-white">
                 <Login />
               </li>
             </>
           ) : (
             <li
-              className="navbar-item"
+              className="navbar-item bg-info text-white"
               onClick={() => {
                 logoutButton();
                 toggleShowNavBar();
@@ -92,7 +93,7 @@ const NavBar = () => {
           )}
           {isLoggedIn && (
             <li
-              className="navbar-item"
+              className="navbar-item bg-info text-white"
               onClick={() => {
                 nav("/user-management");
                 toggleShowNavBar();
@@ -103,7 +104,7 @@ const NavBar = () => {
           )}
           {isManager && (
             <li
-              className="navbar-item"
+              className="navbar-item bg-info text-white"
               onClick={() => {
                 nav("/manager");
                 toggleShowNavBar();

@@ -35,7 +35,6 @@ const Register = () => {
     authService
       .register(username, email, password)
       .then((res) => {
-        console.log(res.data);
         //swal
         nav("/login");
       })

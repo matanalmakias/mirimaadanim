@@ -19,7 +19,6 @@ function ScheduleItem({ item, addWeeklyCart, toggle }) {
     scheduleItem(startDate, startTime)
       .then((object) => {
         weeklyService.addProduct(item._id, object).then((res) => {
-          console.log(res.data);
           socket.emit("update");
         });
       })
