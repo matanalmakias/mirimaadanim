@@ -4,6 +4,8 @@ import { SocketContext } from "../../../context/CateringContext";
 import { useNavigate, useParams } from "react-router-dom";
 import ShekelIcon from "../../../components/shekel/ShekelIcon";
 import { serverUrl } from "../../../utils/utils";
+import "./style.css";
+
 const url = `${serverUrl}/`;
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
@@ -42,6 +44,21 @@ const ProductDetails = () => {
         מחיר: {product?.price}
         <ShekelIcon />
       </p>
+
+      <div className="d-flex flex-row gap-1 w-100">
+        <p className="bg-white p-1">מופיע בימים:</p>
+        {product?.days?.map((day, index) => (
+          <div className="d-flex flex-row">
+            <p
+              onClick={() => nav(`/products`)}
+              key={index}
+              className="shadow btn p-1 bg-white"
+            >
+              {day}
+            </p>
+          </div>
+        ))}
+      </div>
       <p className=" w-100 p-2 bg-light text-dark rounded">
         תמונה: <img src={`${url}/${product.image}`} alt="" />
       </p>

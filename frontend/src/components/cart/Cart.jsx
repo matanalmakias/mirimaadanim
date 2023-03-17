@@ -22,10 +22,10 @@ const Cart = () => {
     );
   }
   return (
-    <div className="text-center w-100">
+    <div className="text-center bg-white shadow w-100">
       <div className="text-center w-100 align-items-center justify-content-center bg-light mt-1 mb-1">
         {cart?.map((item, index) => (
-          <div key={index}>
+          <div className="" key={index}>
             {index + 1}
             <CartItem item={item} />
           </div>

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import authService from "../../services/auth.service";
-import AuthContext from "../../context/AuthContext";
-import { SocketContext } from "../../context/CateringContext";
+import authService from "../../../services/auth.service";
+import AuthContext from "../../../context/AuthContext";
+import { SocketContext } from "../../../context/CateringContext";
 
 const Login = () => {
   const [phoneInput, setPhoneInput] = useState(0);

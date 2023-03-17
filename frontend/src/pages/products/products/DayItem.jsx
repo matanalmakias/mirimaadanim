@@ -8,7 +8,7 @@ const DayItem = ({ day }) => {
   };
 
   return (
-    <div>
+    <div className="shadow d-flex flex-column bg_white">
       <p
         onClick={() => toggleShowComponent()}
         className="btn p-1 bg-primary text-light"

@@ -70,7 +70,7 @@ function CreateCatering() {
       .then((res) => toast(res.data.message));
   };
   return (
-    <Container dir="rtl" className="text-center">
+    <Container dir="rtl" className="text-center p-4">
       <Form onSubmit={(e) => formSubmit(e)} className="">
         <p className="rounded bg-light text-info">הוספת פריט לקייטרינג</p>
         <div className="d-grid mb-2">
@@ -142,12 +142,7 @@ function CreateCatering() {
             />
           </div>
         </div>
-        <span
-          className="mb-3 bg-info btn text-light p-1"
-          onClick={() => nav("/manager/products")}
-        >
-          לשיוך מוצר ליום כלשהוא לחץ פה
-        </span>
+
         <div className="d-flex align-items-center">
           <div className="col">
             <Button className="btn btn-success p-1" type="submit">
