@@ -22,8 +22,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/product/:productId" element={<ProductDetails />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Days />} />
+        <Route path="/" element={<Days />} />
+        {/* <Route path="/products" element={<Days />} /> */}
         {isManager && (
           <Route exact path="/manager/products" element={<Catering />} />
         )}

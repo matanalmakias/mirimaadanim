@@ -44,13 +44,17 @@ const StartProcess = () => {
         <select
           required
           onChange={(event) => setMeatInput(event.target.value)}
-          className="form-select d-flex flex-column justify-content-center align-items-center text-center"
+          className="form-select text-center"
         >
           <option value="" disabled selected>
             בחר מנה עיקרית
           </option>
           {filteredMeatProducts?.map((item, index) => (
-            <option key={index} className="p-1 form-control" value={item.title}>
+            <option
+              key={index}
+              className=" p-1 form-control"
+              value={item.title}
+            >
               {item?.title}
             </option>
           ))}

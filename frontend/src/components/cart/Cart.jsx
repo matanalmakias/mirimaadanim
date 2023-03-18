@@ -9,7 +9,7 @@ const Cart = () => {
   const { selfUser } = useContext(AuthContext);
   const nav = useNavigate();
   useEffect(() => {
-    setCart(selfUser?.cart);
+    setCart(selfUser?.businessMeals);
   }, [selfUser]);
 
   if (cart === null || cart === undefined) {
