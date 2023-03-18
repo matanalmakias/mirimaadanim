@@ -100,7 +100,7 @@ function CreateCatering() {
                 className="form-select"
               >
                 <option value="" disabled selected>
-                  קטגוריה
+                  קטגוריה +
                 </option>
                 {categories.map((category, index) => (
                   <option key={index} value={category}>

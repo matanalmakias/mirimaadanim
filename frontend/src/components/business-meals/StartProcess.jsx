@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { ProductContext } from "./../../context/ProductContext";
+import businessMealService from "../../services/business-meals.service";
+import { toast } from "react-toastify";
 
 const StartProcess = () => {
   const [products, setProducts] = useState(null);
@@ -9,41 +11,99 @@ const StartProcess = () => {
   const [additionalInput, setAdditionalInput] = useState();
   const [breadInput, setBreadInput] = useState();
   const [drinkInput, setDrinkInput] = useState();
+  const [completeMeat, setCompleteMeat] = useState(false);
   const { allProducts } = useContext(ProductContext);
 
-  useEffect(() => {
-    if (allProducts !== null) {
-      setProducts(allProducts);
-    }
-  }, [allProducts]);
-
-  useEffect(() => {
-    if (products === null) {
-      let foundedMeatProducts = [
-        allProducts.filter((item) => item.category === "בשרים"),
-      ];
-
-      setMeatProducts(foundedMeatProducts);
-      console.log(meatProducts);
-    }
-  }, [allProducts, products]);
-
+  const formSubmit = async (e) => {
+    const formData = {
+      meat: meatInput,
+      additional: additionalInput,
+      bread: breadInput,
+      drink: drinkInput,
+    };
+    e.preventDefault();
+    await businessMealService
+      .startProcess(formData)
+      .then((res) => toast(res.data.message));
+  };
+  const filteredMeatProducts = allProducts?.filter(
+    (item) => item.category === "בשרים"
+  );
+  const filteredAdditionalProducts = allProducts?.filter(
+    (item) => item.category === "תוספות"
+  );
+  const filteredBreadProducts = allProducts?.filter(
+    (item) => item.category === "לחם"
+  );
+  const filteredDrinkProducts = allProducts?.filter(
+    (item) => item.category === "שתייה"
+  );
   return (
     <div>
-      <Form>
+      <Form onSubmit={(e) => formSubmit(e)}>
         <select
+          required
           onChange={(event) => setMeatInput(event.target.value)}
-          className="form-select"
+          className="form-select d-flex flex-column justify-content-center align-items-center text-center"
         >
           <option value="" disabled selected>
-            מנה עיקרית
+            בחר מנה עיקרית
           </option>
-          {/* {meatProducts?.map((category, index) => (
-            <option key={index} value={category}>
-              {category}
+          {filteredMeatProducts?.map((item, index) => (
+            <option key={index} className="p-1 form-control" value={item.title}>
+              {item?.title}
             </option>
-          ))} */}
+          ))}
         </select>
+        <select
+          required
+          onChange={(event) => setAdditionalInput(event.target.value)}
+          className="form-select gap-1 d-flex flex-column justify-content-center align-items-center text-center"
+        >
+          <option value="" disabled selected>
+            בחר תוספת
+          </option>
+          {filteredAdditionalProducts?.map((item, index) => (
+            <option key={index} className="p-1 form-control" value={item.title}>
+              {item?.title}
+            </option>
+          ))}
+        </select>
+        <select
+          required
+          onChange={(event) => setBreadInput(event.target.value)}
+          className="form-select gap-1 d-flex flex-column justify-content-center align-items-center text-center"
+        >
+          <option value="" disabled selected>
+            בחר סוג לחם
+          </option>
+          {filteredBreadProducts?.map((item, index) => (
+            <option key={index} className="p-1 form-control" value={item.title}>
+              {item?.title}
+            </option>
+          ))}
+        </select>
+        <select
+          required
+          onChange={(event) => setDrinkInput(event.target.value)}
+          className="form-select gap-1 d-flex flex-column justify-content-center align-items-center text-center"
+        >
+          <option value="" disabled selected>
+            בחר שתייה
+          </option>
+          {filteredDrinkProducts?.map((item, index) => (
+            <option key={index} className="p-1 form-control" value={item.title}>
+              {item?.title}
+            </option>
+          ))}
+        </select>
+
+        <button
+          className="btn w-100 bg-success shadow mt-1 mb-1 text-white addToCart"
+          type="submit"
+        >
+          הוסף הזמנה לסל
+        </button>
       </Form>
     </div>
   );
