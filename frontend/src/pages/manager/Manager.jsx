@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import "./manager.css";
 import { ToastContainer } from "react-toastify";
 import EditSaleList from "../../components/manager/sale/EditSaleList";
+import CreateBusinessMeal from "../../components/manager/CreateBusinessMeal";
 const Manager = () => {
   const nav = useNavigate();
   return (
     <>
+      <hr />
       <div className="text-center d-flex flex-column gap-1">
         <br />
         <span
@@ -16,8 +18,9 @@ const Manager = () => {
         >
           לשיוך מוצר ליום כלשהוא לחץ פה
         </span>
-        <hr />
         <EditSaleList />
+        <CreateBusinessMeal />
+
         <CreateCatering />
       </div>
       <ToastContainer autoClose={2300} />

@@ -1,3 +1,9 @@
+.my_hover:hover {
+  background-color: rgb(113, 14, 163) !important;
+}
+.hide_class {
+  display: none;
+}
 .my_input {
   height: 45px;
   width: 120px;
