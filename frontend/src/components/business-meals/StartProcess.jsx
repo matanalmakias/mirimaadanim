@@ -3,6 +3,10 @@ import { Form } from "react-bootstrap";
 import { ProductContext } from "./../../context/ProductContext";
 import businessMealService from "../../services/business-meals.service";
 import { toast } from "react-toastify";
+import "./style.css";
+import AuthContext from "../../context/AuthContext";
+import CartItem from "./../cart/CartItem";
+import { useNavigate } from "react-router-dom";
 
 const StartProcess = () => {
   const [products, setProducts] = useState(null);
@@ -11,20 +15,36 @@ const StartProcess = () => {
   const [additionalInput, setAdditionalInput] = useState();
   const [breadInput, setBreadInput] = useState();
   const [drinkInput, setDrinkInput] = useState();
+  const [cartItem, setCartItem] = useState();
+  const [showCartItem, setShowCartItem] = useState(false);
   const [completeMeat, setCompleteMeat] = useState(false);
-  const { allProducts } = useContext(ProductContext);
-
+  const { allProducts, socketUpdate } = useContext(ProductContext);
+  const { socketUpdate: AuthSocketUpdate } = useContext(AuthContext);
+  const nav = useNavigate();
+  const resetInputs = () => {
+    setMeatInput("");
+    setAdditionalInput("");
+    setBreadInput("");
+    setDrinkInput("");
+  };
   const formSubmit = async (e) => {
+    e.preventDefault();
     const formData = {
       meat: meatInput,
       additional: additionalInput,
       bread: breadInput,
       drink: drinkInput,
     };
-    e.preventDefault();
+
     await businessMealService
       .startProcess(formData)
-      .then((res) => toast(res.data.message));
+      .then((res) => toast(res.data.message))
+      .finally(() => {
+        resetInputs();
+        socketUpdate();
+        AuthSocketUpdate();
+        setShowCartItem(true);
+      });
   };
   const filteredMeatProducts = allProducts?.filter(
     (item) => item.category === "בשרים"
@@ -41,28 +61,30 @@ const StartProcess = () => {
   return (
     <div>
       <Form onSubmit={(e) => formSubmit(e)}>
-        <select
-          required
-          onChange={(event) => setMeatInput(event.target.value)}
-          className="form-select text-center"
-        >
-          <option value="" disabled selected>
-            בחר מנה עיקרית
-          </option>
-          {filteredMeatProducts?.map((item, index) => (
-            <option
-              key={index}
-              className=" p-1 form-control"
-              value={item.title}
-            >
-              {item?.title}
+        <div>
+          <select
+            required
+            onChange={(event) => setMeatInput(event.target.value)}
+            className="form-select text-center my_center"
+          >
+            <option value="" disabled selected>
+              בחר מנה עיקרית
             </option>
-          ))}
-        </select>
+            {filteredMeatProducts?.map((item, index) => (
+              <option
+                key={index}
+                className=" p-1 form-control"
+                value={item.title}
+              >
+                {item?.title}
+              </option>
+            ))}
+          </select>
+        </div>
         <select
           required
           onChange={(event) => setAdditionalInput(event.target.value)}
-          className="form-select gap-1 d-flex flex-column justify-content-center align-items-center text-center"
+          className="form-select text-center my_center"
         >
           <option value="" disabled selected>
             בחר תוספת
@@ -76,7 +98,7 @@ const StartProcess = () => {
         <select
           required
           onChange={(event) => setBreadInput(event.target.value)}
-          className="form-select gap-1 d-flex flex-column justify-content-center align-items-center text-center"
+          className="form-select text-center my_center"
         >
           <option value="" disabled selected>
             בחר סוג לחם
@@ -90,7 +112,7 @@ const StartProcess = () => {
         <select
           required
           onChange={(event) => setDrinkInput(event.target.value)}
-          className="form-select gap-1 d-flex flex-column justify-content-center align-items-center text-center"
+          className="form-select text-center my_center"
         >
           <option value="" disabled selected>
             בחר שתייה
@@ -109,6 +131,14 @@ const StartProcess = () => {
           הוסף הזמנה לסל
         </button>
       </Form>
+      {showCartItem && (
+        <div
+          onClick={() => nav("/user/cart")}
+          className="btn my_hover bg-white"
+        >
+          עבור לסל
+        </div>
+      )}
     </div>
   );
 };

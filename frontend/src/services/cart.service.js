@@ -16,6 +16,12 @@ const incQuantity = async (productId) => {
   return await axios.post(`${url}/cart/incQuantity/${productId}`, {}, headers);
 };
 
+const removeBusinessMealFromCart = async (productId) => {
+  return await axios.delete(
+    `${url}/cart/removeBusinessMealFromCart/${productId}`,
+    headers
+  );
+};
 const removeFromCart = async (productId) => {
   return await axios.delete(`${url}/cart/deleteFromCart/${productId}`, headers);
 };
@@ -37,6 +43,7 @@ export {
   addToCart,
   removeFromCart,
   submitOrderPackage,
+  removeBusinessMealFromCart,
 };
 
 const cartService = {
@@ -46,5 +53,6 @@ const cartService = {
   addToCart,
   removeFromCart,
   submitOrderPackage,
+  removeBusinessMealFromCart,
 };
 export default cartService;
