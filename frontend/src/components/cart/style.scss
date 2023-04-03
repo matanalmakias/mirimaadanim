@@ -1,0 +1,26 @@
+.cart-minus {
+  background-color: rgb(245, 180, 180) !important;
+  text-align: center;
+
+  color: rgb(78, 7, 7);
+}
+.cart-minus:hover {
+  background-color: rgb(234, 70, 70);
+}
+.cart-buy-btn {
+  text-align: center;
+  background-color: white;
+  color: red;
+  padding: 3px;
+  margin: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.1s;
+}
+.cart-buy-btn:hover {
+  text-align: center;
+  background-color: red;
+  color: white;
+  padding: 3px;
+  font-weight: 600;
+}

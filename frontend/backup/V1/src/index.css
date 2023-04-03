@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@300&display=swap");
+
+.container {
+  background-color: #e9e9e9;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  opacity: 0.9; /* set the opacity to 0.8 */
+}
+body {
+  background-color: rgb(33, 35, 39) !important; /* set the opacity to 0.8 */
+  font-family: "Noto Sans Hebrew", sans-serif;
+  opacity: 0.9;
+}
+
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}

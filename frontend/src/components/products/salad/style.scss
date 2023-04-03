@@ -1,0 +1,81 @@
+.cart-item {
+  background-color: rgb(163, 140, 181);
+  color: white;
+  transition: 0.1s;
+  text-align: center;
+}
+.cursor-on {
+  cursor: pointer;
+}
+.cart-item:hover {
+  background-color: rgb(188, 145, 221);
+  color: white;
+}
+.salad-add-to-cart {
+  background-color: rgb(244, 62, 117);
+  padding: 8px;
+
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.3s;
+}
+.salad-add-to-cart:hover {
+  background-color: rgb(255, 255, 255);
+  padding: 8px;
+
+  color: rgb(244, 62, 117);
+  cursor: pointer;
+}
+.td-item {
+  color: white;
+  text-align: center;
+  padding: 7px;
+
+  background-color: rgb(126, 126, 126);
+}
+
+.salad-details {
+  background-color: rgb(255, 131, 131);
+  padding: 7px;
+  text-align: center;
+  color: rgb(103, 9, 9);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.salad-details:hover {
+  background-color: rgb(139, 18, 18);
+
+  color: rgb(253, 206, 206);
+}
+.salad-item {
+  margin: 10px;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  font-size: 17px;
+  transition: 0.3s;
+  text-align: center;
+}
+.salad-item:hover {
+  background-color: rgb(255, 240, 240);
+  color: rgb(159, 56, 56);
+}
+
+.salad-weight {
+  font-size: 12px;
+  text-align: center;
+  margin: 1px;
+  cursor: pointer;
+  background-color: rgb(255, 0, 111);
+  color: white;
+  transition: 0.2s;
+}
+.salad-weight:hover {
+  font-size: 12px;
+  text-align: center;
+  margin: 1px;
+  cursor: pointer;
+  background-color: rgb(255, 117, 156);
+  color: rgb(255, 255, 255);
+}

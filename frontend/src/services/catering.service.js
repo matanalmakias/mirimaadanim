@@ -1,5 +1,5 @@
 import axios from "axios";
-import { serverUrl } from "../utils/utils";
+import { serverUrl } from "../utils/utils.js";
 const url = `${serverUrl}/api`;
 const config = {
   headers: {

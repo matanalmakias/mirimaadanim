@@ -1,27 +1,45 @@
-import React from "react";
-import CreateCatering from "../../components/manager/CreateCatering";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./manager.css";
 import { ToastContainer } from "react-toastify";
-import EditSaleList from "../../components/manager/sale/EditSaleList";
-import CreateBusinessMeal from "../../components/manager/CreateBusinessMeal";
+import CreateSalad from "../../components/manager/salad/CreateSalad";
+import CreateShabatFood from "../../components/manager/shabat-food/CreateShabatFood";
 const Manager = () => {
+  const [openCreateSalad, setOpenCreateSalad] = useState(false);
+  const [openCreateShabatFood, setOpenCreateShabatFood] = useState(false);
   const nav = useNavigate();
+  const toggleOpenCreateSalad = () => {
+    setOpenCreateSalad((state) => !state);
+  };
+  const toggleOpenCreateShabatFood = () => {
+    setOpenCreateShabatFood((state) => !state);
+  };
   return (
     <>
       <hr />
       <div className="text-center d-flex flex-column gap-1">
-        <br />
-        <span
-          className="mb-3 bg-success my_hover btn text-light p-1"
-          onClick={() => nav("/manager/products")}
+        {/* --------יצירת סלט לתפריט ---------- */}
+        <p
+          onClick={() => toggleOpenCreateSalad()}
+          className="btn bg-white text-black p-2"
         >
-          לשיוך מוצר ליום כלשהוא לחץ פה
-        </span>
-        <EditSaleList />
-        <CreateBusinessMeal />
+          {openCreateSalad ? "סגור" : "הוספת סלט לתפריט"}
+        </p>
+        <section className={openCreateSalad ? "" : "hide_class"}>
+          <CreateSalad />
+        </section>
+        {/* ----------יצירת פריט לאוכל מוכן לשבת ---------- */}
 
-        <CreateCatering />
+        <p
+          onClick={() => toggleOpenCreateShabatFood()}
+          className="btn bg-white text-black p-2"
+        >
+          {openCreateShabatFood ? "סגור" : "הוסף פריט לאוכל מוכן לשבת"}
+        </p>
+        <section className={openCreateShabatFood ? "" : "hide_class"}>
+          <CreateShabatFood />
+        </section>
+        {/* ---------------------------------------- */}
       </div>
       <ToastContainer autoClose={2300} />
     </>

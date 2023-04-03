@@ -1,0 +1,33 @@
+.nav_logo {
+  cursor: pointer;
+}
+.hide_class {
+  display: none;
+}
+.nav_toggle {
+  background-color: rgb(255, 255, 255) !important;
+  width: 50px !important;
+  color: black;
+  cursor: pointer;
+  padding: 4px;
+}
+.mobile_menu {
+  margin-left: 40px !important;
+}
+.my_img {
+  height: 50px;
+  width: 120px;
+}
+.title {
+  cursor: pointer;
+}
+.navbar-item {
+  background-color: var(--light-color) !important;
+  color: var(--secondary-color) !important;
+  list-style: none;
+  cursor: pointer;
+}
+.navbar-item:hover {
+  background-color: var(--dark-color) !important;
+  color: var(--light-color) !important;
+}

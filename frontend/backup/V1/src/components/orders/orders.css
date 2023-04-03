@@ -1,0 +1,16 @@
+.order-card {
+  cursor: pointer;
+}
+.order-card:hover {
+  background-color: var(--dark-color);
+}
+
+.titlee {
+  background-color: var(--danger-color);
+  color: var(--light-color);
+}
+.card-item {
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  padding: 2px;
+}

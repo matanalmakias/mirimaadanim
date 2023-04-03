@@ -1,0 +1,40 @@
+.my_img {
+  width: 100%;
+  height: 60px !important;
+}
+.my_title {
+  background-color: #fff;
+  color: black;
+  padding: 4px;
+  width: 100%;
+  text-align: center;
+}
+.my_title:hover {
+  background-color: black;
+  color: white;
+  padding: 8px;
+}
+.my_desc {
+  background-color: #fff;
+  color: black;
+  padding: 4px;
+  width: 100%;
+  text-align: center;
+}
+.my_desc:hover {
+  background-color: black;
+  color: white;
+  padding: 8px;
+}
+.my_price {
+  background-color: #fff;
+  color: black;
+  padding: 4px;
+  width: 100%;
+  text-align: center;
+}
+.my_price:hover {
+  background-color: black;
+  color: white;
+  padding: 8px;
+}

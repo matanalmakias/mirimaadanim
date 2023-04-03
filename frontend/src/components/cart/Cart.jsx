@@ -1,40 +1,78 @@
 import React, { useContext, useEffect, useState } from "react";
-import AuthContext from "../../context/AuthContext";
-import CartItem from "./CartItem";
+import AuthContext from "../../context/AuthContext.jsx";
+import CartItem from "./CartItem.jsx";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-
+const cart = [
+  { id: 1, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 2, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 3, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 4, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 5, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 6, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 7, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 8, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 9, name: `סלט ירקות`, price: 12, weight: 250 },
+  { id: 10, name: `סלט ירקות`, price: 12, weight: 250 },
+];
 const Cart = () => {
-  const [cart, setCart] = useState(null);
-  const { selfUser } = useContext(AuthContext);
-  const nav = useNavigate();
-  useEffect(() => {
-    setCart(selfUser?.businessMeals);
-  }, [selfUser]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  if (cart === null || cart === undefined) {
-    return (
-      <div className="bg-dark text-center text-primary ">Loading.......</div>
-    );
-  } else if (cart?.length === 0) {
-    return (
-      <div className="bg-dark text-center text-primary ">הסל ריק.....</div>
-    );
-  }
+  useEffect(() => {
+    console.log(selectedItems);
+  }, [selectedItems]);
+  const selectItem = (ind) => {
+    const selectedItem = cart.find((item, index) => ind === index);
+    setSelectedItems((state) => {
+      return [...state, selectedItem];
+    });
+  };
+
+  const unSelectItem = (ind) => {
+    const selectedItem = cart.find((item, index) => ind === index);
+    console.log(selectedItem);
+    setSelectedItems((state) => {
+      const updatedSelectedItems = state.filter(
+        (item) => item.id !== selectedItem.id
+      );
+      return updatedSelectedItems;
+    });
+  };
   return (
-    <div className="text-center bg-white shadow w-100">
-      <div className="text-center w-100 align-items-center justify-content-center bg-light mt-1 mb-1">
-        {cart?.map((item, index) => (
-          <div className="" key={index}>
-            {index + 1}
-            <CartItem item={item} />
-          </div>
-        ))}
-      </div>
-      <p className="btn bg-info fs-6 p-2 text-light" onClick={() => nav(-1)}>
-        חזור
+    <div>
+      <p className="bg-white text-black p-1 m-1">
+        על מנת להזמין - סמן את המוצרים שתרצה ולחץ על הזמנה
       </p>
-      <ToastContainer autoClose={2500} />
+      <div className="p-1">
+        <p className="cart-buy-btn">הזמנה</p>
+      </div>
+      <div className="d-flex p-1 flex-row align-items-center justify-content-center">
+        <table className="w-100">
+          <tbody>
+            <tr>
+              <td className="td-item">סימון</td>
+              <td className="td-item">שם פריט</td>
+              <td className="td-item">משקל</td>
+              <td className="td-item">מחיר</td>
+              <td className="td-item">הוסף/הורד משקל</td>
+              <td className="td-item">מחיקה</td>
+            </tr>
+
+            {cart.map((item, index) => (
+              <CartItem
+                selectedItems={selectedItems}
+                selectItem={selectItem}
+                unSelectItem={unSelectItem}
+                item={item}
+                index={index}
+                key={item.id}
+              />
+            ))}
+
+            <ToastContainer autoClose={2500} />
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

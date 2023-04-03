@@ -1,3 +1,27 @@
+.p-item {
+  background-color: #fff;
+  padding: 8px;
+  text-align: center;
+}
+.hide_class {
+  display: none;
+}
+.p-title {
+  background-color: rgb(234, 99, 140);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 15px;
+  color: white;
+  transition: 0.3s;
+  width: 100%;
+  text-align: center;
+}
+.p-title:hover {
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  color: rgb(234, 99, 140);
+  cursor: pointer;
+}
 .my_btn {
   text-align: center;
   background-color: rgb(255, 99, 47) !important;

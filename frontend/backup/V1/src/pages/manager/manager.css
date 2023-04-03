@@ -1,0 +1,16 @@
+.my_hover:hover {
+  background-color: rgb(137, 79, 223) !important;
+}
+.btn1 {
+  cursor: pointer;
+  background-color: #aeaeae;
+  color: rgb(251, 251, 251);
+  padding: 7px;
+  border-radius: 5px;
+  text-align: center;
+  transition: 0.2s;
+}
+.btn1:hover {
+  background-color: rgb(251, 251, 251);
+  color: #aeaeae;
+}

@@ -1,0 +1,21 @@
+.my_div {
+  width: 100%;
+}
+.my_btn {
+  padding: 27px !important;
+
+  width: 29% !important;
+}
+.my_label {
+  background-color: orange;
+
+  width: 100%;
+}
+.my_field {
+  padding: 25px;
+  background-color: rgb(245, 245, 245);
+  width: 100%;
+}
+.my_container {
+  text-align: center;
+}

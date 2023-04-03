@@ -66,7 +66,7 @@ const NavBar = () => {
             <li
               className="navbar-item bg-info text-white"
               onClick={() => {
-                nav("/user/cart");
+                nav("/cart");
                 toggleShowNavBar();
               }}
             >

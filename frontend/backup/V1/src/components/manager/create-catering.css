@@ -1,0 +1,45 @@
+.my_hover:hover {
+  background-color: rgb(113, 14, 163) !important;
+}
+.hide_class {
+  display: none;
+}
+.my_input {
+  height: 45px;
+  width: 120px;
+  padding: 10px;
+  font-size: 0.8rem;
+  text-align: right;
+}
+.my_textarea {
+  height: 45px;
+  width: 250px;
+  margin: 5px;
+  font-size: 0.8rem;
+  text-align: right;
+}
+.my_h3 {
+  background-color: rgb(255, 252, 252) !important;
+  color: rgb(196, 137, 137);
+  padding: 20px;
+  border-radius: 23px;
+  margin-left: 31px;
+  width: 80% !important;
+}
+.my_div {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.my_form {
+  text-align: center;
+  background-color: rgb(74, 10, 10);
+  border-radius: 57px;
+  color: rgb(255, 239, 239);
+  padding: 20px;
+}
+.my_btn {
+  padding: 10px !important;
+  width: 80% !important;
+  font-size: 0.8rem !important;
+}
