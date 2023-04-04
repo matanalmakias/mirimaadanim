@@ -9,14 +9,14 @@ export const salads = [
     price: 12,
   },
   {
-    id: 1,
+    id: 2,
     name: "סלט ירקות",
     description: `עגבנייה,מלפפון,בצל,גמבה`,
     weight: `250 ג'`,
     price: 12,
   },
   {
-    id: 1,
+    id: 3,
     name: "סלט ירקות",
     description: `עגבנייה,מלפפון,בצל,גמבה`,
     weight: `250 ג'`,

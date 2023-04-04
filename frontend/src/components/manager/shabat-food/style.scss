@@ -1,0 +1,32 @@
+.package-tbody {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  color: rgb(50, 21, 67);
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+  padding: 22px;
+}
+.table-item {
+  background-color: rgb(236, 243, 250);
+  padding: 5px;
+
+  color: rgb(22, 38, 88);
+  font-size: 15px;
+  cursor: pointer;
+}
+.table-item:hover {
+  background-color: rgb(57, 102, 147);
+
+  color: rgb(236, 243, 250);
+}
+.continue-btn {
+  background-color: rgb(244, 56, 36);
+  color: WHITE;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.continue-btn:hover {
+  color: rgb(185, 126, 126);
+  background-color: rgba(251, 56, 92, 0.55);
+}

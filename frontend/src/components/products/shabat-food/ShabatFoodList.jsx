@@ -11,7 +11,7 @@ export const shabatFood = [
     price: 12,
   },
   {
-    id: 1,
+    id: 2,
     name: "שניצל",
     description: `שניצל מטוגן`,
     category: `בשרים`,
@@ -19,7 +19,7 @@ export const shabatFood = [
     price: 12,
   },
   {
-    id: 1,
+    id: 3,
     name: "שניצל",
     description: `שניצל מטוגן`,
     category: `בשרים`,

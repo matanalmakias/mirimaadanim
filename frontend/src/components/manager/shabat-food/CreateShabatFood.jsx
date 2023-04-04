@@ -9,7 +9,7 @@ const CreateShabatFood = () => {
         <div className="d-flex flex-column gap-1">
           <h2 className="h2 bg-white text-black">הוספת פריט לאוכל מוכן שלבת</h2>
           <p className="text-white ">
-            משקל כלל הסלטים הוא 500 ג' , ישנה אפשרות להוסיף על ידי לחיצה על
+            משקל כלל הפריטים הוא 250 ג' , ישנה אפשרות להוסיף על ידי לחיצה על
             תוספת משקל
           </p>
           <input

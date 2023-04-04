@@ -18,12 +18,23 @@ function App() {
       <Header />
 
       <Routes>
+        {/* ---------------------Home----------------------- */}
+
         <Route path="/" element={<Home />} />
+        {/* ---------------------Manager----------------------- */}
+
         {isManager && <Route path="/manager" element={<Manager />} />}
+        {/* ---------------------Salads----------------------- */}
+
         <Route path="/product/salads/:id" element={<SaladDetails />} />
+
+        {/* ---------------------Cart----------------------- */}
+
         <Route path="/cart" element={<Cart />} />
+        {/* ---------------------Orders----------------------- */}
+
         {isLoggedIn && <Route path="/orders" element={<AllOrders />} />}
-        {isLoggedIn && <Route path="/order/" element={<Order />} />}
+        {/* {isLoggedIn && <Route path="/order/" element={<Order />} />} */}
       </Routes>
 
       <Footer />

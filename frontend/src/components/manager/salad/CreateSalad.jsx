@@ -6,7 +6,7 @@ const CreateSalad = () => {
     <div>
       <h2 className="h2 bg-white text-black">הוספת סלט לתפריט</h2>
       <p className="text-white ">
-        משקל כלל הסלטים הוא 100 ג' , ישנה אפשרות להוסיף על ידי לחיצה על תוספת
+        משקל כלל הסלטים הוא 250 ג' , ישנה אפשרות להוסיף על ידי לחיצה על תוספת
         משקל
       </p>
       <Form className="p-2 ">

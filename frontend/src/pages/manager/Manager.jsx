@@ -4,15 +4,20 @@ import "./manager.css";
 import { ToastContainer } from "react-toastify";
 import CreateSalad from "../../components/manager/salad/CreateSalad";
 import CreateShabatFood from "../../components/manager/shabat-food/CreateShabatFood";
+import CreatePackageList from "./../../components/manager/shabat-food/CreatePackageList";
 const Manager = () => {
   const [openCreateSalad, setOpenCreateSalad] = useState(false);
   const [openCreateShabatFood, setOpenCreateShabatFood] = useState(false);
+  const [openCreatePackage, setOpenCreatePackage] = useState(false);
   const nav = useNavigate();
   const toggleOpenCreateSalad = () => {
     setOpenCreateSalad((state) => !state);
   };
   const toggleOpenCreateShabatFood = () => {
     setOpenCreateShabatFood((state) => !state);
+  };
+  const toggleOpenCreatePackage = () => {
+    setOpenCreatePackage((state) => !state);
   };
   return (
     <>
@@ -38,6 +43,17 @@ const Manager = () => {
         </p>
         <section className={openCreateShabatFood ? "" : "hide_class"}>
           <CreateShabatFood />
+        </section>
+
+        {/* ----------יצירת חבילה שלמה לאוכל מוכן לשבת---------- */}
+        <p
+          onClick={() => toggleOpenCreatePackage()}
+          className="btn bg-white text-black p-2"
+        >
+          {openCreatePackage ? "סגור" : "הוסף חבילה שלמה לחגים/שבת"}
+        </p>
+        <section className={openCreatePackage ? "" : "hide_class"}>
+          <CreatePackageList />
         </section>
         {/* ---------------------------------------- */}
       </div>
