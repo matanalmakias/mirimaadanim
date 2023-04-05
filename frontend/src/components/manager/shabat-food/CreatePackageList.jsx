@@ -4,10 +4,37 @@ import { shabatFood } from "../../products/shabat-food/ShabatFoodList";
 import "./style.scss";
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
+import CreatePackageItem from "./CreatePackageItem";
+import { shekelSymbol } from "./../../../utils/utils";
 const CreatePackageList = () => {
   const [showCreate, setShowCreate] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [productsInPackage, setProductsInPackage] = useState([[], []]);
 
+  useEffect(() => {
+    console.log(totalPrice);
+  }, [totalPrice]);
+  const pullShabatItemFromPackage = (itemId) => {
+    setProductsInPackage((prevState) => {
+      const newProductsInPackage = [...prevState];
+      const index = newProductsInPackage[0].indexOf(itemId);
+      if (index !== -1) {
+        newProductsInPackage[0].splice(index, 1);
+      }
+      return newProductsInPackage;
+    });
+  };
+
+  const pullSaladsItemFromPackage = (itemId) => {
+    setProductsInPackage((prevState) => {
+      const newProductsInPackage = [...prevState];
+      const index = newProductsInPackage[1].indexOf(itemId);
+      if (index !== -1) {
+        newProductsInPackage[1].splice(index, 1);
+      }
+      return newProductsInPackage;
+    });
+  };
   const pushShabatItemToPackage = (itemId) => {
     setProductsInPackage((prevState) => {
       const newProductsInPackage = [...prevState];
@@ -26,37 +53,67 @@ const CreatePackageList = () => {
   const toggleShowCreate = () => {
     setShowCreate((state) => !state);
   };
+  const sumTotalPrice = (func, price) => {
+    if (func === "plus") {
+      let newTotalPrice = price + totalPrice;
+      setTotalPrice(newTotalPrice);
+    } else if (func === "minus") {
+      let newTotalPrice = totalPrice - price;
+      setTotalPrice(newTotalPrice);
+    }
+    return totalPrice;
+  };
   return (
-    <div className="package-tbody">
+    <div className="package-tbody ">
       לחץ על מוצר כדי לצרף אותו ובסוף לחץ על יצירה
       <table className="package-tbody">
-        <thead>
-          <tr>
-            <th className="bg-black  text-white">אוכל מוכן לשבת</th>
-            <th className="bg-black text-white">סלטים</th>
+        <thead className="w-100">
+          <tr className="w-100">
+            <th className="bg-black w-100 p-1 text-white">אוכל מוכן לשבת</th>
           </tr>
         </thead>
         <tbody className="">
           {shabatFood.map((item, index) => {
             return (
-              <tr className="" key={index}>
-                <td
-                  onClick={() => pushShabatItemToPackage(item.id)}
-                  className="table-item"
-                >
-                  {item.name}
-                </td>
-                <td
-                  onClick={() => pushSaladsItemToPackage(item.id)}
-                  className="table-item"
-                >
-                  {salads[index] && salads[index].name}
-                </td>
-              </tr>
+              <CreatePackageItem
+                totalPrice={totalPrice}
+                sumTotalPrice={sumTotalPrice}
+                pullShabatItemFromPackage={pullShabatItemFromPackage}
+                category={"shabat"}
+                item={item}
+                index={index}
+                pushShabatItemToPackage={pushShabatItemToPackage}
+                pushSaladsItemToPackage={pushSaladsItemToPackage}
+              />
             );
           })}
         </tbody>
       </table>
+      <table className="package-tbody">
+        <thead className="w-100">
+          <tr className="w-100">
+            <th className="bg-black w-100 p-1 text-white">סלטים</th>
+          </tr>
+        </thead>
+        <tbody className="">
+          {salads.map((item, index) => (
+            <CreatePackageItem
+              totalPrice={totalPrice}
+              sumTotalPrice={sumTotalPrice}
+              pullSaladsItemFromPackage={pullSaladsItemFromPackage}
+              category={"salads"}
+              item={item}
+              index={index}
+              pushShabatItemToPackage={pushShabatItemToPackage}
+              pushSaladsItemToPackage={pushSaladsItemToPackage}
+            />
+          ))}
+        </tbody>
+      </table>
+      <p>
+        מחיר כלל המוצרים שבחרת : {totalPrice}
+        {shekelSymbol}
+      </p>
       <p className="continue-btn" onClick={() => toggleShowCreate()}>
         {showCreate ? "סגור" : "המשך"}
       </p>

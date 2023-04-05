@@ -11,3 +11,5 @@ export const dayList = [
   "יום רביעי",
   "יום חמישי",
 ];
+
+export const shekelSymbol = String.fromCharCode(8362);

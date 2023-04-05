@@ -7,7 +7,7 @@
   display: none;
 }
 .p-title {
-  background-color: rgb(234, 99, 140);
+  background-color: rgb(235, 48, 105);
   padding: 10px;
   cursor: pointer;
   border-radius: 15px;
@@ -17,9 +17,9 @@
   text-align: center;
 }
 .p-title:hover {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 187, 187);
   padding: 10px;
-  color: rgb(234, 99, 140);
+  color: rgb(116, 24, 50);
   cursor: pointer;
 }
 .my_btn {

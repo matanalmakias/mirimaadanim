@@ -10,6 +10,8 @@ import SaladDetails from "./components/products/salad/SaladDetails.jsx";
 import Cart from "./components/cart/Cart.jsx";
 import AllOrders from "./components/orders/AllOrders.jsx";
 import Order from "./components/orders/Order.jsx";
+import ShabatDetails from "./components/products/shabat-food/ShabatDetails.jsx";
+import PackageDetails from "./components/products/package/PackageDetails.jsx";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -27,6 +29,12 @@ function App() {
         {/* ---------------------Salads----------------------- */}
 
         <Route path="/product/salads/:id" element={<SaladDetails />} />
+        {/* ---------------------Shabat----------------------- */}
+
+        <Route path="/product/shabat/:id" element={<ShabatDetails />} />
+        {/* ---------------------Packages----------------------- */}
+
+        <Route path="/product/package/:id" element={<PackageDetails />} />
 
         {/* ---------------------Cart----------------------- */}
 

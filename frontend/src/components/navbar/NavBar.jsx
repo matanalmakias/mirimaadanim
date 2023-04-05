@@ -56,12 +56,7 @@ const NavBar = () => {
           >
             דף הבית
           </li>
-          <li className="navbar-item bg-info text-white" href="#about">
-            אודות
-          </li>
-          <li className="navbar-item bg-info text-white" href="#contact">
-            צור קשר
-          </li>
+
           {isLoggedIn && (
             <li
               className="navbar-item bg-info text-white"
