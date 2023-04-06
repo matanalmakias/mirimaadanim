@@ -19,3 +19,7 @@
 .my_container {
   text-align: center;
 }
+.login-p {
+  font-size: 13px;
+  background-color: rgb(64, 64, 64);
+}

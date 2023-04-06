@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import authService from "../../services/auth.service";
-import { StoreContext } from "../../context/StoreContext";
 import "./navbar.css";
 import logo from "../../images/logo.png";
 import Login from "../../components/login/Login";
@@ -10,7 +9,7 @@ import Login from "../../components/login/Login";
 const NavBar = () => {
   const [showNavBar, setShowNavBar] = useState(false);
   const { isLoggedIn, logout, isManager } = useContext(AuthContext);
-  const { checkout, cart } = useContext(StoreContext);
+
   const nav = useNavigate();
   const logoutButton = async () => {
     try {

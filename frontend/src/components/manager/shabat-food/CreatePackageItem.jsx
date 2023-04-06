@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { salads } from "../../products/salad/SaladList";
 import { AiFillCheckCircle } from "react-icons/ai";
 import "./style.scss";
 const CreatePackageItem = ({
@@ -24,9 +23,9 @@ const CreatePackageItem = ({
         onClick={() => {
           if (isSelected === false) {
             if (category === "shabat") {
-              pushShabatItemToPackage(item.id);
+              pushShabatItemToPackage(item?.id);
             } else if (category === "salads") {
-              pushSaladsItemToPackage(item.id);
+              pushSaladsItemToPackage(item?.id);
             }
             sumTotalPrice("plus", item.price);
           } else {

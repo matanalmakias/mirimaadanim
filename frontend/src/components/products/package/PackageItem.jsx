@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { shekelSymbol } from "./../../../utils/utils";
 import "./style.scss";
 const PackageItem = ({ item, index }) => {
-  console.log(item);
   const nav = useNavigate();
   return (
     <>

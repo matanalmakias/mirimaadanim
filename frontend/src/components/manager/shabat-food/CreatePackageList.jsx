@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { salads } from "../../products/salad/SaladList";
-import { shabatFood } from "../../products/shabat-food/ShabatFoodList";
+import React, { useContext, useState } from "react";
 import "./style.scss";
 import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import CreatePackageItem from "./CreatePackageItem";
 import { shekelSymbol } from "./../../../utils/utils";
+import ShabatFoodContext from "../../../context/shabat-food/ShabatFoodContext";
 const CreatePackageList = () => {
   const [showCreate, setShowCreate] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productsInPackage, setProductsInPackage] = useState([[], []]);
-
+  const { allProducts } = useContext(ShabatFoodContext);
   useEffect(() => {
     console.log(totalPrice);
   }, [totalPrice]);
@@ -73,7 +72,7 @@ const CreatePackageList = () => {
           </tr>
         </thead>
         <tbody className="">
-          {shabatFood.map((item, index) => {
+          {allProducts?.map((item, index) => {
             return (
               <CreatePackageItem
                 totalPrice={totalPrice}
@@ -96,7 +95,7 @@ const CreatePackageList = () => {
           </tr>
         </thead>
         <tbody className="">
-          {salads.map((item, index) => (
+          {/* {salads.map((item, index) => (
             <CreatePackageItem
               totalPrice={totalPrice}
               sumTotalPrice={sumTotalPrice}
@@ -107,7 +106,7 @@ const CreatePackageList = () => {
               pushShabatItemToPackage={pushShabatItemToPackage}
               pushSaladsItemToPackage={pushSaladsItemToPackage}
             />
-          ))}
+          ))} */}
         </tbody>
       </table>
       <p>

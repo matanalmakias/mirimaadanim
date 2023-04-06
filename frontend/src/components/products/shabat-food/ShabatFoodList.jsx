@@ -1,38 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ShabatFoodItem from "./ShabatFoodItem";
+import ShabatFoodContext from "../../../context/shabat-food/ShabatFoodContext";
+import { Circles } from "react-loader-spinner";
+import Loader1 from "./../../loader/Loader1.jsx";
 
-export const shabatFood = [
-  {
-    id: 1,
-    name: "שניצל",
-    description: `שניצל מטוגן`,
-    category: `בשרים`,
-    weight: `250 ג'`,
-    price: 12,
-  },
-  {
-    id: 2,
-    name: "שניצל",
-    description: `שניצל מטוגן`,
-    category: `בשרים`,
-    weight: `250 ג'`,
-    price: 12,
-  },
-  {
-    id: 3,
-    name: "שניצל",
-    description: `שניצל מטוגן`,
-    category: `בשרים`,
-    weight: `250 ג'`,
-    price: 12,
-  },
-];
 const ShabatFoodList = () => {
   const [openShabatFood, setOpenShabatFood] = useState(false);
+  const { allProducts } = useContext(ShabatFoodContext);
 
   const toggleOpenShabatFood = () => {
     setOpenShabatFood((state) => !state);
   };
+  if (allProducts === null) {
+    return <Loader1 />;
+  }
   return (
     <>
       <div>
@@ -59,7 +40,7 @@ const ShabatFoodList = () => {
                   <td className="td-item">הוספה לסל</td>
                   <td className="td-item">לפרטים</td>
                 </tr>
-                {shabatFood.map((item, index) => (
+                {allProducts.map((item, index) => (
                   <ShabatFoodItem key={item.id} item={item} index={index} />
                 ))}
               </tbody>

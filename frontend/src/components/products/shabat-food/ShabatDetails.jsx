@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { shabatFood } from "./ShabatFoodList";
+import ShabatFoodContext from "../../../context/shabat-food/ShabatFoodContext";
+import Loader1 from "./../../loader/Loader1.jsx";
 
 const ShabatDetails = () => {
+  const { allProducts } = useContext(ShabatFoodContext);
   const { id } = useParams();
-  const shabat = shabatFood.find((item) => (item.id = id));
+  if (allProducts === null) {
+    return <Loader1 />;
+  }
+  const shabat = allProducts.find((item) => item._id === id);
 
   return (
     <div className="d-flex p-3 flex-column text-center">

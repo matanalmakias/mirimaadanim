@@ -14,14 +14,20 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { ShabatFoodProvider } from "./context/shabat-food/ShabatFoodContext.jsx";
+import { SaladProvider } from "./context/salads/SaladContext.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <div className="">
+  <div className="text-center" dir="rtl">
     <BrowserRouter>
       <AuthContextProvider>
-        <App />
+        <ShabatFoodProvider>
+          <SaladProvider>
+            <App />
+          </SaladProvider>
+        </ShabatFoodProvider>
       </AuthContextProvider>
     </BrowserRouter>
   </div>

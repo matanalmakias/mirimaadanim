@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { salads } from "./SaladList";
+import SaladContext from "../../../context/salads/SaladContext";
+import Loader1 from "./../../loader/Loader1.jsx";
 
 const SaladDetails = () => {
+  const { allProducts } = useContext(SaladContext);
   const { id } = useParams();
-  const salad = salads.find((item) => (item.id = id));
+  if (allProducts === null) {
+    return <Loader1 />;
+  }
+  const salad = allProducts?.find((item) => item?._id === id);
 
   return (
     <div className="d-flex p-3 flex-column text-center">

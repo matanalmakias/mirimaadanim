@@ -9,9 +9,9 @@ import Manager from "./pages/manager/Manager.jsx";
 import SaladDetails from "./components/products/salad/SaladDetails.jsx";
 import Cart from "./components/cart/Cart.jsx";
 import AllOrders from "./components/orders/AllOrders.jsx";
-import Order from "./components/orders/Order.jsx";
 import ShabatDetails from "./components/products/shabat-food/ShabatDetails.jsx";
 import PackageDetails from "./components/products/package/PackageDetails.jsx";
+import UserManagement from "./pages/user-management/UserManagement.jsx";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -32,6 +32,9 @@ function App() {
         {/* ---------------------Shabat----------------------- */}
 
         <Route path="/product/shabat/:id" element={<ShabatDetails />} />
+        {/* ---------------------Salads----------------------- */}
+
+        <Route path="/product/salad/:id" element={<SaladDetails />} />
         {/* ---------------------Packages----------------------- */}
 
         <Route path="/product/package/:id" element={<PackageDetails />} />
@@ -43,6 +46,12 @@ function App() {
 
         {isLoggedIn && <Route path="/orders" element={<AllOrders />} />}
         {/* {isLoggedIn && <Route path="/order/" element={<Order />} />} */}
+
+        {/* ---------------------User Management----------------------- */}
+
+        {isLoggedIn && (
+          <Route path="/user-management" element={<UserManagement />} />
+        )}
       </Routes>
 
       <Footer />

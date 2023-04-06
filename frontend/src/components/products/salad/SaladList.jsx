@@ -1,34 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SaladItem from "./SaladItem";
-export const salads = [
-  {
-    id: 1,
-    name: "סלט ירקות",
-    description: `עגבנייה,מלפפון,בצל,גמבה`,
-    weight: `250 ג'`,
-    price: 12,
-  },
-  {
-    id: 2,
-    name: "סלט ירקות",
-    description: `עגבנייה,מלפפון,בצל,גמבה`,
-    weight: `250 ג'`,
-    price: 12,
-  },
-  {
-    id: 3,
-    name: "סלט ירקות",
-    description: `עגבנייה,מלפפון,בצל,גמבה`,
-    weight: `250 ג'`,
-    price: 12,
-  },
-];
+import SaladContext from "../../../context/salads/SaladContext.jsx";
+import Loader1 from "../../loader/Loader1.jsx";
+
 const SaladList = () => {
   const [openSalads, setOpenSalads] = useState(false);
+  const { allProducts } = useContext(SaladContext);
 
   const toggleOpenSalads = () => {
     setOpenSalads((state) => !state);
   };
+  if (allProducts === null) {
+    return <Loader1 />;
+  }
   return (
     <>
       <div>
@@ -54,7 +38,7 @@ const SaladList = () => {
                   <td className="td-item">הוספה לסל</td>
                   <td className="td-item">לפרטים</td>
                 </tr>
-                {salads.map((item) => (
+                {allProducts?.map((item) => (
                   <SaladItem key={item.id} item={item} />
                 ))}
               </tbody>

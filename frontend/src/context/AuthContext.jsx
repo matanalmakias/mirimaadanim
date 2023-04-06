@@ -7,8 +7,7 @@ import {
 } from "react";
 import isAdmin from "../functions/isAdmin.model";
 import authService from "../services/auth.service";
-import { SocketContext } from "./CateringContext";
-import { ProductContext } from "./ProductContext";
+import { SocketContext } from "./SocketContext";
 
 const initialState = {
   selfUser: [],
@@ -32,7 +31,7 @@ const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState(undefined);
 
   const socket = useContext(SocketContext);
-  const { socketUpdate: productSocketUpdate } = useContext(ProductContext);
+
   useEffect(() => {
     if (isLoggedIn) {
       authService.getSingleUser().then((res) => setSelfUser(res.data));
@@ -89,7 +88,6 @@ const AuthContextProvider = ({ children }) => {
     setIsLoggedIn(true);
     setToken(token);
     socketUpdate();
-    productSocketUpdate();
     return (
       <>
         <p>התחברת בהצלחה</p>

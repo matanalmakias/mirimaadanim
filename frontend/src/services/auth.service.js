@@ -43,6 +43,20 @@ const finalLogin = async (phoneNumber, verfCode) => {
       return res.data;
     });
 };
+const existCodeLogin = async (phoneNumber, verfCode) => {
+  return axios
+    .post(`${baseUrl}/existLogin/${phoneNumber}/${verfCode}`)
+    .then((res) => {
+      const token = res.data.accessToken;
+      const phone = res.data.phoneNumer;
+      const roles = res.data.roles;
+      if (token) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify({ phone, token, roles }));
+      }
+      return res.data;
+    });
+};
 
 const register = async (username, email, password) => {
   return axios.post(baseUrl + "/signup", { username, email, password });
@@ -78,6 +92,7 @@ export {
   editEmail,
   tryLogin,
   finalLogin,
+  existCodeLogin,
 };
 
 const authService = {
@@ -89,5 +104,6 @@ const authService = {
   editEmail,
   tryLogin,
   finalLogin,
+  existCodeLogin,
 };
 export default authService;
