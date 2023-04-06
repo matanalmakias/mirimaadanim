@@ -3,15 +3,15 @@ import AuthContext from "../../context/AuthContext.jsx";
 import CartItem from "./CartItem.jsx";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import CartPackageItem from "./CartPackageItem.jsx";
 
 const Cart = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const { selfUser } = useContext(AuthContext);
-  const cart = selfUser?.cart?.filter((item) => !item.totalPrice);
-  const packageProducts = selfUser?.cart?.filter((item) => item.totalPrice);
+  const cart = selfUser?.cart;
+  const packageProducts = cart.filter((item) => item.totalPrice);
+  console.log(packageProducts);
   const selectItem = (ind) => {
-    const selectedItem = cart?.find((item, index) => ind === index);
+    const selectedItem = cart.find((item, index) => ind === index);
     setSelectedItems((state) => {
       return [...state, selectedItem];
     });
@@ -26,7 +26,6 @@ const Cart = () => {
       return updatedSelectedItems;
     });
   };
-  console.log(packageProducts);
   return (
     <div>
       <p className="bg-white text-black p-1 m-1">
@@ -57,23 +56,11 @@ const Cart = () => {
                 key={item.id}
               />
             ))}
+
+            <ToastContainer autoClose={2500} />
           </tbody>
         </table>
       </div>
-      <div className="d-flex justify-content-center align-items-center text-center flex-column w-100">
-        <h1 className="text-white ">חבילות</h1>
-        {packageProducts?.map((item, index) => (
-          <CartPackageItem
-            selectedItems={selectedItems}
-            selectItem={selectItem}
-            unSelectItem={unSelectItem}
-            item={item}
-            index={index}
-            key={item.id}
-          />
-        ))}
-      </div>
-      <ToastContainer autoClose={2500} />
     </div>
   );
 };

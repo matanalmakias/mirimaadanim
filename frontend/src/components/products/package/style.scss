@@ -1,11 +1,15 @@
 .package-index {
-  background-color: rgba(74, 72, 72, 0.621);
+  background-color: rgb(100, 96, 96);
   text-align: center;
-  color: rgb(130, 130, 130);
+  font-size: 15px;
+  color: rgb(252, 252, 252);
 }
 .package-item {
-  background-color: rgb(255, 255, 255);
-  padding: 2px;
+  background-color: rgb(242, 205, 255);
+  padding: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(38, 17, 17);
   transition: 0.2s;
 }
 .package-item:hover {

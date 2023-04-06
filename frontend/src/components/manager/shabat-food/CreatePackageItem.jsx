@@ -23,16 +23,16 @@ const CreatePackageItem = ({
         onClick={() => {
           if (isSelected === false) {
             if (category === "shabat") {
-              pushShabatItemToPackage(item?.id);
+              pushShabatItemToPackage(item?._id);
             } else if (category === "salads") {
-              pushSaladsItemToPackage(item?.id);
+              pushSaladsItemToPackage(item?._id);
             }
             sumTotalPrice("plus", item.price);
           } else {
             if (category === "shabat") {
-              pullShabatItemFromPackage(item.id);
+              pullShabatItemFromPackage(item._id);
             } else if (category === "salads") {
-              pullSaladsItemFromPackage(item.id);
+              pullSaladsItemFromPackage(item._id);
             }
             sumTotalPrice("minus", item.price);
           }

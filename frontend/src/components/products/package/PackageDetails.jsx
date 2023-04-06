@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { packages } from "./PackageList";
+import PackageContext from "../../../context/package/PackageContext";
 
 const PackageDetails = () => {
   const { id } = useParams();
-  const foundPackage = packages.find((item) => (item.id = id));
+  const { allProducts } = useContext(PackageContext);
+
+  const foundPackage = allProducts?.find((item) => (item._id = id));
 
   return (
     <div className="d-flex p-3 flex-column text-center">

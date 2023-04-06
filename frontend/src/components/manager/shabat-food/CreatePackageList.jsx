@@ -1,18 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.scss";
-import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import CreatePackageItem from "./CreatePackageItem";
 import { shekelSymbol } from "./../../../utils/utils";
 import ShabatFoodContext from "../../../context/shabat-food/ShabatFoodContext";
+import SaladContext from "../../../context/salads/SaladContext.jsx";
+import packageService from "./../../../services/package/package.service";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const CreatePackageList = () => {
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState();
+  const [image, setImage] = useState();
   const [showCreate, setShowCreate] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productsInPackage, setProductsInPackage] = useState([[], []]);
-  const { allProducts } = useContext(ShabatFoodContext);
+  const { allProducts: shabatProducts } = useContext(ShabatFoodContext);
+  const { allProducts: saladProducts } = useContext(SaladContext);
+  const nav = useNavigate();
   useEffect(() => {
-    console.log(totalPrice);
-  }, [totalPrice]);
+    console.log(productsInPackage);
+  }, [productsInPackage]);
   const pullShabatItemFromPackage = (itemId) => {
     setProductsInPackage((prevState) => {
       const newProductsInPackage = [...prevState];
@@ -62,6 +71,24 @@ const CreatePackageList = () => {
     }
     return totalPrice;
   };
+  const submitForm = async (e) => {
+    e.preventDefault(); // prevent default behavior of form submission
+    const formData = new FormData();
+    const items = { shabat: productsInPackage[0], salad: productsInPackage[1] };
+    const itemsString = JSON.stringify(items); // stringify the object
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("image", image);
+    formData.append("totalPrice", totalPrice);
+    formData.append("items", itemsString); // append the stringified object
+
+    await packageService
+      .createProduct(formData)
+      .then((res) => toast(res.data.message))
+      .finally(() => nav(-1));
+  };
+
   return (
     <div className="package-tbody ">
       לחץ על מוצר כדי לצרף אותו ובסוף לחץ על יצירה
@@ -72,7 +99,7 @@ const CreatePackageList = () => {
           </tr>
         </thead>
         <tbody className="">
-          {allProducts?.map((item, index) => {
+          {shabatProducts?.map((item, index) => {
             return (
               <CreatePackageItem
                 totalPrice={totalPrice}
@@ -95,7 +122,7 @@ const CreatePackageList = () => {
           </tr>
         </thead>
         <tbody className="">
-          {/* {salads.map((item, index) => (
+          {saladProducts?.map((item, index) => (
             <CreatePackageItem
               totalPrice={totalPrice}
               sumTotalPrice={sumTotalPrice}
@@ -106,7 +133,7 @@ const CreatePackageList = () => {
               pushShabatItemToPackage={pushShabatItemToPackage}
               pushSaladsItemToPackage={pushSaladsItemToPackage}
             />
-          ))} */}
+          ))}
         </tbody>
       </table>
       <p>
@@ -117,35 +144,45 @@ const CreatePackageList = () => {
         {showCreate ? "סגור" : "המשך"}
       </p>
       <div className={showCreate ? "" : "hide_class"}>
-        <Form className="d-flex flex-column gap-1 ">
+        <Form
+          onSubmit={(e) => submitForm(e)}
+          className="d-flex flex-column gap-1 "
+        >
           <input
+            onChange={(e) => setTitle(e.target.value)}
             className="form-control p-1"
             type="text"
             required
             placeholder="כותרת"
           />
           <input
+            onChange={(e) => setDescription(e.target.value)}
             className="form-control p-1"
             type="text"
             required
             placeholder="תיאור"
           />
           <input
+            onChange={(e) => setPrice(e.target.value)}
             className="form-control p-1"
             type="number"
             required
             placeholder="מחיר"
           />
           <input
+            onChange={(e) => setImage(e.target.files[0])}
             className="form-control p-1"
             type="file"
             accept="image/*"
             placeholder="תמונה"
             required
           />
-          <p className="btn btn-success p-2 w-100" type="submit">
+          <button
+            onClick={() => submitForm()}
+            className="btn btn-success p-2 w-100"
+          >
             שלח
-          </p>
+          </button>
         </Form>
       </div>
     </div>

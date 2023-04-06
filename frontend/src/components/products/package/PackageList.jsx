@@ -1,69 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import PackageItem from "./PackageItem";
-
-export const packages = [
-  {
-    id: 1,
-    totalPrice: 233,
-    items: [
-      {
-        id: 1,
-        name: "סלט ירקות",
-        description: `עגבנייה,מלפפון,בצל,גמבה`,
-        weight: `250 ג'`,
-        price: 12,
-      },
-      {
-        id: 2,
-        name: "סלט ירקות",
-        description: `עגבנייה,מלפפון,בצל,גמבה`,
-        weight: `250 ג'`,
-        price: 12,
-      },
-      {
-        id: 3,
-        name: "סלט ירקות",
-        description: `עגבנייה,מלפפון,בצל,גמבה`,
-        weight: `250 ג'`,
-        price: 12,
-      },
-    ],
-  },
-
-  {
-    id: 2,
-    totalPrice: 233,
-    items: [
-      {
-        id: 1,
-        name: "סלט ירקות",
-        description: `עגבנייה,מלפפון,בצל,גמבה`,
-        weight: `250 ג'`,
-        price: 12,
-      },
-      {
-        id: 2,
-        name: "סלט ירקות",
-        description: `עגבנייה,מלפפון,בצל,גמבה`,
-        weight: `250 ג'`,
-        price: 12,
-      },
-      {
-        id: 3,
-        name: "סלט ירקות",
-        description: `עגבנייה,מלפפון,בצל,גמבה`,
-        weight: `250 ג'`,
-        price: 12,
-      },
-    ],
-  },
-];
+import { PackageContext } from "../../../context/package/PackageContext.jsx";
 const PackageList = () => {
   const [openPackages, setOpenpackages] = useState(false);
-
+  const { allProducts } = useContext(PackageContext);
   const toggleOpenpackages = () => {
     setOpenpackages((state) => !state);
   };
+  console.log(allProducts);
   return (
     <>
       <div>
@@ -71,7 +15,7 @@ const PackageList = () => {
           חבילות לחגים ולשבת
         </p>
         <div className={openPackages ? "" : "hide_class"}>
-          {packages.map((item, index) => (
+          {allProducts?.map((item, index) => (
             <PackageItem index={index} key={item.id} item={item} />
           ))}
         </div>
