@@ -3,6 +3,8 @@ import "./style.scss";
 import { Form } from "react-bootstrap";
 import userService from "../../../services/user/user.service";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import AuthContext from "../../../context/AuthContext";
 const UpdateAddress = () => {
   const [showComponent, setShowComponent] = useState(false);
   const [groundFloor, setGroundFloor] = useState(false);
@@ -13,6 +15,7 @@ const UpdateAddress = () => {
   const [street, setStreet] = useState();
   const [floor, setFloor] = useState();
   const [apart, setApart] = useState();
+  const { selfUser } = useContext(AuthContext);
 
   const toggleShowComponent = () => {
     setShowComponent((state) => !state);
@@ -35,7 +38,7 @@ const UpdateAddress = () => {
       formData.append("floor", floor);
       formData.append("apart", apart);
     }
-    console.log(formData);
+
     await userService
       .updateAddress(formData)
       .then((res) => toast(res.data.message));
@@ -64,14 +67,14 @@ const UpdateAddress = () => {
               className="form-control"
               type="text"
               required
-              placeholder="עיר"
+              placeholder={`עיר: ${selfUser.address.city}`}
             />
             <input
               onChange={(e) => setGroundStreet(e.target.value)}
               className="form-control"
               type="text"
               required
-              placeholder="רחוב"
+              placeholder={`רחוב: ${selfUser.address.street}`}
             />
             <button className="form-control" type="submit">
               עדכן כתובת
@@ -79,34 +82,34 @@ const UpdateAddress = () => {
           </Form>
         </div>
         <div className={buildingApart ? "" : "hide_class"}>
-          <Form>
+          <Form onSubmit={(e) => submitForm(e)}>
             <input
               onChange={(e) => setCity(e.target.value)}
               className="form-control"
               type="text"
               required
-              placeholder="עיר"
+              placeholder={`עיר: ${selfUser.address.city}`}
             />
             <input
               onChange={(e) => setStreet(e.target.value)}
               className="form-control"
               type="text"
               required
-              placeholder="רחוב"
+              placeholder={`רחוב: ${selfUser.address.street}`}
             />
             <input
               onChange={(e) => setFloor(e.target.value)}
               className="form-control"
               type="number"
               required
-              placeholder="קומה"
+              placeholder={`קומה: ${selfUser.address.floor}`}
             />
             <input
               onChange={(e) => setApart(e.target.value)}
               className="form-control"
               type="number"
               required
-              placeholder="דירה"
+              placeholder={`דירה: ${selfUser.address.houseNumber}`}
             />
             <button className="form-control" type="submit">
               עדכן כתובת

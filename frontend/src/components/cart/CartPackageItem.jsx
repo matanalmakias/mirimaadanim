@@ -24,7 +24,6 @@ const CartPackageItem = ({
   const removeFromCart = async () => {
     cartService.remove(item?._id).then((res) => toast(res.data.message));
   };
-  console.log(item);
   return (
     <div>
       <td className="">

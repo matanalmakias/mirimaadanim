@@ -47,10 +47,10 @@ const Login = () => {
   };
   return (
     <div>
-      <p className="mb-1 login-p">
+      <p className="mb-1 login-p text-white">
         כדי לקבל קוד חודש - הכנס מס פאלפון ולחץ על "שלח לי קוד לנייד"
       </p>
-      <p className=" login-p">
+      <p className=" login-p text-white">
         אם קיבלתה קוד ושמרתה אותו הכנס אותו, גם את מס' הפלאפון ולחץ על "התחבר עם
         קוד קיים"
       </p>

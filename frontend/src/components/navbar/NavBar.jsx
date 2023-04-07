@@ -69,11 +69,7 @@ const NavBar = () => {
           )}
 
           {isLoggedIn === false ? (
-            <>
-              <li className="navbar-item bg-info text-white">
-                <Login />
-              </li>
-            </>
+            <></>
           ) : (
             <li
               className="navbar-item bg-info text-white"

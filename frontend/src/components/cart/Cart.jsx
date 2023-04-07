@@ -2,14 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext.jsx";
 import CartItem from "./CartItem.jsx";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import CartPackageItem from "./CartPackageItem.jsx";
+import cartService from "../../services/cart/cart.service.js";
 
 const Cart = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const { selfUser } = useContext(AuthContext);
   const cart = selfUser?.cart?.filter((item) => !item.totalPrice);
   const packageProducts = selfUser?.cart?.filter((item) => item.totalPrice);
+
   const selectItem = (ind) => {
     const selectedItem = cart?.find((item, index) => ind === index);
     setSelectedItems((state) => {
@@ -26,14 +28,23 @@ const Cart = () => {
       return updatedSelectedItems;
     });
   };
-  console.log(packageProducts);
+  const submitForm = async (e) => {
+    e.preventDefault();
+
+    await cartService
+      .moveToPayment(selectedItems)
+      .then((res) => toast(res.data.message));
+  };
+
   return (
     <div>
       <p className="bg-white text-black p-1 m-1">
         על מנת להזמין - סמן את המוצרים שתרצה ולחץ על הזמנה
       </p>
       <div className="p-1">
-        <p className="cart-buy-btn">הזמנה</p>
+        <p onClick={(e) => submitForm(e)} className="cart-buy-btn">
+          הזמנה
+        </p>
       </div>
       <div className="d-flex p-1 flex-row align-items-center justify-content-center">
         <table className="w-100">
