@@ -1,5 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@200&display=swap");
 
 .main-app {
+  /* make sure the container has position */
+  background-color: #e9ff42be;
+  object-fit: cover;
   font-family: "Noto Sans Hebrew", sans-serif;
 }

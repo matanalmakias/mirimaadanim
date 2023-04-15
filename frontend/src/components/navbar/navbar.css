@@ -31,3 +31,16 @@
   background-color: var(--dark-color) !important;
   color: var(--light-color) !important;
 }
+
+.cart-go {
+  background-color: white;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: Noto Sans Hebrew;
+  padding: 2px;
+  transition: 0.6s;
+  cursor: pointer;
+}
+.cart-go:hover {
+  background-color: #e74a4a0e;
+}

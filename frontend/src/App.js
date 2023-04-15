@@ -12,13 +12,14 @@ import AllOrders from "./components/orders/AllOrders.jsx";
 import ShabatDetails from "./components/products/shabat-food/ShabatDetails.jsx";
 import PackageDetails from "./components/products/package/PackageDetails.jsx";
 import UserManagement from "./pages/user-management/UserManagement.jsx";
+import Background1 from "./components/background/Background1.jsx";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
   return (
-    <div className="main-app" dir="rtl">
+    <div className="main-app">
       <Header />
-
+      <Background1 />
       <Routes>
         {/* ---------------------Home----------------------- */}
 
@@ -53,7 +54,6 @@ function App() {
           <Route path="/user-management" element={<UserManagement />} />
         )}
       </Routes>
-
       <Footer />
     </div>
   );

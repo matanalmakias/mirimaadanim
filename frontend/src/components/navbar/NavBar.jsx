@@ -9,7 +9,7 @@ import Login from "../../components/login/Login";
 const NavBar = () => {
   const [showNavBar, setShowNavBar] = useState(false);
   const { isLoggedIn, logout, isManager } = useContext(AuthContext);
-
+  const { selfUser } = useContext(AuthContext);
   const nav = useNavigate();
   const logoutButton = async () => {
     try {
@@ -27,7 +27,7 @@ const NavBar = () => {
   return (
     <>
       <div className="spacer p-1"></div>
-      <div className="gap-4 d-flex flex-column justify-content-center align-items-center text-center bg-light p-2">
+      <div className="gap-4 d-flex flex-column justify-content-center align-items-center text-center p-2">
         <img
           className="nav_logo"
           onClick={() => {
@@ -43,7 +43,6 @@ const NavBar = () => {
           class="ri-menu-line nav_toggle"
         ></i>
       </div>
-
       <div className={showNavBar ? "text-center" : "hide_class"} dir="rtl">
         <ul className="p-1 d-flex flex-column gap-1">
           <li
@@ -105,6 +104,9 @@ const NavBar = () => {
           )}
         </ul>
       </div>
+      <p className="cart-go">
+        יש לך - {selfUser?.cart?.length} מוצרים בסל - לחץ למעבר לסל
+      </p>
     </>
   );
 };

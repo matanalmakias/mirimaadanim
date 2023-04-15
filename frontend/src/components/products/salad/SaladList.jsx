@@ -39,7 +39,7 @@ const SaladList = () => {
                   <td className="td-item">לפרטים</td>
                 </tr>
                 {allProducts?.map((item) => (
-                  <SaladItem key={item.id} item={item} />
+                  <SaladItem key={item._id} item={item} />
                 ))}
               </tbody>
             </table>
