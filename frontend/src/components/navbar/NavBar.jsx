@@ -7,9 +7,9 @@ import logo from "../../images/logo.png";
 import Login from "../../components/login/Login";
 
 const NavBar = () => {
-  const [showNavBar, setShowNavBar] = useState(false);
+  const [showNavBar, setShowNavBar] = useState(true);
   const { isLoggedIn, logout, isManager } = useContext(AuthContext);
-  const { selfUser } = useContext(AuthContext);
+
   const nav = useNavigate();
   const logoutButton = async () => {
     try {
@@ -20,14 +20,11 @@ const NavBar = () => {
       console.log(error);
     }
   };
-  const toggleShowNavBar = () => {
-    setShowNavBar((state) => !state);
-  };
 
   return (
     <>
       <div className="spacer p-1"></div>
-      <div className="gap-4 d-flex flex-column justify-content-center align-items-center text-center p-2">
+      <div className="gap-4 d-flex flex-column justify-content-center align-items-center text-center bg-light p-2">
         <img
           className="nav_logo"
           onClick={() => {
@@ -39,74 +36,66 @@ const NavBar = () => {
         />
 
         <i
-          onClick={() => toggleShowNavBar()}
-          class="ri-menu-line nav_toggle"
+          className="ri-menu-line nav_toggle"
+          onClick={() => setShowNavBar((s) => !s)}
         ></i>
       </div>
-      <div className={showNavBar ? "text-center" : "hide_class"} dir="rtl">
-        <ul className="p-1 d-flex flex-column gap-1">
-          <li
-            className="navbar-item bg-info text-white"
-            onClick={() => {
-              nav("/");
-              toggleShowNavBar();
-            }}
-          >
-            דף הבית
-          </li>
-
+      {showNavBar && (
+        <>
           {isLoggedIn && (
-            <li
-              className="navbar-item bg-info text-white"
-              onClick={() => {
-                nav("/cart");
-                toggleShowNavBar();
-              }}
-            >
-              סל קניות
-            </li>
-          )}
+            <div className="text-center" dir="rtl">
+              <ul className="p-1 row gap-1">
+                <li
+                  className=" col navbar-item bg-info text-white"
+                  onClick={() => {
+                    nav("/");
+                  }}
+                >
+                  דף הבית
+                </li>
 
-          {isLoggedIn === false ? (
-            <></>
-          ) : (
-            <li
-              className="navbar-item bg-info text-white"
-              onClick={() => {
-                logoutButton();
-                toggleShowNavBar();
-              }}
-            >
-              התנתקות
-            </li>
+                <li
+                  className=" col navbar-item bg-info text-white"
+                  onClick={() => {
+                    nav("/cart");
+                  }}
+                >
+                  סל קניות
+                </li>
+
+                <li
+                  className=" col navbar-item bg-info text-white"
+                  onClick={() => {
+                    logoutButton();
+                  }}
+                >
+                  התנתקות
+                </li>
+
+                <li
+                  className=" col navbar-item bg-info text-white"
+                  onClick={() => {
+                    nav("/user-management");
+                  }}
+                >
+                  ניהול חשבון
+                </li>
+
+                {isManager && (
+                  <li
+                    className=" col navbar-item bg-info text-white"
+                    onClick={() => {
+                      nav("/manager");
+                    }}
+                  >
+                    כניסה למנהלים
+                  </li>
+                )}
+              </ul>
+            </div>
           )}
-          {isLoggedIn && (
-            <li
-              className="navbar-item bg-info text-white"
-              onClick={() => {
-                nav("/user-management");
-                toggleShowNavBar();
-              }}
-            >
-              ניהול חשבון
-            </li>
-          )}
-          {isManager && (
-            <li
-              className="navbar-item bg-info text-white"
-              onClick={() => {
-                nav("/manager");
-                toggleShowNavBar();
-              }}
-            >
-              כניסה למנהלים
-            </li>
-          )}
-        </ul>
-      </div>
-      <p className="cart-go">
-        יש לך - {selfUser?.cart?.length} מוצרים בסל - לחץ למעבר לסל
-      </p>
+        </>
+      )}
     </>
   );
 };

@@ -41,7 +41,7 @@ const ShabatFoodList = () => {
                   <td className="td-item">לפרטים</td>
                 </tr>
                 {allProducts.map((item, index) => (
-                  <ShabatFoodItem key={item._id} item={item} index={index} />
+                  <ShabatFoodItem key={item.id} item={item} index={index} />
                 ))}
               </tbody>
             </table>

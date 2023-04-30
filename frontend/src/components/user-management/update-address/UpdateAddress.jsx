@@ -67,14 +67,14 @@ const UpdateAddress = () => {
               className="form-control"
               type="text"
               required
-              placeholder={`עיר: ${selfUser.address.city}`}
+              placeholder={`עיר: ${selfUser?.address?.city}`}
             />
             <input
               onChange={(e) => setGroundStreet(e.target.value)}
               className="form-control"
               type="text"
               required
-              placeholder={`רחוב: ${selfUser.address.street}`}
+              placeholder={`רחוב: ${selfUser?.address?.street}`}
             />
             <button className="form-control" type="submit">
               עדכן כתובת
@@ -88,28 +88,28 @@ const UpdateAddress = () => {
               className="form-control"
               type="text"
               required
-              placeholder={`עיר: ${selfUser.address.city}`}
+              placeholder={`עיר: ${selfUser?.address?.city}`}
             />
             <input
               onChange={(e) => setStreet(e.target.value)}
               className="form-control"
               type="text"
               required
-              placeholder={`רחוב: ${selfUser.address.street}`}
+              placeholder={`רחוב: ${selfUser?.address?.street}`}
             />
             <input
               onChange={(e) => setFloor(e.target.value)}
               className="form-control"
               type="number"
               required
-              placeholder={`קומה: ${selfUser.address.floor}`}
+              placeholder={`קומה: ${selfUser?.address?.floor}`}
             />
             <input
               onChange={(e) => setApart(e.target.value)}
               className="form-control"
               type="number"
               required
-              placeholder={`דירה: ${selfUser.address.houseNumber}`}
+              placeholder={`דירה: ${selfUser?.address?.houseNumber}`}
             />
             <button className="form-control" type="submit">
               עדכן כתובת

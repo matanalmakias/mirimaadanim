@@ -9,7 +9,7 @@ const UserManagement = () => {
     <div dir="rtl">
       <UpdateAddress />
 
-      <ToastContainer autoClose={1370} />
+      <ToastContainer autoClose={700} />
     </div>
   );
 };

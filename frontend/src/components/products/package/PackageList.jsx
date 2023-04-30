@@ -7,6 +7,7 @@ const PackageList = () => {
   const toggleOpenpackages = () => {
     setOpenpackages((state) => !state);
   };
+  console.log(allProducts);
   return (
     <>
       <div>
@@ -15,7 +16,7 @@ const PackageList = () => {
         </p>
         <div className={openPackages ? "" : "hide_class"}>
           {allProducts?.map((item, index) => (
-            <PackageItem index={index} key={item._id} item={item} />
+            <PackageItem index={index} key={item.id} item={item} />
           ))}
         </div>
       </div>

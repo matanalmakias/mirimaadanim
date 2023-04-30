@@ -6,10 +6,10 @@
 }
 .nav_toggle {
   background-color: rgb(255, 255, 255) !important;
-  width: 50px !important;
+  width: 10px !important;
   color: black;
   cursor: pointer;
-  padding: 4px;
+
 }
 .mobile_menu {
   margin-left: 40px !important;
@@ -30,17 +30,4 @@
 .navbar-item:hover {
   background-color: var(--dark-color) !important;
   color: var(--light-color) !important;
-}
-
-.cart-go {
-  background-color: white;
-  font-size: 15px;
-  font-weight: 500;
-  font-family: Noto Sans Hebrew;
-  padding: 2px;
-  transition: 0.6s;
-  cursor: pointer;
-}
-.cart-go:hover {
-  background-color: #e74a4a0e;
 }

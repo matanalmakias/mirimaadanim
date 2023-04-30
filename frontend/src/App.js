@@ -12,14 +12,16 @@ import AllOrders from "./components/orders/AllOrders.jsx";
 import ShabatDetails from "./components/products/shabat-food/ShabatDetails.jsx";
 import PackageDetails from "./components/products/package/PackageDetails.jsx";
 import UserManagement from "./pages/user-management/UserManagement.jsx";
-import Background1 from "./components/background/Background1.jsx";
+import { CateringList } from "./components/catering/Catering.jsx";
+import CateringDetails from "./components/catering/CateringDetails.jsx";
+import MenuDetails from "./components/catering/MenuDetails.jsx";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
   return (
-    <div className="main-app">
+    <div className="main-app" dir="rtl">
       <Header />
-      <Background1 />
+
       <Routes>
         {/* ---------------------Home----------------------- */}
 
@@ -43,6 +45,15 @@ function App() {
         {/* ---------------------Cart----------------------- */}
 
         <Route path="/cart" element={<Cart />} />
+        {/* ---------------------Catering Events----------------------- */}
+
+        <Route path="/catering-events" element={<CateringList />} />
+        {/* ---------------------Catering Events----------------------- */}
+
+        <Route path="/catering/:id" element={<CateringDetails />} />
+        {/* ---------------------Catering Events----------------------- */}
+
+        <Route path="/catering-menu/:id/:index" element={<MenuDetails />} />
         {/* ---------------------Orders----------------------- */}
 
         {isLoggedIn && <Route path="/orders" element={<AllOrders />} />}
@@ -54,6 +65,7 @@ function App() {
           <Route path="/user-management" element={<UserManagement />} />
         )}
       </Routes>
+
       <Footer />
     </div>
   );

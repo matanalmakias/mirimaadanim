@@ -17,7 +17,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ShabatFoodProvider } from "./context/shabat-food/ShabatFoodContext.jsx";
 import { SaladProvider } from "./context/salads/SaladContext.jsx";
 import { PackageProvider } from "./context/package/PackageContext.jsx";
-import Background1 from "./components/background/Background1.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
