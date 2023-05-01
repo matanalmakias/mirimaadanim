@@ -1,3 +1,22 @@
+export const readyProductList = {
+  firstMeals: [
+    `פילה טונה`,
+    `פילה דניס`,
+    `פילה סלומון`,
+    `פילה סלומון אפוי בתנור`,
+    `דג מטוגן/מרלוזה`,
+  ],
+  secondMeals: [`בשר צלי ברוטב פטריות`, "כרעיים עוף בתנור", "שניצלים"],
+  additionals: [`בשר צלי ברוטב פטריות`, "כרעיים עוף בתנור", "שניצלים"],
+  salads: [`מטבוחה`, "סלט פיצוחים", "קולסלאום", "תירס מקסיקני", "גמבה צבעים"],
+  oneTimeColors: {
+    plates: ["כחול", "ירוק", "לבן", "שחור"],
+    maps: ["כחול", "ירוק", "לבן", "שחור"],
+    forkKnife: ["כחול", "ירוק", "לבן", "שחור"],
+  },
+  softDrinks: ["קולה", "ספרייט", "פנטה"],
+  generals: ["לחמניות צמה"],
+};
 export const productList = {
   firstMeals: [
     `פילה טונה`,
@@ -32,7 +51,10 @@ export const cateringList = [
     name: `קייטרינג לסעודת מצווה`,
     description: `     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur,
         dolores?`,
-    menus: [`תפריט רגיל`, "תפריט בהתאמה אישית"],
+    menus: [
+      { name: `תפריט רגיל`, menu: { readyProductList } },
+      { name: `תפריט בהתאמה אישית`, menu: { productList } },
+    ],
   },
   {
     _id: 2,

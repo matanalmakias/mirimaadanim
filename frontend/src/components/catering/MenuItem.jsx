@@ -6,7 +6,7 @@ const MenuItem = ({ item, index, catering }) => {
   const [showItem, setShowItem] = useState(false);
   const [qty, setQty] = useState();
   const navigate = useNavigate();
-
+  console.log(`item`, item);
   const formSubmit = (e) => {
     e.preventDefault();
     const quantity = e.target.elements.quantity.value;
@@ -22,7 +22,7 @@ const MenuItem = ({ item, index, catering }) => {
         className="card col btn btn-light"
         onClick={() => setShowItem(!showItem)}
       >
-        {item}
+        {item.name}
       </button>
       {showItem && (
         <Form

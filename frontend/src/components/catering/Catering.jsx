@@ -34,10 +34,10 @@ export const CateringItem = ({ item }) => {
 
   return (
     <>
-      <p onClick={() => nav(`/catering/${item._id}`)} className="mb-1 card ">
+      <p onClick={() => nav(`/catering/${item._id}`)} className="m-1 card ">
         {item?.name}
       </p>
-      <p>{item?.description}</p>
+      <p className="card p1 m-1">{item?.description}</p>
     </>
   );
 };
