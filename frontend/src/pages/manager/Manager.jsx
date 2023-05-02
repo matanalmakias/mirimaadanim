@@ -10,6 +10,7 @@ const Manager = () => {
   const [openCreateSalad, setOpenCreateSalad] = useState(false);
   const [openCreateShabatFood, setOpenCreateShabatFood] = useState(false);
   const [openCreatePackage, setOpenCreatePackage] = useState(false);
+  const [openCreateBid, setOpenCreateBid] = useState(false);
   const nav = useNavigate();
 
   const toggleOpenCreateSalad = () => {
@@ -25,6 +26,16 @@ const Manager = () => {
     <>
       <hr />
       <div className="text-center d-flex flex-column gap-1">
+        {/* --------יצירת הצעת מחיר ---------- */}
+        <p
+          onClick={() => toggleOpenCreateBid()}
+          className="btn bg-white text-black p-2 fs1"
+        >
+          {openCreateBid ? "סגור" : "הוספת הצעת מחיר"}
+        </p>
+        <section className={openCreateBid ? "" : "hide_class"}>
+          <CreateBid />
+        </section>
         {/* --------יצירת סלט לתפריט ---------- */}
         <p
           onClick={() => toggleOpenCreateSalad()}

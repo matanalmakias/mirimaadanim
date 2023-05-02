@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import AuthContext from "../../context/AuthContext";
+import AuthContext from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import authService from "../../services/auth.service";
+import authService from "../../../services/auth.service";
 import "./navbar.css";
-import logo from "../../images/logo.png";
-import Login from "../../components/login/Login";
+import logo from "../../../images/logo.png";
+import Login from "../../login/Login";
 
 const NavBar = () => {
   const [showNavBar, setShowNavBar] = useState(true);

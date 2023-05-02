@@ -87,7 +87,7 @@ const Login = () => {
 
       {/*<----------- Final Login------------> */}
       <div className={showTryLogin === false ? "bg-light" : "hide_class"}>
-        <p className="bg-dark p-1">הקוד נשלח אליך לנייד</p>
+        <p className=" card p-1">הקוד נשלח אליך לנייד</p>
         <input
           type="number"
           pattern="[0-9]{6}"
