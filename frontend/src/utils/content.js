@@ -85,3 +85,42 @@ export const cateringList = [
     menus: [`תפריט רגיל`, "תפריט בהתאמה אישית"],
   },
 ];
+
+export const bidList = [
+  {
+    _id: 1,
+    title: `הצעת מחיר עבור אירוע קייטרינג`,
+    customerName: `יוסי`,
+    customerPhone: `0526757706`,
+    customerEmail: `inviteserv@gmail.com`,
+    content: `<></>`,
+    date: `2023-05-02`,
+  },
+  {
+    _id: 2,
+    title: `הצעת מחיר עבור אירוע קייטרינג`,
+    customerName: `יוסי`,
+    customerPhone: `0526757706`,
+    customerEmail: `inviteserv@gmail.com`,
+    content: `<></>`,
+    date: `2023-05-02`,
+  },
+  {
+    _id: 3,
+    title: `הצעת מחיר עבור אירוע קייטרינג`,
+    customerName: `יוסי`,
+    customerPhone: `0526757706`,
+    customerEmail: `inviteserv@gmail.com`,
+    content: `<></>`,
+    date: `2023-05-02`,
+  },
+  {
+    _id: 4,
+    title: `הצעת מחיר עבור אירוע קייטרינג`,
+    customerName: `יוסי`,
+    customerPhone: `0526757706`,
+    customerEmail: `inviteserv@gmail.com`,
+    content: `<></>`,
+    date: `2023-05-02`,
+  },
+];

@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import CreateSalad from "../../components/manager/salad/CreateSalad";
 import CreateShabatFood from "../../components/manager/shabat-food/CreateShabatFood";
 import CreatePackageList from "./../../components/manager/shabat-food/CreatePackageList";
+import CreateBid from "../../components/manager/bid/CreateBid";
+import Bid from "../../components/manager/bid/Bid";
 const Manager = () => {
   const [openCreateSalad, setOpenCreateSalad] = useState(false);
   const [openCreateShabatFood, setOpenCreateShabatFood] = useState(false);
@@ -22,6 +24,9 @@ const Manager = () => {
   const toggleOpenCreatePackage = () => {
     setOpenCreatePackage((state) => !state);
   };
+  const toggleOpenCreateBid = () => {
+    setOpenCreateBid((state) => !state);
+  };
   return (
     <>
       <hr />
@@ -29,17 +34,17 @@ const Manager = () => {
         {/* --------יצירת הצעת מחיר ---------- */}
         <p
           onClick={() => toggleOpenCreateBid()}
-          className="btn bg-white text-black p-2 fs1"
+          className="btn bg-white text-black p-2 mb-1 fs1"
         >
-          {openCreateBid ? "סגור" : "הוספת הצעת מחיר"}
+          {openCreateBid ? "סגור" : "הצעות מחיר"}
         </p>
         <section className={openCreateBid ? "" : "hide_class"}>
-          <CreateBid />
+          <Bid />
         </section>
         {/* --------יצירת סלט לתפריט ---------- */}
         <p
           onClick={() => toggleOpenCreateSalad()}
-          className="btn bg-white text-black p-2 fs1"
+          className="btn bg-white text-black p-2 mb-1 fs1"
         >
           {openCreateSalad ? "סגור" : "הוספת סלט לתפריט"}
         </p>
@@ -50,7 +55,7 @@ const Manager = () => {
 
         <p
           onClick={() => toggleOpenCreateShabatFood()}
-          className="btn bg-white text-black p-2 fs1"
+          className="btn bg-white text-black p-2 mb-1 fs1"
         >
           {openCreateShabatFood ? "סגור" : "הוסף פריט לאוכל מוכן לשבת"}
         </p>
@@ -61,7 +66,7 @@ const Manager = () => {
         {/* ----------יצירת חבילה שלמה לאוכל מוכן לשבת---------- */}
         <p
           onClick={() => toggleOpenCreatePackage()}
-          className="btn bg-white text-black p-2 fs1"
+          className="btn bg-white text-black p-2 mb-1 fs1"
         >
           {openCreatePackage ? "סגור" : "הוסף חבילה שלמה לחגים/שבת"}
         </p>

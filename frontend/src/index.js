@@ -6,6 +6,7 @@ import "./index.css";
 import "remixicon/fonts/remixicon.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import reportWebVitals from "./reportWebVitals.js";
+import "react-quill/dist/quill.snow.css"; // import the styles
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import "@fontsource/roboto/300.css";
