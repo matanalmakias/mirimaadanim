@@ -6,14 +6,9 @@ import Header from "./components/header/Header.jsx";
 import Footer from "./components/footer/Footer.jsx";
 import Home from "./pages/home/Home.jsx";
 import Manager from "./pages/manager/Manager.jsx";
-import SaladDetails from "./components/products/salad/SaladDetails.jsx";
 import Cart from "./components/cart/Cart.jsx";
 import AllOrders from "./components/orders/AllOrders.jsx";
-import ShabatDetails from "./components/products/shabat-food/ShabatDetails.jsx";
-import PackageDetails from "./components/products/package/PackageDetails.jsx";
 import UserManagement from "./pages/user-management/UserManagement.jsx";
-import { CateringList } from "./components/catering/Catering.jsx";
-import CateringDetails from "./components/catering/CateringDetails.jsx";
 import MenuDetails from "./components/catering/MenuDetails.jsx";
 
 function App() {
@@ -29,28 +24,10 @@ function App() {
         {/* ---------------------Manager----------------------- */}
 
         {isManager && <Route path="/manager" element={<Manager />} />}
-        {/* ---------------------Salads----------------------- */}
-
-        <Route path="/product/salads/:id" element={<SaladDetails />} />
-        {/* ---------------------Shabat----------------------- */}
-
-        <Route path="/product/shabat/:id" element={<ShabatDetails />} />
-        {/* ---------------------Salads----------------------- */}
-
-        <Route path="/product/salad/:id" element={<SaladDetails />} />
-        {/* ---------------------Packages----------------------- */}
-
-        <Route path="/product/package/:id" element={<PackageDetails />} />
 
         {/* ---------------------Cart----------------------- */}
 
         <Route path="/cart" element={<Cart />} />
-        {/* ---------------------Catering Events----------------------- */}
-
-        <Route path="/catering-events" element={<CateringList />} />
-        {/* ---------------------Catering Events----------------------- */}
-
-        <Route path="/catering/:id" element={<CateringDetails />} />
         {/* ---------------------Catering Events----------------------- */}
 
         <Route path="/catering-menu/:id/:index" element={<MenuDetails />} />

@@ -1,3 +1,12 @@
+// מערכת הזמנות
+// מערכת מלאי
+// מערכת לקוחות
+// מערכת הצעות מחיר - V
+// מערכת פורום
+// מערכת מוצרים - V
+
+// List,Item,Details
+
 export const readyProductList = {
   firstMeals: [
     `פילה טונה`,
@@ -122,5 +131,113 @@ export const bidList = [
     customerEmail: `inviteserv@gmail.com`,
     content: `<></>`,
     date: `2023-05-02`,
+  },
+];
+
+export const customerList = [
+  {
+    _id: 1,
+    name: "John Doe",
+    email: "johndoe@example.com",
+    phone: "555-555-5555",
+    address: "123 Main St, Anytown, USA",
+    createdAt: `22-05-04`,
+    orders: [
+      {
+        orderId: "12345",
+        orderDate: "2023-04-30",
+        orderTotal: 100.0,
+        shippingAddress: "123 Main St, Anytown, USA",
+      },
+      {
+        orderId: "67890",
+        orderDate: "2023-05-01",
+        orderTotal: 75.0,
+        shippingAddress: "456 Market St, Anytown, USA",
+      },
+    ],
+  },
+  {
+    _id: 2,
+    name: "Jane Smith",
+    email: "janesmith@example.com",
+    phone: "555-555-5555",
+    address: "456 Market St, Anytown, USA",
+    orders: [
+      {
+        orderId: "13579",
+        orderDate: "2023-05-02",
+        orderTotal: 50.0,
+        shippingAddress: "456 Market St, Anytown, USA",
+      },
+    ],
+  },
+];
+
+export const orderList = [
+  {
+    _id: "1",
+    customerId: 1,
+    products: [
+      {
+        id: "1",
+        name: "Product 1",
+        price: 50.0,
+        quantity: 2,
+      },
+      {
+        id: "2",
+        name: "Product 2",
+        price: 25.0,
+        quantity: 1,
+      },
+    ],
+    date: "2023-05-03",
+    total: 125.0,
+    status: "Delivered",
+  },
+  {
+    _id: "2",
+    customerId: 1,
+    products: [
+      {
+        id: "3",
+        name: "Product 3",
+        price: 10.0,
+        quantity: 3,
+      },
+    ],
+    date: "2023-05-02",
+    total: 30.0,
+    status: "In Transit",
+  },
+];
+
+export const productList2 = [
+  {
+    _id: "1",
+    name: "Product 1",
+    description: "This is product 1",
+    price: 50.0,
+    quantity: 10,
+    createdAt: `2022-05-02`,
+    images: [
+      {
+        id: "1",
+        url: "https://example.com/product1-image1.jpg",
+      },
+      {
+        id: "2",
+        url: "https://example.com/product1-image2.jpg",
+      },
+    ],
+    reviews: [
+      {
+        id: "1",
+        author: "John Doe",
+        rating: 4,
+        comment: "This product is great!",
+      },
+    ],
   },
 ];

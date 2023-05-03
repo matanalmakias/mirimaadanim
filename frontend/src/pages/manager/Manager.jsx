@@ -8,29 +8,77 @@ import CreateShabatFood from "../../components/manager/shabat-food/CreateShabatF
 import CreatePackageList from "./../../components/manager/shabat-food/CreatePackageList";
 import CreateBid from "../../components/manager/bid/CreateBid";
 import Bid from "../../components/manager/bid/Bid";
+import Customer from "../../components/manager/customers/Customer";
+import Order from "../../components/manager/order/Order";
+import Inventory from "../../components/manager/inventory/Inventory";
+import Product from "../../components/manager/products/Products";
 const Manager = () => {
-  const [openCreateSalad, setOpenCreateSalad] = useState(false);
-  const [openCreateShabatFood, setOpenCreateShabatFood] = useState(false);
-  const [openCreatePackage, setOpenCreatePackage] = useState(false);
   const [openCreateBid, setOpenCreateBid] = useState(false);
+  const [openCreateCustomer, setOpenCreateCustomer] = useState(false);
+  const [openCreateOrder, setOpenCreateOrder] = useState(false);
+  const [openCreateInventory, setOpenCreateInventory] = useState(false);
+  const [openCreateProducts, setOpenCreateProducts] = useState(false);
   const nav = useNavigate();
 
-  const toggleOpenCreateSalad = () => {
-    setOpenCreateSalad((state) => !state);
-  };
-  const toggleOpenCreateShabatFood = () => {
-    setOpenCreateShabatFood((state) => !state);
-  };
-  const toggleOpenCreatePackage = () => {
-    setOpenCreatePackage((state) => !state);
-  };
   const toggleOpenCreateBid = () => {
     setOpenCreateBid((state) => !state);
+  };
+  const toggleOpenCreateCustomer = () => {
+    setOpenCreateCustomer((state) => !state);
+  };
+  const toggleOpenCreateOrder = () => {
+    setOpenCreateOrder((state) => !state);
+  };
+  const toggleOpenCreateInventory = () => {
+    setOpenCreateInventory((state) => !state);
+  };
+  const toggleOpenCreateProducts = () => {
+    setOpenCreateProducts((state) => !state);
   };
   return (
     <>
       <hr />
       <div className="text-center d-flex flex-column gap-1">
+        {/* --------יצירת מוצרים ---------- */}
+        <p
+          onClick={() => toggleOpenCreateProducts()}
+          className="btn bg-white text-black p-2 mb-1 fs1"
+        >
+          {openCreateProducts ? "סגור" : "רשימת מוצרים"}
+        </p>
+        <section className={openCreateProducts ? "" : "hide_class"}>
+          <Product />
+        </section>
+        {/* --------יצירת מלאי ---------- */}
+        <p
+          onClick={() => toggleOpenCreateInventory()}
+          className="btn bg-white text-black p-2 mb-1 fs1"
+        >
+          {openCreateInventory ? "סגור" : "רשימת מלאי"}
+        </p>
+        <section className={openCreateInventory ? "" : "hide_class"}>
+          <Inventory />
+        </section>
+        {/* --------יצירת הזמנה ---------- */}
+        <p
+          onClick={() => toggleOpenCreateOrder()}
+          className="btn bg-white text-black p-2 mb-1 fs1"
+        >
+          {openCreateOrder ? "סגור" : "הזמנות"}
+        </p>
+        <section className={openCreateOrder ? "" : "hide_class"}>
+          <Order />
+        </section>
+        {/* --------יצירת לקוח ---------- */}
+        <p
+          onClick={() => toggleOpenCreateCustomer()}
+          className="btn bg-white text-black p-2 mb-1 fs1"
+        >
+          {openCreateCustomer ? "סגור" : "לקוחות"}
+        </p>
+        <section className={openCreateCustomer ? "" : "hide_class"}>
+          <Customer />
+        </section>
         {/* --------יצירת הצעת מחיר ---------- */}
         <p
           onClick={() => toggleOpenCreateBid()}
@@ -41,39 +89,6 @@ const Manager = () => {
         <section className={openCreateBid ? "" : "hide_class"}>
           <Bid />
         </section>
-        {/* --------יצירת סלט לתפריט ---------- */}
-        <p
-          onClick={() => toggleOpenCreateSalad()}
-          className="btn bg-white text-black p-2 mb-1 fs1"
-        >
-          {openCreateSalad ? "סגור" : "הוספת סלט לתפריט"}
-        </p>
-        <section className={openCreateSalad ? "" : "hide_class"}>
-          <CreateSalad />
-        </section>
-        {/* ----------יצירת פריט לאוכל מוכן לשבת ---------- */}
-
-        <p
-          onClick={() => toggleOpenCreateShabatFood()}
-          className="btn bg-white text-black p-2 mb-1 fs1"
-        >
-          {openCreateShabatFood ? "סגור" : "הוסף פריט לאוכל מוכן לשבת"}
-        </p>
-        <section className={openCreateShabatFood ? "" : "hide_class"}>
-          <CreateShabatFood />
-        </section>
-
-        {/* ----------יצירת חבילה שלמה לאוכל מוכן לשבת---------- */}
-        <p
-          onClick={() => toggleOpenCreatePackage()}
-          className="btn bg-white text-black p-2 mb-1 fs1"
-        >
-          {openCreatePackage ? "סגור" : "הוסף חבילה שלמה לחגים/שבת"}
-        </p>
-        <section className={openCreatePackage ? "" : "hide_class"}>
-          <CreatePackageList />
-        </section>
-        {/* ---------------------------------------- */}
       </div>
       <ToastContainer autoClose={1200} />
     </>
