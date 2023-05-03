@@ -5,8 +5,8 @@ import BidItem from "./BidItem";
 const BidList = () => {
   return (
     <div>
-      {bidList?.map((item) => (
-        <BidItem key={item._id} item={item} />
+      {bidList?.map((item, index) => (
+        <BidItem key={item._id} index={index} item={item} />
       ))}
     </div>
   );

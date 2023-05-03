@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
-const BidItem = ({ item }) => {
+const BidItem = ({ item, index }) => {
   const [showItem, setShowItem] = useState(false);
   return (
     <div className="">
+      <span className="col card">{index + 1}</span>
       <span
         onClick={() => setShowItem((s) => !s)}
         className="btn btn-light fs1 p-2 card m-2"
