@@ -241,3 +241,23 @@ export const productList2 = [
     ],
   },
 ];
+
+export const postList = [
+  {
+    _id: "1",
+    title: "My First Post",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    authorId: 1,
+    tags: ["tag1", "tag2", "tag3"],
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    likes: {
+      likes: 0,
+      users: [],
+    },
+    shares: {
+      shares: 0,
+      users: [],
+    },
+  },
+];

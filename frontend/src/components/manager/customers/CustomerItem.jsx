@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const CustomerItem = ({ item, index }) => {
-  console.log(item);
   const [showItem, setShowItem] = useState(false);
   return (
     <div className="">

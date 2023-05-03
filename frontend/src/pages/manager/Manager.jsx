@@ -12,12 +12,14 @@ import Customer from "../../components/manager/customers/Customer";
 import Order from "../../components/manager/order/Order";
 import Inventory from "../../components/manager/inventory/Inventory";
 import Product from "../../components/manager/products/Products";
+import Post from "../../components/manager/posts/Post";
 const Manager = () => {
   const [openCreateBid, setOpenCreateBid] = useState(false);
   const [openCreateCustomer, setOpenCreateCustomer] = useState(false);
   const [openCreateOrder, setOpenCreateOrder] = useState(false);
   const [openCreateInventory, setOpenCreateInventory] = useState(false);
   const [openCreateProducts, setOpenCreateProducts] = useState(false);
+  const [openCreatePost, setOpenCreatePost] = useState(false);
   const nav = useNavigate();
 
   const toggleOpenCreateBid = () => {
@@ -35,10 +37,23 @@ const Manager = () => {
   const toggleOpenCreateProducts = () => {
     setOpenCreateProducts((state) => !state);
   };
+  const toggleOpenCreatePost = () => {
+    setOpenCreatePost((state) => !state);
+  };
   return (
     <>
       <hr />
       <div className="text-center d-flex flex-column gap-1">
+        {/* --------יצירת פוסטים ---------- */}
+        <p
+          onClick={() => toggleOpenCreatePost()}
+          className="btn bg-white text-black p-2 mb-1 fs1"
+        >
+          {openCreatePost ? "סגור" : "פוסטים"}
+        </p>
+        <section className={openCreatePost ? "" : "hide_class"}>
+          <Post />
+        </section>
         {/* --------יצירת מוצרים ---------- */}
         <p
           onClick={() => toggleOpenCreateProducts()}
