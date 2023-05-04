@@ -240,6 +240,32 @@ export const productList2 = [
       },
     ],
   },
+  {
+    _id: "2",
+    name: "Product 2",
+    description: "This is product 1",
+    price: 50.0,
+    quantity: 10,
+    createdAt: `2022-05-02`,
+    images: [
+      {
+        id: "1",
+        url: "https://example.com/product1-image1.jpg",
+      },
+      {
+        id: "2",
+        url: "https://example.com/product1-image2.jpg",
+      },
+    ],
+    reviews: [
+      {
+        id: "1",
+        author: "John Doe",
+        rating: 4,
+        comment: "This product is great!",
+      },
+    ],
+  },
 ];
 
 export const postList = [
@@ -259,5 +285,39 @@ export const postList = [
       shares: 0,
       users: [],
     },
+  },
+];
+
+export const inventoryList = [
+  {
+    _id: "1",
+    name: "Raw material A",
+    quantity: 1000,
+    unit: "kg",
+    pricePerUnit: 1.5,
+    supplier: "יוחננוף",
+    products: [
+      {
+        name: `מוצר 1`,
+        _id: `1`,
+      },
+    ],
+  },
+];
+
+export const updateList = [
+  {
+    _id: "1",
+    name: "Raw material A",
+    quantity: 1000,
+    unit: "kg",
+    pricePerUnit: 1.5,
+    supplier: "יוחננוף",
+    products: [
+      {
+        name: `מוצר 2`,
+        _id: `2`,
+      },
+    ],
   },
 ];

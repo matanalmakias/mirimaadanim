@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss"; // import the CSS file for styling
 import ReactQuill from "react-quill";
+import { productList2 } from "../../../utils/content";
+import ProductList from "../products/ProductsList";
+import ProductItem from "../products/ProductsItem";
 function CreateBid() {
   const [htmlValue, setHtmlValue] = useState("");
-  const [bidNameInput, setBidNameInput] = useState(null);
+  const [pricePerUnitInput, setPricePerUnitInput] = useState(null);
   const [nameInput, setNameInput] = useState(null);
-  const [phoneInput, setPhoneInput] = useState(null);
-  const [emailInput, setEmailInput] = useState(null);
+  const [qtyInput, setQtyInput] = useState(null);
+  const [weightInput, setWeightInput] = useState(null);
+  const [supplierInput, setSupplierInput] = useState(null);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const handleProductClick = (productId) => {
+    if (selectedProducts.includes(productId)) {
+      setSelectedProducts(selectedProducts.filter((_id) => _id !== productId));
+    } else {
+      setSelectedProducts([...selectedProducts, productId]);
+    }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission here
@@ -22,62 +35,91 @@ function CreateBid() {
     >
       <div className="row gap-1 w-100">
         <label htmlFor="company" className="col-3 label1 mb-1">
-          שם הצעת מחיר
-        </label>
-        <input
-          type="text"
-          required
-          onChange={(e) => setBidNameInput(e.target.value)}
-          placeholder="תן שם להצעת המחיר"
-          className="text-center col-8"
-        />
-      </div>
-      <div className="row gap-1 w-100">
-        <label htmlFor="company" className="col-3 label1 mb-1">
-          שם הלקוח
+          שם פריט
         </label>
         <input
           type="text"
           required
           onChange={(e) => setNameInput(e.target.value)}
-          placeholder="הכנס שם לקוח"
+          placeholder="תן שם לפריט"
           className="text-center col-8"
         />
       </div>
       <div className="row gap-1 w-100">
         <label htmlFor="company" className="col-3 label1 mb-1">
-          מס' פלאפון לקוח
+          כמות
         </label>
         <input
-          onChange={(e) => setPhoneInput(e.target.value)}
           type="tel"
           required
-          placeholder="הכנס מס' פלאפון של הלקוח"
+          onChange={(e) => setQtyInput(e.target.value)}
+          placeholder="הכנס כמות מעודכנת"
           className="text-center col-8"
         />
       </div>
       <div className="row gap-1 w-100">
         <label htmlFor="company" className="col-3 label1 mb-1">
-          אימייל לקוח
+          לפי
         </label>
         <input
-          onChange={(e) => setEmailInput(e.target.value)}
-          type="email"
+          onChange={(e) => setWeightInput(e.target.value)}
+          type="text"
           required
-          placeholder="הכנס אימייל של הלקוח"
+          placeholder="לפי /משקל /ק'ג/ליטר וכו'"
+          className="text-center col-8"
+        />
+      </div>
+      <div className="row gap-1 w-100">
+        <label htmlFor="company" className="col-3 label1 mb-1">
+          מחיר לפי יחידה
+        </label>
+        <input
+          onChange={(e) => setPricePerUnitInput(e.target.value)}
+          type="tel"
+          required
+          placeholder="מחיר מוצר לפי יחידה"
+          className="text-center col-8"
+        />
+      </div>
+      <div className="row gap-1 w-100">
+        <label htmlFor="company" className="col-3 label1 mb-1">
+          ספק
+        </label>
+        <input
+          onChange={(e) => setSupplierInput(e.target.value)}
+          type="text"
+          required
+          placeholder="מי הספק? יוחננוף/מחסני השוק וכו'"
           className="text-center col-8"
         />
       </div>
 
-      <div className="p-2 w-100">
-        <ReactQuill
-          className="bg-light w-100 "
-          id="htmlInput"
-          required
-          value={htmlValue}
-          onChange={handleHtmlChange}
-        />
+      <div className="row gap-1 w-100 align-items-center justify-content-center">
+        <label htmlFor="company" className="text-center col-3 label1 mb-1">
+          שיוך מוצרים[חובה]
+        </label>
+        <div className="">
+          <span className=" bg-secondary text-white ">
+            שייך את כל המוצרים שמתאימים להכנה של פריט זה!
+          </span>
+          {productList2?.map((item, index) => (
+            <div key={index} className="card m-1 row p-1">
+              <input
+                type="checkbox"
+                id={item._id}
+                className=" col"
+                value={item._id}
+                checked={selectedProducts.includes(item._id)}
+                onChange={() => handleProductClick(item._id)}
+              />
+              <label className="col" htmlFor={item.id}>
+                {item.name}
+              </label>
+            </div>
+          ))}
+        </div>
       </div>
+
       <button className="w-50" type="submit">
         Submit
       </button>

@@ -1,15 +1,15 @@
 import React from "react";
-import { bidList } from "../../../utils/content";
-import BidItem from "./InventoryItem";
+import InventoryItem from "./InventoryItem";
+import { inventoryList } from "../../../utils/content";
 
-const BidList = () => {
+const InventoryList = () => {
   return (
     <div>
-      {bidList?.map((item, index) => (
-        <BidItem key={item._id} index={index} item={item} />
+      {inventoryList?.map((item, index) => (
+        <InventoryItem key={item._id} index={index} item={item} />
       ))}
     </div>
   );
 };
 
-export default BidList;
+export default InventoryList;
