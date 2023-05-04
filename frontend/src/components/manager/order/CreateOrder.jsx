@@ -1,19 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./style.scss"; // import the CSS file for styling
-import ReactQuill from "react-quill";
+import { customerList, productList2 } from "../../../utils/content";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShekelSign } from "@fortawesome/free-solid-svg-icons";
+
 function CreateBid() {
-  const [htmlValue, setHtmlValue] = useState("");
-  const [bidNameInput, setBidNameInput] = useState(null);
-  const [nameInput, setNameInput] = useState(null);
-  const [phoneInput, setPhoneInput] = useState(null);
-  const [emailInput, setEmailInput] = useState(null);
+  const [titleInput, setTitleInput] = useState();
+  const [totalPrice, setTotalPrice] = useState();
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState([]);
+  useEffect(() => {
+    setTotalPrice(0);
+    let price = 0;
+    selectedProducts.forEach((item, index) => {
+      let product = productList2?.find(
+        (productItem) => productItem._id === item
+      );
+      price = product.price + price;
+      setTotalPrice(price);
+    });
+  }, [selectedProducts]);
+  const handleCustomerClick = (userId) => {
+    if (selectedCustomer.includes(userId)) {
+      setSelectedCustomer(selectedCustomer.filter((_id) => _id !== userId));
+    } else {
+      setSelectedCustomer([...selectedProducts, userId]);
+    }
+  };
+  const handleProductClick = (productId) => {
+    if (selectedProducts.includes(productId)) {
+      setSelectedProducts(selectedProducts.filter((_id) => _id !== productId));
+    } else {
+      setSelectedProducts([...selectedProducts, productId]);
+    }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission here
   };
-  function handleHtmlChange(value) {
-    setHtmlValue(value);
-  }
 
   return (
     <form
@@ -22,62 +46,68 @@ function CreateBid() {
     >
       <div className="row gap-1 w-100">
         <label htmlFor="company" className="col-3 label1 mb-1">
-          שם הצעת מחיר
+          תיאור הזמנה
         </label>
         <input
           type="text"
           required
-          onChange={(e) => setBidNameInput(e.target.value)}
-          placeholder="תן שם להצעת המחיר"
+          onChange={(e) => setTitleInput(e.target.value)}
+          placeholder=" תאר את ההזמנה, מי הזמין, מה הזמין ולאן"
           className="text-center col-8"
         />
       </div>
-      <div className="row gap-1 w-100">
-        <label htmlFor="company" className="col-3 label1 mb-1">
-          שם הלקוח
+      <div className="row gap-1 w-100 align-items-center justify-content-center">
+        <label htmlFor="company" className="col-3 text-center label1 mb-1">
+          שיוך מוצרים להזמנה
         </label>
-        <input
-          type="text"
-          required
-          onChange={(e) => setNameInput(e.target.value)}
-          placeholder="הכנס שם לקוח"
-          className="text-center col-8"
-        />
-      </div>
-      <div className="row gap-1 w-100">
-        <label htmlFor="company" className="col-3 label1 mb-1">
-          מס' פלאפון לקוח
+
+        {productList2?.map((item, index) => (
+          <div key={index} className="card row p-1">
+            <input
+              type="checkbox"
+              id={item._id}
+              className=" col form-check"
+              value={item._id}
+              checked={selectedProducts.includes(item._id)}
+              onChange={() => handleProductClick(item._id)}
+            />
+            <label className="col" htmlFor={item.id}>
+              {item.name}
+            </label>
+          </div>
+        ))}
+        <label htmlFor="company" className="col-3 text-center label1 mb-1">
+          שיוך לקוח
         </label>
-        <input
-          onChange={(e) => setPhoneInput(e.target.value)}
-          type="tel"
-          required
-          placeholder="הכנס מס' פלאפון של הלקוח"
-          className="text-center col-8"
-        />
-      </div>
-      <div className="row gap-1 w-100">
-        <label htmlFor="company" className="col-3 label1 mb-1">
-          אימייל לקוח
-        </label>
-        <input
-          onChange={(e) => setEmailInput(e.target.value)}
-          type="email"
-          required
-          placeholder="הכנס אימייל של הלקוח"
-          className="text-center col-8"
-        />
+
+        {customerList?.map((item, index) => (
+          <div key={index} className="card row p-1">
+            <input
+              type="checkbox"
+              id={item._id}
+              className=" col  form-check"
+              value={item._id}
+              checked={selectedCustomer.includes(item._id)}
+              onChange={() => handleCustomerClick(item._id)}
+            />
+            <label className="col" htmlFor={item.id}>
+              {item.name}
+            </label>
+          </div>
+        ))}
+        <div className="row p-1 gap-1">
+          <span className="card h5 w-100 col p-1 m-1 row gap-2">
+            <span
+              className="m-1 h5 text-center p-1"
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              מחיר כולל: <FontAwesomeIcon icon={faShekelSign} />
+              {totalPrice}
+            </span>
+          </span>
+        </div>
       </div>
 
-      <div className="p-2 w-100">
-        <ReactQuill
-          className="bg-light w-100 "
-          id="htmlInput"
-          required
-          value={htmlValue}
-          onChange={handleHtmlChange}
-        />
-      </div>
       <button className="w-50" type="submit">
         Submit
       </button>

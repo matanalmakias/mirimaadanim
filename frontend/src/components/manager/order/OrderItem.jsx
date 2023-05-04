@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-const BidItem = ({ item, index }) => {
+const OrderItem = ({ item, index }) => {
+  console.log(item);
   const [showItem, setShowItem] = useState(false);
   return (
     <div className="">
@@ -14,13 +15,18 @@ const BidItem = ({ item, index }) => {
       {showItem && (
         <div className="p-3">
           <div className="row gap-1">
-            <span className="card p-1 col">לכבוד: {item?.customerName}</span>
-            <span className="col p-1 card">מס': {item?.customerPhone}</span>
-            <span className="col p-1 card">אימייל': {item?.customerEmail}</span>
+            <span className="card p-1 col">
+              שם לקוח: {item?.customer?.name}
+            </span>
+            <span className="col p-1 card">סטטוס הזמנה: {item?.status}</span>
           </div>
 
-          <span className=" m-2 card p-2">{item?.content}</span>
+          <span className=" m-2 card p-1">מחיר כולל: {item?.total}</span>
           <span className="card">תאריך: {item?.date}</span>
+          <span className="card h4 m-1"> רשימת מוצרים</span>
+          {item?.products?.map((item) => (
+            <span className="card m-1">{item.name}</span>
+          ))}
         </div>
       )}
       <hr className="card mb-1" />
@@ -28,4 +34,4 @@ const BidItem = ({ item, index }) => {
   );
 };
 
-export default BidItem;
+export default OrderItem;

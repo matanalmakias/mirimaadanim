@@ -40,7 +40,7 @@ const SecondStep = ({ products: productsIds }) => {
                 required
                 onChange={(e) => setNameInput(e.target.value)}
                 placeholder={`שם מעודכן - ${item?.name}`}
-                className="text-center col-8"
+                className="text-center col-8 fs1"
               />
             </div>
             <div className="row gap-1 w-100">
@@ -52,7 +52,7 @@ const SecondStep = ({ products: productsIds }) => {
                 required
                 onChange={(e) => setQtyInput(e.target.value)}
                 placeholder={`כמות מעודכנת - ${item?.quantity}`}
-                className="text-center col-8"
+                className="text-center col-8 fs1"
               />
             </div>
             <div className="row gap-1 w-100">
@@ -64,7 +64,7 @@ const SecondStep = ({ products: productsIds }) => {
                 type="text"
                 required
                 placeholder={`מעודכן - ${item?.unit}`}
-                className="text-center col-8"
+                className="text-center col-8 fs1"
               />
             </div>
             <div className="row gap-1 w-100">
@@ -76,7 +76,7 @@ const SecondStep = ({ products: productsIds }) => {
                 type="tel"
                 required
                 placeholder={`מחיר מעודכן - ${item?.pricePerUnit}`}
-                className="text-center col-8"
+                className="text-center col-8 fs1"
               />
             </div>
             <div className="row gap-1 w-100">
@@ -88,7 +88,7 @@ const SecondStep = ({ products: productsIds }) => {
                 type="text"
                 required
                 placeholder={`ספק אחרון - ${item?.supplier}`}
-                className="text-center col-8"
+                className="text-center col-8 fs1"
               />
             </div>
 

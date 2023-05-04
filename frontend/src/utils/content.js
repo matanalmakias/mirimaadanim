@@ -176,8 +176,10 @@ export const customerList = [
 
 export const orderList = [
   {
+    title: `שם הזמנה`,
     _id: "1",
-    customerId: 1,
+    customer: { name: `יוסי`, id: `1` },
+    discount: 0,
     products: [
       {
         id: "1",
@@ -198,7 +200,9 @@ export const orderList = [
   },
   {
     _id: "2",
-    customerId: 1,
+    title: `שם הזמנה`,
+    customer: { name: `יוסי`, id: `1` },
+    discount: 0,
     products: [
       {
         id: "3",

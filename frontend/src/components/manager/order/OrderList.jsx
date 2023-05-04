@@ -1,15 +1,15 @@
 import React from "react";
-import { bidList } from "../../../utils/content";
-import BidItem from "./OrderItem";
+import OrderItem from "./OrderItem";
+import { orderList } from "../../../utils/content";
 
-const BidList = () => {
+const OrderList = () => {
   return (
     <div>
-      {bidList?.map((item, index) => (
-        <BidItem key={item._id} index={index} item={item} />
+      {orderList?.map((item, index) => (
+        <OrderItem key={item._id} index={index} item={item} />
       ))}
     </div>
   );
 };
 
-export default BidList;
+export default OrderList;
