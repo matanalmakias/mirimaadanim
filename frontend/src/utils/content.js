@@ -103,6 +103,7 @@ export const bidList = [
     customerPhone: `0526757706`,
     customerEmail: `inviteserv@gmail.com`,
     content: `<></>`,
+    products: [{ name: `Product 1`, _id: `1` }],
     date: `2023-05-02`,
   },
   {
@@ -112,6 +113,7 @@ export const bidList = [
     customerPhone: `0526757706`,
     customerEmail: `inviteserv@gmail.com`,
     content: `<></>`,
+    products: [{ name: `Product 1`, _id: `1` }],
     date: `2023-05-02`,
   },
   {
@@ -121,6 +123,7 @@ export const bidList = [
     customerPhone: `0526757706`,
     customerEmail: `inviteserv@gmail.com`,
     content: `<></>`,
+    products: [{ name: `Product 1`, _id: `1` }],
     date: `2023-05-02`,
   },
   {
@@ -130,6 +133,7 @@ export const bidList = [
     customerPhone: `0526757706`,
     customerEmail: `inviteserv@gmail.com`,
     content: `<></>`,
+    products: [{ name: `Product 1`, _id: `1` }],
     date: `2023-05-02`,
   },
 ];

@@ -1,12 +1,22 @@
 import React, { useState } from "react";
 import "./style.scss"; // import the CSS file for styling
 import ReactQuill from "react-quill";
+import { productList2 } from "../../../utils/content";
 function CreateBid() {
   const [htmlValue, setHtmlValue] = useState("");
   const [bidNameInput, setBidNameInput] = useState(null);
   const [nameInput, setNameInput] = useState(null);
   const [phoneInput, setPhoneInput] = useState(null);
   const [emailInput, setEmailInput] = useState(null);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const handleProductClick = (productId) => {
+    if (selectedProducts.includes(productId)) {
+      setSelectedProducts(selectedProducts.filter((_id) => _id !== productId));
+    } else {
+      setSelectedProducts([...selectedProducts, productId]);
+    }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // handle form submission here
@@ -69,7 +79,36 @@ function CreateBid() {
         />
       </div>
 
+      <div className="row gap-1 w-100 align-items-center justify-content-center">
+        <label htmlFor="company" className="text-center col-3 label1 mb-1">
+          שיוך מוצרים[חובה]
+        </label>
+        <div className="">
+          <span className=" bg-secondary text-white ">
+            שייך את כל המוצרים שמתאימים להכנה של פריט זה!
+          </span>
+          {productList2?.map((item, index) => (
+            <div key={index} className="card m-1 row p-1">
+              <input
+                type="checkbox"
+                id={item._id}
+                className=" col"
+                value={item._id}
+                checked={selectedProducts.includes(item._id)}
+                onChange={() => handleProductClick(item._id)}
+              />
+              <label className="col" htmlFor={item.id}>
+                {item.name}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="p-2 w-100">
+        <label htmlFor="company" className="col-3 label1 mb-1">
+          הוספת מידע / מכתב
+        </label>
         <ReactQuill
           className="bg-light w-100 "
           id="htmlInput"
