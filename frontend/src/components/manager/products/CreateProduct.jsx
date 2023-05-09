@@ -1,31 +1,32 @@
 import React, { useState } from "react";
 import "./style.scss"; // import the CSS file for styling
-import ReactQuill from "react-quill";
+import productService from "../../../services/product/product.service";
+import { toast } from "react-toastify";
 function CreateProduct() {
   const [productNameInput, setProductNameInput] = useState(null);
   const [descInput, setDescInput] = useState(null);
   const [priceInput, setPriceInput] = useState(null);
   const [images, setImages] = useState(null);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
-  };
-  function handleImageUpload(e) {
-    const files = e.target.files;
-    const images = [];
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file);
-
-      reader.onload = () => {
-        images.push(reader.result);
-        setImages(images);
-      };
+    const formData = new FormData();
+    formData.append("name", productNameInput);
+    formData.append("description", descInput);
+    formData.append("price", priceInput);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
     }
-  }
+    productService
+      .createProduct(formData)
+      .then((res) => toast(res.data.msg))
+      .finally(() => {
+        event.target.submit();
+
+        window.location.reload();
+      });
+  };
 
   return (
     <form
@@ -72,14 +73,13 @@ function CreateProduct() {
         <label htmlFor="images" className="col-3 label1 mb-1">
           תמונות
         </label>
+
         <input
-          onChange={(e) => handleImageUpload(e)}
+          onChange={(e) => setImages(e.target.files)}
           type="file"
-          id="images"
-          name="images"
           accept="image/*"
-          multiple={true}
-          className="text-center  form-control w_70 "
+          multiple
+          className="text-center form-control  w_70 "
         />
       </div>
 

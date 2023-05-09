@@ -16,7 +16,7 @@ const Home = () => {
   }
   return (
     <div
-      className="p-5 d-flex flex-column align-items-center justify-content-center"
+      className="d-flex flex-column align-items-center justify-content-center"
       dir="rtl"
     >
       <Products />

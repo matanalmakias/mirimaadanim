@@ -1,5 +1,14 @@
-.nav_logo {
-  cursor: pointer;
+@media (min-width: 748px) {
+  .nav_logo {
+    cursor: pointer;
+    width: 49% !important;
+  }
+}
+@media (max-width: 746px) {
+  .nav_logo {
+    cursor: pointer;
+    width: 100% !important;
+  }
 }
 .hide_class {
   display: none;

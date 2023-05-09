@@ -6,12 +6,8 @@ const socket = io(`${serverUrl}/`);
 export const SocketContext = createContext(socket);
 
 export const SocketProvider = ({ children }) => {
-  const socketUpdate = async () => {
-    return socket.emit(`update`);
-  };
-
   return (
-    <SocketContext.Provider value={{ socket, socketUpdate }}>
+    <SocketContext.Provider value={{ socket }}>
       {children}
     </SocketContext.Provider>
   );

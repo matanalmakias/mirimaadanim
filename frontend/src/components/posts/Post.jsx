@@ -3,8 +3,8 @@ import PostList from "./PostList";
 
 const Post = () => {
   return (
-    <div className="m-2">
-      <h4 className="h2 card">פוסטים</h4>
+    <div className="m-2  w-100 ">
+      <h4 className="h2 bg-light">פוסטים</h4>
       <PostList />
     </div>
   );

@@ -19,6 +19,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { ShabatFoodProvider } from "./context/shabat-food/ShabatFoodContext.jsx";
 import { SaladProvider } from "./context/salads/SaladContext.jsx";
 import { PackageProvider } from "./context/package/PackageContext.jsx";
+import { ProductProvider } from "./context/product/ProductContext.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,7 +30,9 @@ root.render(
         <ShabatFoodProvider>
           <SaladProvider>
             <PackageProvider>
-              <App />
+              <ProductProvider>
+                <App />
+              </ProductProvider>
             </PackageProvider>
           </SaladProvider>
         </ShabatFoodProvider>
