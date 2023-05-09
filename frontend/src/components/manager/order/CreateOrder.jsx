@@ -3,6 +3,8 @@ import "./style.scss"; // import the CSS file for styling
 import { customerList, productList2 } from "../../../utils/content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShekelSign } from "@fortawesome/free-solid-svg-icons";
+import orderService from "../../../services/order/order.service";
+import { toast } from "react-toastify";
 
 function CreateBid() {
   const [titleInput, setTitleInput] = useState();
@@ -36,7 +38,19 @@ function CreateBid() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
+
+    const formData = new FormData();
+    formData.append("title", titleInput);
+    formData.append("totalPrice", totalPrice);
+    formData.append("products", selectedProducts);
+    formData.append("customer", selectedCustomer);
+    orderService
+      .createOrder(formData)
+      .then((res) => toast(res.data.msg))
+      .finally(() => {
+        event.target.submit();
+        window.location.reload();
+      });
   };
 
   return (

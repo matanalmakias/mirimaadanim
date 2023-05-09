@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.scss"; // import the CSS file for styling
 import ReactQuill from "react-quill";
-import postService from "../../../services/post/product.service";
+import postService from "../../../services/post/post.service";
 import { toast } from "react-toastify";
 function CreateBid() {
   const [htmlValue, setHtmlValue] = useState("");

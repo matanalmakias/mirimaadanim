@@ -20,6 +20,7 @@ import { ShabatFoodProvider } from "./context/shabat-food/ShabatFoodContext.jsx"
 import { SaladProvider } from "./context/salads/SaladContext.jsx";
 import { PackageProvider } from "./context/package/PackageContext.jsx";
 import { ProductProvider } from "./context/product/ProductContext.jsx";
+import { PostProvider } from "./context/post/PostContext.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -31,7 +32,9 @@ root.render(
           <SaladProvider>
             <PackageProvider>
               <ProductProvider>
-                <App />
+                <PostProvider>
+                  <App />
+                </PostProvider>
               </ProductProvider>
             </PackageProvider>
           </SaladProvider>

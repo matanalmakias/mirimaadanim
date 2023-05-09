@@ -16,9 +16,9 @@ export const ProductProvider = ({ children }) => {
       socket.off("product-update");
     };
   }, []);
-
+  const contextValues = { allProducts };
   return (
-    <ProductContext.Provider value={{ allProducts }}>
+    <ProductContext.Provider value={contextValues}>
       {children}
     </ProductContext.Provider>
   );
