@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./style.scss"; // import the CSS file for styling
 import ReactQuill from "react-quill";
 import { productList2 } from "../../../utils/content";
+import bidService from "../../../services/bid/bid.service";
+import { toast } from "react-toastify";
 function CreateBid() {
   const [htmlValue, setHtmlValue] = useState("");
   const [bidNameInput, setBidNameInput] = useState(null);
@@ -19,7 +21,21 @@ function CreateBid() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
+
+    const formData = new FormData();
+    formData.append("title", bidNameInput);
+    formData.append("customerName", nameInput);
+    formData.append("customerPhone", phoneInput);
+    formData.append("customerEmail", emailInput);
+    formData.append("content", htmlValue);
+    formData.append("products", selectedProducts);
+    bidService
+      .createBid(formData)
+      .then((res) => toast(res.data.msg))
+      .finally(() => {
+        event.target.submit();
+        window.location.reload();
+      });
   };
   function handleHtmlChange(value) {
     setHtmlValue(value);

@@ -4,6 +4,8 @@ import ReactQuill from "react-quill";
 import { productList2 } from "../../../utils/content";
 import ProductList from "../products/ProductsList";
 import ProductItem from "../products/ProductsItem";
+import inventoryService from "./../../../services/inventory/inventory.service";
+import { toast } from "react-toastify";
 function CreateBid() {
   const [htmlValue, setHtmlValue] = useState("");
   const [pricePerUnitInput, setPricePerUnitInput] = useState(null);
@@ -22,7 +24,21 @@ function CreateBid() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
+
+    const formData = new FormData();
+    formData.append("name", nameInput);
+    formData.append("unit", weightInput);
+    formData.append("supplier", supplierInput);
+    formData.append("quantity", qtyInput);
+    formData.append("pricePerUnit", pricePerUnitInput);
+    formData.append("products", selectedProducts);
+    inventoryService
+      .createInventory(formData)
+      .then((res) => toast(res.data.msg))
+      .finally(() => {
+        event.target.submit();
+        window.location.reload();
+      });
   };
   function handleHtmlChange(value) {
     setHtmlValue(value);
