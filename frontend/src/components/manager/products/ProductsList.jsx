@@ -4,6 +4,8 @@ import { ProductContext } from "../../../context/product/ProductContext";
 
 const ProductList = () => {
   const { allProducts } = useContext(ProductContext);
+  console.log(allProducts);
+
   return (
     <div>
       {allProducts?.map((item, index) => (

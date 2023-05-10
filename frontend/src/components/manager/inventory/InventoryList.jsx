@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import InventoryItem from "./InventoryItem";
-import { inventoryList } from "../../../utils/content";
+import { InventoryContext } from "./../../../context/inventory/InventoryContext";
 
 const InventoryList = () => {
+  const { allInventorys } = useContext(InventoryContext);
   return (
     <div>
-      {inventoryList?.map((item, index) => (
+      {allInventorys?.map((item, index) => (
         <InventoryItem key={item._id} index={index} item={item} />
       ))}
     </div>

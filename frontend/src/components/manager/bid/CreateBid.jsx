@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./style.scss"; // import the CSS file for styling
 import ReactQuill from "react-quill";
 import { productList2 } from "../../../utils/content";
 import bidService from "../../../services/bid/bid.service";
 import { toast } from "react-toastify";
+import { phoneRegex } from "../../../utils/utils";
+import ProductContext from "../../../context/product/ProductContext";
 function CreateBid() {
   const [htmlValue, setHtmlValue] = useState("");
   const [bidNameInput, setBidNameInput] = useState(null);
@@ -11,7 +13,8 @@ function CreateBid() {
   const [phoneInput, setPhoneInput] = useState(null);
   const [emailInput, setEmailInput] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState([]);
-
+  const [errMsg, setErrMsg] = useState([]);
+  const { allProducts } = useContext(ProductContext);
   const handleProductClick = (productId) => {
     if (selectedProducts.includes(productId)) {
       setSelectedProducts(selectedProducts.filter((_id) => _id !== productId));
@@ -21,14 +24,16 @@ function CreateBid() {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    if (!phoneRegex.test(phoneInput)) {
+      return setErrMsg(`מספר הפאלפון לא תקין !`);
+    }
     const formData = new FormData();
     formData.append("title", bidNameInput);
     formData.append("customerName", nameInput);
     formData.append("customerPhone", phoneInput);
     formData.append("customerEmail", emailInput);
     formData.append("content", htmlValue);
-    formData.append("products", selectedProducts);
+    formData.append("products", JSON.stringify(selectedProducts));
     bidService
       .createBid(formData)
       .then((res) => toast(res.data.msg))
@@ -46,6 +51,7 @@ function CreateBid() {
       className="d-flex justify-content-center text-center align-items-center flex-column gap-2"
       onSubmit={handleSubmit}
     >
+      <span className="card">{errMsg}</span>
       <div className="row gap-1 w-100">
         <label htmlFor="company" className="col-3 label1 mb-1">
           שם הצעת מחיר
@@ -103,7 +109,7 @@ function CreateBid() {
           <span className=" bg-secondary text-white ">
             שייך את כל המוצרים שמתאימים להכנה של פריט זה!
           </span>
-          {productList2?.map((item, index) => (
+          {allProducts?.map((item, index) => (
             <div key={index} className="card m-1 row p-1">
               <input
                 type="checkbox"

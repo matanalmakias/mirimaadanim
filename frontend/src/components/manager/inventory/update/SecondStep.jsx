@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { inventoryList, productList2 } from "../../../../utils/content";
+import InventoryContext from "../../../../context/inventory/InventoryContext";
 
 const SecondStep = ({ products: productsIds }) => {
   const [pricePerUnitInput, setPricePerUnitInput] = useState(null);
@@ -7,9 +8,11 @@ const SecondStep = ({ products: productsIds }) => {
   const [qtyInput, setQtyInput] = useState(null);
   const [weightInput, setWeightInput] = useState(null);
   const [supplierInput, setSupplierInput] = useState(null);
+  const { allInventorys } = useContext(InventoryContext);
+
   let products = [];
   productsIds?.forEach((id, index) => {
-    let product = inventoryList?.find((item) => item._id === id);
+    let product = allInventorys?.find((item) => item._id === id);
     if (!product) {
       return;
     }

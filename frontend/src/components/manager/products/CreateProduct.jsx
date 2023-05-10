@@ -10,7 +10,6 @@ function CreateProduct() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append("name", productNameInput);
     formData.append("description", descInput);
@@ -23,11 +22,9 @@ function CreateProduct() {
       .then((res) => toast(res.data.msg))
       .finally(() => {
         event.target.submit();
-
         window.location.reload();
       });
   };
-
   return (
     <form
       className="d-flex justify-content-center text-center align-items-center flex-column gap-2"

@@ -21,6 +21,10 @@ import { SaladProvider } from "./context/salads/SaladContext.jsx";
 import { PackageProvider } from "./context/package/PackageContext.jsx";
 import { ProductProvider } from "./context/product/ProductContext.jsx";
 import { PostProvider } from "./context/post/PostContext.jsx";
+import { InventoryProvider } from "./context/inventory/InventoryContext.jsx";
+import { OrderProvider } from "./context/order/OrderContext.jsx";
+import { CustomerProvider } from "./context/customer/CustomerContext.jsx";
+import { BidProvider } from "./context/bid/BidContext.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -33,7 +37,15 @@ root.render(
             <PackageProvider>
               <ProductProvider>
                 <PostProvider>
-                  <App />
+                  <InventoryProvider>
+                    <OrderProvider>
+                      <CustomerProvider>
+                        <BidProvider>
+                          <App />
+                        </BidProvider>
+                      </CustomerProvider>
+                    </OrderProvider>
+                  </InventoryProvider>
                 </PostProvider>
               </ProductProvider>
             </PackageProvider>

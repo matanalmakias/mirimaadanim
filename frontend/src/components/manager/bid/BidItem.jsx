@@ -2,6 +2,10 @@ import React, { useState } from "react";
 
 const BidItem = ({ item, index }) => {
   const [showItem, setShowItem] = useState(false);
+  const date = new Date(item?.date);
+
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("he-IL", options);
   return (
     <div className="">
       <span className="col card">{index + 1}</span>
@@ -20,7 +24,7 @@ const BidItem = ({ item, index }) => {
           </div>
 
           <span className=" m-2 card p-2">{item?.content}</span>
-          <span className="card">תאריך: {item?.date}</span>
+          <span className="card">תאריך: {formattedDate}</span>
         </div>
       )}
       <hr className="card mb-1" />

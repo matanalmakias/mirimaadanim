@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./style.scss"; // import the CSS file for styling
 import { customerList, productList2 } from "../../../utils/content";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShekelSign } from "@fortawesome/free-solid-svg-icons";
 import orderService from "../../../services/order/order.service";
 import { toast } from "react-toastify";
+import ProductContext from "../../../context/product/ProductContext";
 
 function CreateBid() {
   const [titleInput, setTitleInput] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState([]);
+  const { allProducts } = useContext(ProductContext);
   useEffect(() => {
     setTotalPrice(0);
     let price = 0;
@@ -75,7 +77,7 @@ function CreateBid() {
           שיוך מוצרים להזמנה
         </label>
 
-        {productList2?.map((item, index) => (
+        {allProducts?.map((item, index) => (
           <div key={index} className="card row p-1">
             <input
               type="checkbox"

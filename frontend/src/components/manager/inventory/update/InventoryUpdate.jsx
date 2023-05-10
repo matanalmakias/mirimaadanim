@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { inventoryList, productList2 } from "../../../../utils/content";
 import { Form } from "react-bootstrap";
 import { BsArrowDownLeftSquareFill } from "react-icons/bs";
 import SecondStep from "./SecondStep";
+import InventoryContext from "../../../../context/inventory/InventoryContext";
 const InventoryUpdate = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [firstStep, setFirstStep] = useState(true);
   const [secondStep, setSecondStep] = useState(false);
+  const { allInventorys } = useContext(InventoryContext);
   const handleProductClick = (productId) => {
     if (selectedProducts.includes(productId)) {
       setSelectedProducts(selectedProducts.filter((_id) => _id !== productId));
@@ -27,7 +29,7 @@ const InventoryUpdate = () => {
     <div>
       {firstStep && (
         <Form onSubmit={(e) => submit(e)}>
-          {inventoryList?.map((item, index) => (
+          {allInventorys?.map((item, index) => (
             <div key={index} className="card m-1 row p-1">
               <input
                 type="checkbox"

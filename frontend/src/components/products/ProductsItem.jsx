@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
 const ProductItem = ({ item, index }) => {
+  const date = new Date(item?.createdAt);
+
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("he-IL", options);
   return (
     <div className="col card p-4  mb-1">
       <label className="mb-1" htmlFor="title">
@@ -24,7 +28,7 @@ const ProductItem = ({ item, index }) => {
           נוצר בתאריך
         </label>
 
-        <span className="card  p-2 mb-1">{item?.createdAt}</span>
+        <span className="card  p-2 mb-1">{formattedDate}</span>
       </div>
 
       <hr className="card mb-1" />

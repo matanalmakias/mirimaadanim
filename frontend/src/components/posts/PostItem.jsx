@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 
 const PostItem = ({ item, index }) => {
+  const date = new Date(item?.createdAt);
+
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  const formattedDate = date.toLocaleDateString("he-IL", options);
   return (
     <div className="card p-3 mb-1">
       <span className="col card p-1 mb-1">{index + 1}</span>
@@ -17,10 +21,10 @@ const PostItem = ({ item, index }) => {
             נושאים
           </label>
           <span className="card p-1 col mb-1">
-            {item?.tags?.map((item) => (
-              <>
+            {item?.tags?.map((item, index) => (
+              <p key={index}>
                 {item},{` `}
-              </>
+              </p>
             ))}
           </span>
         </div>
@@ -32,9 +36,7 @@ const PostItem = ({ item, index }) => {
           תאריך
         </label>
 
-        <span className="card  mb-1">
-          {item?.createdAt.toLocaleDateString("he-IL")}
-        </span>
+        <span className="card  mb-1">{formattedDate}</span>
         <div className="row m-2 gap-1 mb-1">
           <div className="col p-2 card mb-1">לייקים: {item.likes.likes}</div>
           <div className="col p-2 card mb-1">שיתופים: {item.shares.shares}</div>

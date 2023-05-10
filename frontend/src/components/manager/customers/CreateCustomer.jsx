@@ -1,26 +1,40 @@
 import React, { useState } from "react";
 import "./style.scss"; // import the CSS file for styling
-import ReactQuill from "react-quill";
+import customerService from "./../../../services/customer/customer.service";
+import { toast } from "react-toastify";
+import { phoneRegex } from "../../../utils/utils";
 function CreateCustomer() {
-  const [htmlValue, setHtmlValue] = useState("");
-  const [customerNameInput, setCustomerNameInput] = useState(null);
   const [addressInput, setAddressInput] = useState(null);
   const [nameInput, setNameInput] = useState(null);
   const [phoneInput, setPhoneInput] = useState(null);
   const [emailInput, setEmailInput] = useState(null);
+  const [errMsg, setErrMsg] = useState(null);
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handle form submission here
+    if (!phoneRegex.test(phoneInput)) {
+      return setErrMsg(`מספר הפאלפון לא תקין !`);
+    }
+    const formData = new FormData();
+    formData.append("name", nameInput);
+    formData.append("email", emailInput);
+    formData.append("phone", phoneInput);
+    formData.append("address", addressInput);
+
+    customerService
+      .createCustomer(formData)
+      .then((res) => toast(res.data.msg))
+      .finally(() => {
+        event.target.submit();
+        window.location.reload();
+      });
   };
-  function handleHtmlChange(value) {
-    setHtmlValue(value);
-  }
 
   return (
     <form
       className="d-flex justify-content-center text-center align-items-center flex-column gap-2"
       onSubmit={handleSubmit}
     >
+      <span className="card">{errMsg}</span>
       <div className="row gap-1 w-100">
         <label htmlFor="company" className="col-3 label1 mb-1">
           שם הלקוח
@@ -70,15 +84,6 @@ function CreateCustomer() {
         />
       </div>
 
-      <div className="p-2 w-100">
-        <ReactQuill
-          className="bg-light w-100 "
-          id="htmlInput"
-          required
-          value={htmlValue}
-          onChange={handleHtmlChange}
-        />
-      </div>
       <button className="w-50" type="submit">
         Submit
       </button>

@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import "./style.scss"; // import the CSS file for styling
-import ReactQuill from "react-quill";
-import { productList2 } from "../../../utils/content";
-import ProductList from "../products/ProductsList";
-import ProductItem from "../products/ProductsItem";
+import React, { useContext, useEffect, useState } from "react";
+import "./style.scss";
 import inventoryService from "./../../../services/inventory/inventory.service";
 import { toast } from "react-toastify";
-function CreateBid() {
-  const [htmlValue, setHtmlValue] = useState("");
+import ProductContext from "../../../context/product/ProductContext";
+function CreateInventory() {
   const [pricePerUnitInput, setPricePerUnitInput] = useState(null);
   const [nameInput, setNameInput] = useState(null);
   const [qtyInput, setQtyInput] = useState(null);
   const [weightInput, setWeightInput] = useState(null);
   const [supplierInput, setSupplierInput] = useState(null);
   const [selectedProducts, setSelectedProducts] = useState([]);
-
+  const { allProducts } = useContext(ProductContext);
   const handleProductClick = (productId) => {
     if (selectedProducts.includes(productId)) {
       setSelectedProducts(selectedProducts.filter((_id) => _id !== productId));
@@ -27,22 +23,18 @@ function CreateBid() {
 
     const formData = new FormData();
     formData.append("name", nameInput);
-    formData.append("unit", weightInput);
     formData.append("supplier", supplierInput);
     formData.append("quantity", qtyInput);
     formData.append("pricePerUnit", pricePerUnitInput);
-    formData.append("products", selectedProducts);
+    formData.append("products", JSON.stringify(selectedProducts));
     inventoryService
       .createInventory(formData)
       .then((res) => toast(res.data.msg))
       .finally(() => {
-        event.target.submit();
-        window.location.reload();
+        // event.target.submit();
+        // window.location.reload();
       });
   };
-  function handleHtmlChange(value) {
-    setHtmlValue(value);
-  }
 
   return (
     <form
@@ -66,7 +58,7 @@ function CreateBid() {
           כמות
         </label>
         <input
-          type="tel"
+          type="number"
           required
           onChange={(e) => setQtyInput(e.target.value)}
           placeholder="הכנס כמות מעודכנת"
@@ -118,7 +110,7 @@ function CreateBid() {
           <span className=" bg-secondary text-white ">
             שייך את כל המוצרים שמתאימים להכנה של פריט זה!
           </span>
-          {productList2?.map((item, index) => (
+          {allProducts?.map((item, index) => (
             <div key={index} className="card m-1 row p-1">
               <input
                 type="checkbox"
@@ -143,4 +135,4 @@ function CreateBid() {
   );
 }
 
-export default CreateBid;
+export default CreateInventory;

@@ -13,3 +13,5 @@ export const dayList = [
 ];
 
 export const shekelSymbol = String.fromCharCode(8362);
+
+export const phoneRegex = /^05\d{8}$/;
