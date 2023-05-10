@@ -19,6 +19,16 @@ const Home = () => {
       className="d-flex flex-column align-items-center justify-content-center"
       dir="rtl"
     >
+      <div className="row gap-1 p-1 m-1">
+        <button
+          onClick={() => nav("/services/catering")}
+          className="col btn btn-light p-3 fs1"
+        >
+          לאירועי קייטרינג
+        </button>
+        <button className="col btn btn-light p-3 fs1">לאוכל מוכן לשבת</button>
+        <button className="col btn btn-light p-3 fs1">לארוחות יומיומיות</button>
+      </div>
       <Products />
       <Post />
       <ToastContainer autoClose={700} />

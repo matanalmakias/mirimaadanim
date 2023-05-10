@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { cateringList } from "../../utils/content";
+import { cateringList } from "../../src/utils/content";
 import MenuItem from "./MenuItem";
 
 export const CateringDetails = () => {

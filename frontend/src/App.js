@@ -9,7 +9,7 @@ import Manager from "./pages/manager/Manager.jsx";
 import Cart from "./components/cart/Cart.jsx";
 import AllOrders from "./components/orders/AllOrders.jsx";
 import UserManagement from "./pages/user-management/UserManagement.jsx";
-import MenuDetails from "./components/catering/MenuDetails.jsx";
+import Catering from "./pages/services/catering/Catering.jsx";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
@@ -28,9 +28,10 @@ function App() {
         {/* ---------------------Cart----------------------- */}
 
         <Route path="/cart" element={<Cart />} />
-        {/* ---------------------Catering Events----------------------- */}
+        {/* ---------------------Services----------------------- */}
 
-        <Route path="/catering-menu/:id/:index" element={<MenuDetails />} />
+        <Route path="/services/catering" element={<Catering />} />
+
         {/* ---------------------Orders----------------------- */}
 
         {isLoggedIn && <Route path="/orders" element={<AllOrders />} />}
