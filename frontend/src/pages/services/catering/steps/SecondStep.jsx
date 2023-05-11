@@ -56,7 +56,8 @@ const SecondStep = ({
             type="checkbox"
           />
         </label>
-        <button type="submit" className="w-100 fs1 card btn btn-success">
+        <button type="submit" className="w-100  p-2 btn-primary">
+          {" "}
           המשך
         </button>
       </Form>

@@ -26,8 +26,18 @@ const Home = () => {
         >
           לאירועי קייטרינג
         </button>
-        <button className="col btn btn-light p-3 fs1">לאוכל מוכן לשבת</button>
-        <button className="col btn btn-light p-3 fs1">לארוחות יומיומיות</button>
+        <button
+          onClick={() => nav("/services/shabat-food")}
+          className="col btn btn-light p-3 fs1"
+        >
+          לאוכל מוכן לשבת
+        </button>
+        <button
+          onClick={() => nav("/services/daily")}
+          className="col btn btn-light p-3 fs1"
+        >
+          לארוחות יומיומיות
+        </button>
       </div>
       <Products />
       <Post />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import FirstStep from "./steps/FirstStep";
 import SecondStep from "./steps/SecondStep";
@@ -21,6 +21,9 @@ const Catering = () => {
     fourthStep: null,
     fifthStep: null,
   });
+  useEffect(() => {
+    console.log(stepResults);
+  }, [stepResults]);
   const backBtn = (setCurrentState, setPreviousState) => {
     setCurrentState((s) => !s);
     setPreviousState((s) => !s);
@@ -60,6 +63,7 @@ const Catering = () => {
       )}
       {fourthStep && (
         <FourthStep
+          setFifthStep={setFifthStep}
           setThirdStep={setThirdStep}
           setFourthStep={setFourthStep}
           backBtn={backBtn}
@@ -69,10 +73,10 @@ const Catering = () => {
       )}
       {fifthStep && (
         <FifthStep
-          setFifthStep={setThirdStep}
+          setFifthStep={setFifthStep}
           setFourthStep={setFourthStep}
+          stepResults={stepResults}
           backBtn={backBtn}
-          setStepResults={setStepResults}
           getCateringFromServer={getCateringFromServer}
         />
       )}

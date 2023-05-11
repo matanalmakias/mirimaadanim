@@ -57,7 +57,7 @@ const ThirdStep = ({
           <select
             onChange={(e) => setEventType(e.target.value)}
             required
-            className="form-control text-center fs1"
+            className="form-control text-center fs-big"
             name="eventType"
             id="eventType"
           >
@@ -65,7 +65,9 @@ const ThirdStep = ({
               בחר סוג אירוע
             </option>
             {eventTypes?.map((item, index) => (
-              <option key={index}>{item}</option>
+              <option className="fs-big" key={index}>
+                {item}
+              </option>
             ))}
           </select>
           {anotherType && (
@@ -78,7 +80,8 @@ const ThirdStep = ({
           )}
         </label>
 
-        <button type="submit" className="w-100 fs1 card btn btn-success">
+        <button type="submit" className="w-100  p-2 btn-primary">
+          {" "}
           המשך
         </button>
       </Form>
