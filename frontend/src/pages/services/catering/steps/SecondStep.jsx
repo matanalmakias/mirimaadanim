@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import { BsArrowDownRightCircleFill } from "react-icons/bs";
 
-const SecondStep = ({ setSecondStep, setThirdStep, setStepResults }) => {
+const SecondStep = ({
+  setSecondStep,
+  setThirdStep,
+  setStepResults,
+  backBtn,
+  setFirstStep,
+}) => {
   const [dateInput, setDateInput] = useState(null);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -27,6 +34,12 @@ const SecondStep = ({ setSecondStep, setThirdStep, setStepResults }) => {
           className=" p-2 card h5 bg-success text-white mb-1 w-100"
           htmlFor="location"
         >
+          <button
+            onClick={() => backBtn(setSecondStep, setFirstStep)}
+            className=" color1 btn p-1 fs-small m-2 btn-light"
+          >
+            <BsArrowDownRightCircleFill /> חזור לשלב הקודם
+          </button>
           לאיזה תאריך תרצה לבצע את ההזמנה?
           <input
             type="date"

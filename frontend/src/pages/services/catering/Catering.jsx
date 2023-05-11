@@ -5,20 +5,26 @@ import SecondStep from "./steps/SecondStep";
 import ThirdStep from "./steps/ThirdStep";
 import FourthStep from "./steps/FourthStep";
 import cateringService from "./../../../services/catering/catering.service";
+import FifthStep from "./steps/FifthStep";
 
 const Catering = () => {
   const [firstStep, setFirstStep] = useState(true);
   const [secondStep, setSecondStep] = useState(false);
   const [thirdStep, setThirdStep] = useState(false);
   const [fourthStep, setFourthStep] = useState(false);
+  const [fifthStep, setFifthStep] = useState(false);
 
   const [stepResults, setStepResults] = useState({
     firstStep: null,
     secondStep: null,
     thirdStep: null,
     fourthStep: null,
+    fifthStep: null,
   });
-
+  const backBtn = (setCurrentState, setPreviousState) => {
+    setCurrentState((s) => !s);
+    setPreviousState((s) => !s);
+  };
   const locations = [`באר שבע והסביבה`, "גוש דן", "שפלה"];
   const getCateringFromServer = () => {
     cateringService.getCateringProcess(stepResults);
@@ -28,6 +34,7 @@ const Catering = () => {
       {firstStep && (
         <FirstStep
           setStepResults={setStepResults}
+          backBtn={backBtn}
           locations={locations}
           setFirstStep={setFirstStep}
           setSecondStep={setSecondStep}
@@ -35,6 +42,8 @@ const Catering = () => {
       )}
       {secondStep && (
         <SecondStep
+          backBtn={backBtn}
+          setFirstStep={setFirstStep}
           setStepResults={setStepResults}
           setSecondStep={setSecondStep}
           setThirdStep={setThirdStep}
@@ -42,13 +51,31 @@ const Catering = () => {
       )}
       {thirdStep && (
         <ThirdStep
+          setSecondStep={setSecondStep}
+          backBtn={backBtn}
           setStepResults={setStepResults}
           setThirdStep={setThirdStep}
           setFourthStep={setFourthStep}
+        />
+      )}
+      {fourthStep && (
+        <FourthStep
+          setThirdStep={setThirdStep}
+          setFourthStep={setFourthStep}
+          backBtn={backBtn}
+          setStepResults={setStepResults}
           getCateringFromServer={getCateringFromServer}
         />
       )}
-      {fourthStep && <FourthStep setStepResults={setStepResults} />}
+      {fifthStep && (
+        <FifthStep
+          setFifthStep={setThirdStep}
+          setFourthStep={setFourthStep}
+          backBtn={backBtn}
+          setStepResults={setStepResults}
+          getCateringFromServer={getCateringFromServer}
+        />
+      )}
     </div>
   );
 };

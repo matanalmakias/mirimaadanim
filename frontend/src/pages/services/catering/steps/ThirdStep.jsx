@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import { BsArrowDownRightCircleFill } from "react-icons/bs";
 const eventTypes = [
   `חינה`,
   "יום הולדת",
@@ -14,8 +15,9 @@ const eventTypes = [
 const ThirdStep = ({
   setThirdStep,
   setFourthStep,
+  backBtn,
   setStepResults,
-  getCateringFromServer,
+  setSecondStep,
 }) => {
   const [eventType, setEventType] = useState(null);
   const [anotherType, setAnotherType] = useState(false);
@@ -28,14 +30,12 @@ const ThirdStep = ({
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    // setThirdStep((s) => !s);
-    // setFourthStep((s) => !s);
     await setStepResults((s) => ({
       ...s,
       thirdStep: anotherEventType === null ? eventType : anotherEventType,
     }));
-
-    getCateringFromServer();
+    setThirdStep((s) => !s);
+    setFourthStep((s) => !s);
   };
   return (
     <div className=" p-1 ">
@@ -47,6 +47,12 @@ const ThirdStep = ({
           className=" p-2 card h5 bg-success text-white mb-1 w-100"
           htmlFor="type"
         >
+          <button
+            onClick={() => backBtn(setThirdStep, setSecondStep)}
+            className=" color1 btn p-1 fs-small m-2 btn-light"
+          >
+            <BsArrowDownRightCircleFill /> חזור לשלב הקודם
+          </button>
           מהו סוג האירוע שאנחנו מדברים עליו?
           <select
             onChange={(e) => setEventType(e.target.value)}

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form } from "react-bootstrap";
-
+import { BsArrowRightCircleFill } from "react-icons/bs";
+import "./style.scss";
 const FirstStep = ({
   locations,
   setFirstStep,
@@ -25,15 +26,18 @@ const FirstStep = ({
         onSubmit={(e) => formSubmit(e)}
       >
         <label
-          className=" p-2 card h5 bg-success text-white mb-1 w-100"
+          className=" p-2 card h5 bg-success text-center text-white mb-1 w-100"
           htmlFor="location"
         >
-          באיזה איזור ההזמנה?
+          <p className="mb-1 row">
+            <p className="col card p-2 shadow color1">באיזה איזור ההזמנה?</p>
+          </p>
+
           <select
             onChange={(e) => setLocationInput(e.target.value)}
             name="location"
             required
-            className="text-center mt-1"
+            className="text-center mt-1 form-control fs-big"
             id="location"
           >
             <option selected value="">
