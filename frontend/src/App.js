@@ -3,52 +3,38 @@ import { Route, Routes } from "react-router-dom";
 import AuthContext from "./context/AuthContext.jsx";
 import { useContext } from "react";
 import Header from "./components/header/Header.jsx";
-import Footer from "./components/footer/Footer.jsx";
-import Home from "./pages/home/Home.jsx";
-import Manager from "./pages/manager/Manager.jsx";
-import Cart from "./components/cart/Cart.jsx";
-import AllOrders from "./components/orders/AllOrders.jsx";
-import UserManagement from "./pages/user-management/UserManagement.jsx";
-import Catering from "./pages/services/catering/Catering.jsx";
-import ShabatFood from "./pages/services/shabat-food/ShabatFood.jsx";
-import PrivateCustomers from "./pages/services/private-customers/PrivateCustomers.jsx";
+import ManotMumlatsot from "./components/ManotMumlatsot/ManotMumlatsot.jsx";
+import Sales from "./components/Sales/Sales.jsx";
+import Maarazim from "./components/maarazim/Maarazim.jsx";
+import { Button } from "react-bootstrap";
 
 function App() {
   const { isLoggedIn, isManager } = useContext(AuthContext);
   return (
-    <div className="main-app" dir="rtl">
+    <div
+      className="main-app d-flex align-items-center justify-content-center flex-column"
+      dir="rtl"
+    >
       <Header />
+      <div className="background-overlay"></div>
+      <Button className="w-100 h5 fs-medium p-3">
+        קייטרינג למקומות עבודה & לקוחות פרטיים
+      </Button>
 
-      <Routes>
-        {/* ---------------------Home----------------------- */}
+      <Button className="w-100 h5 fs-medium  p-3">קייטרינג לאירועים</Button>
+      <div className="row align-items-center justify-content-center text-center custom-row">
+        <div className="col-4 col-sm-4 custom-col">
+          <ManotMumlatsot />
+        </div>
+        <div className="col-4 col-sm-4 custom-col">
+          <Sales />
+        </div>
+        <div className="col-4 col-sm-4 custom-col">
+          <Maarazim />
+        </div>
+      </div>
 
-        <Route path="/" element={<Home />} />
-        {/* ---------------------Manager----------------------- */}
-
-        {isManager && <Route path="/manager" element={<Manager />} />}
-
-        {/* ---------------------Cart----------------------- */}
-
-        <Route path="/cart" element={<Cart />} />
-        {/* ---------------------Services----------------------- */}
-
-        <Route path="/services/catering" element={<Catering />} />
-        <Route path="/services/shabat-food" element={<ShabatFood />} />
-        <Route path="/services/daily" element={<PrivateCustomers />} />
-
-        {/* ---------------------Orders----------------------- */}
-
-        {isLoggedIn && <Route path="/orders" element={<AllOrders />} />}
-        {/* {isLoggedIn && <Route path="/order/" element={<Order />} />} */}
-
-        {/* ---------------------User Management----------------------- */}
-
-        {isLoggedIn && (
-          <Route path="/user-management" element={<UserManagement />} />
-        )}
-      </Routes>
-
-      <Footer />
+      <Routes></Routes>
     </div>
   );
 }

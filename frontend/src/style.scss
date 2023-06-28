@@ -1,0 +1,19 @@
+.label1{
+    background-color: #f5feff!important;
+}
+.fs-medium{
+    font-size: 18px!important;
+}
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('./images/bg2.png');
+    opacity: 0.3;
+    z-index: -1;
+}
+.logo{
+    width: 100%;
+}

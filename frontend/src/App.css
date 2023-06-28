@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@200&display=swap");
 
 .main-app {
+
+    height: 100vh;
+      width: 100vw;
+    position: relative;
+  color: white;
   font-family: "Noto Sans Hebrew", sans-serif;
+}
+
+.custom-row {
+  
+  margin-right: -15px!important;
+  margin-left: -15px!important;
+}
+
+.custom-col {
+  padding-right: 0!important;
+  padding-left: 0 !important;
 }
